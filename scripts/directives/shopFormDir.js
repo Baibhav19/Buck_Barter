@@ -1,6 +1,6 @@
 app.directive('shopReg' , function(){
 	return{
 		restrict : "E" ,
-		templateUrl : "shopkprForm.html"
+		templateUrl : "templates/shopkprForm.html"
 	};
 });
