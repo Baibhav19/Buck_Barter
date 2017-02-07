@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app = "localDeals">
+<head>
+<!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">-->
+<link rel="stylesheet" href="css/custom/registration1.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/lib/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="scripts/lib/bootstrap.min.js"></script>
+<script src="scripts/lib/angular.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="scripts/controllers/formController.js"></script>
+<script type="text/javascript" src="scripts/directives/custDirective.js"></script>
+<script type="text/javascript" src="scripts/directives/shopFormDir.js"></script>
+
+</head>
+<body>
+<div class="container-fluid my-custom-container">
+   <div class="row panel">
+    <div class="col-md-12" style="border: 1px solid black;">
+      <div class="panel-login" ng-controller = "formController as frmCtrl">
+
+        <div class="panel-heading" >
+          <div class="row">
+            <ul class = "nav nav-tabs">
+              <li class = "test" ng-class="{active : frmCtrl.isSelected(1)}"><a href ng-click = "frmCtrl.setTab(1)"><b><center class = "textColor">CUSTOMER</center></b></a></li>
+              <li class = "test" ng-class="{active : frmCtrl.isSelected(2)}"><a href ng-click = "frmCtrl.setTab(2)"><b><center class="textColor">SHOPKEEPER</center></b></a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="panel-body" ng-if = "frmCtrl.isSelected(1)">
+          <cust-reg></cust-reg>
+        </div>
+
+        <div class="panel-body" ng-if = "frmCtrl.isSelected(2)">
+          <shop-reg></shop-reg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

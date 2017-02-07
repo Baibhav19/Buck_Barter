@@ -1,6 +1,6 @@
 app.directive('custReg' , function(){
 	return{
 		restrict : "E" ,
-		templateUrl : "templatescustreg.html"
+		templateUrl : "templates/custreg.html"
 	};
 })

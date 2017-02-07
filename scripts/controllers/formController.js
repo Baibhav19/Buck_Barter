@@ -1,4 +1,7 @@
-app.controller('formController' , function(){
+app.controller('formController' , [ 
+	'$http' ,
+	'$scope' ,
+	function($http){
 	this.tab = 1;
 	this.setTab = function(tabno){
 		this.tab = tabno ;
@@ -6,30 +9,8 @@ app.controller('formController' , function(){
 	this.isSelected = function(checkTab){
 		 return this.tab === checkTab ;
 	};
-	this.cust = {
-		fname : '',
-		lname : '',
-		email : '',
-		passw: '',
-		cpassw : '',
-		phno : '',
-		city : '',
-		state : '' 
-	};
-	this.shopkpr = {
-		fname : '',
-		lname : '',
-		email : '',
-		passw: '',
-		cpassw : '',
-		phno : '',
-		shopType : '',
-		availFrom : '',
-		availTo : '',
-		Address : '',
-		city : '',
-		state : '' 
-	};
+	this.cust = { fname : '', lname : '', email : '', passw: '', cpassw : '', phno : '', city : '', state : '' };
+	this.shopkpr = { fname : '', lname : '', email : '', passw: '', cpassw : '', phno : '', shopType : '', availFrom : '', availTo : '', Address : '', city : '', state : '' };
 	this.custRegister = function(){
 		console.log("registered customer" , this.cust);
 		this.cust = {};
@@ -39,4 +20,4 @@ app.controller('formController' , function(){
 		this.shopkpr = {};
 	};
 
-});
+}]);
