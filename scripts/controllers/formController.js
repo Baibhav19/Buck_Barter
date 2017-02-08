@@ -1,7 +1,4 @@
-app.controller('formController' , [ 
-	'$http' ,
-	'$scope' ,
-	function($http){
+app.controller('formController' , function($http){
 	this.tab = 1;
 	this.setTab = function(tabno){
 		this.tab = tabno ;
@@ -9,15 +6,46 @@ app.controller('formController' , [
 	this.isSelected = function(checkTab){
 		 return this.tab === checkTab ;
 	};
-	this.cust = { fname : '', lname : '', email : '', passw: '', cpassw : '', phno : '', city : '', state : '' };
-	this.shopkpr = { fname : '', lname : '', email : '', passw: '', cpassw : '', phno : '', shopType : '', availFrom : '', availTo : '', Address : '', city : '', state : '' };
+	this.cust = {
+		fname : '',
+		lname : '',
+		email : '',
+		password: '',
+		cpassword: '',
+		phone: '',
+		city : '',
+		state : '' 
+	};
+	this.shopkpr = {
+		fname : '',
+		lname : '',
+		email : '',
+		passw: '',
+		cpassw : '',
+		phno : '',
+		shopType : '',
+		availFrom : '',
+		availTo : '',
+		Address : '',
+		city : '',
+		state : '' 
+	};
 	this.custRegister = function(){
 		console.log("registered customer" , this.cust);
-		this.cust = {};
+		//this.cust = {};
+		$http.post("/contact",this.cust ).then(function(response) {
+        		console.log(response);
+       	 /*if (!!error) {
+        	console.log("jsxas");
+        }
+        else{
+        	console.log('Data posted successfully');
+      	}*/
+      });
 	};
 	this.shopkprRegister = function(){
 		console.log("registered shopkeeper" , this.shopkpr);
 		this.shopkpr = {};
 	};
-
-}]);
+	
+});
