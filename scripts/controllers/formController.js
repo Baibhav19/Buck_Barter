@@ -20,31 +20,29 @@ app.controller('formController' , function($http){
 		fname : '',
 		lname : '',
 		email : '',
-		passw: '',
-		cpassw : '',
-		phno : '',
+		password : '',
+		cpassword : '',
+		phone : '',
 		shopType : '',
 		availFrom : '',
 		availTo : '',
-		Address : '',
+		address : '',
 		city : '',
 		state : '' 
 	};
 	this.custRegister = function(){
 		console.log("registered customer" , this.cust);
-		//this.cust = {};
 		$http.post("/contact",this.cust ).then(function(response) {
-        		console.log(response);
-       	 /*if (!!error) {
-        	console.log("jsxas");
-        }
-        else{
-        	console.log('Data posted successfully');
-      	}*/
-      });
+        	console.log(response); 
+    	});
+    	this.cust = {};
+    	this.regCustForm.$setPristine();
 	};
 	this.shopkprRegister = function(){
 		console.log("registered shopkeeper" , this.shopkpr);
+		$http.post("/contact_shop",this.shopkpr).then(function(response){
+			console.log(response);
+		});
 		this.shopkpr = {};
 	};
 	
