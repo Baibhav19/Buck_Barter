@@ -33,7 +33,7 @@ app.controller('formController' , function($http){
 	};
 	this.custRegister = function(){
 		console.log("registered customer" , this.cust);
-		$http.post("/contact",this.cust ).then(function(response) {
+		$http.post("/contact",this.cust).then(function(response) {
         	this.bol = true;
         	console.log(bol);
     	});
