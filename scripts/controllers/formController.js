@@ -6,6 +6,7 @@ app.controller('formController' , function($http){
 	this.isSelected = function(checkTab){
 		 return this.tab === checkTab ;
 	};
+	this.bol = false;
 	this.cust = {
 		fname : '',
 		lname : '',
@@ -33,10 +34,11 @@ app.controller('formController' , function($http){
 	this.custRegister = function(){
 		console.log("registered customer" , this.cust);
 		$http.post("/contact",this.cust ).then(function(response) {
-        	console.log(response); 
+        	this.bol = true;
+        	console.log(bol);
     	});
     	this.cust = {};
-    	this.regCustForm.$setPristine();
+    	//this.regCustForm.$setPristine();
 	};
 	this.shopkprRegister = function(){
 		console.log("registered shopkeeper" , this.shopkpr);
