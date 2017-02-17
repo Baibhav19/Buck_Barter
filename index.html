@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 <html ng-app = "localDeals">
 <head>
-<!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">-->
-<link rel="stylesheet" href="css/custom/registration1.css">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/lib/bootstrap.min.css">
+<link rel="stylesheet" href="css/custom/nextpage.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="scripts/lib/bootstrap.min.js"></script>
 <script src="scripts/lib/angular.js"></script>
 <script type="text/javascript" src="app.js"></script>
+<script src="scripts/lib/angular-ui-router.min.js"></script>
 <script type="text/javascript" src="scripts/controllers/formController.js"></script>
+<script type="text/javascript" src="scripts/controllers/loginController.js"></script>
 <script type="text/javascript" src="scripts/directives/custDirective.js"></script>
 <script type="text/javascript" src="scripts/directives/shopFormDir.js"></script>
 
 </head>
+<title>Buck Barter</title>
 <body>
-<div class="container-fluid my-custom-container">
-   <div class="row panel">
-    <div class="col-md-12" style="border: 1px solid black;">
-      <div class="panel-login" ng-controller = "formController as frmCtrl">
-
-        <div class="panel-heading" >
-          <div class="row">
-            <ul class = "nav nav-tabs">
-              <li class = "test" ng-class="{active : frmCtrl.isSelected(1)}"><a href ng-click = "frmCtrl.setTab(1)"><b><center class = "textColor">CUSTOMER</center></b></a></li>
-              <li class = "test" ng-class="{active : frmCtrl.isSelected(2)}"><a href ng-click = "frmCtrl.setTab(2)"><b><center class="textColor">SHOPKEEPER</center></b></a></li>
-            </ul>
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- <header> -->
+        <div class="row ">
+        <nav class="navbar navbar-inverse ">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>                        
+              </button>
+              <a class="navbar-brand" href="#">BuckBarter</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+              <div class="row">           
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a ui-sref="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a data-toggle="modal" ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                  </ul>
+              </div>
+            </div>
           </div>
+        </nav>
         </div>
-
-        <div class="panel-body" ng-if = "frmCtrl.isSelected(1)">
-          <cust-reg></cust-reg>
-        </div>
-
-        <div class="panel-body" ng-if = "frmCtrl.isSelected(2)">
-          <shop-reg></shop-reg>
-        </div>
-      </div>
+      <!-- </header> -->
+      <!--main content of page -->
+      <div ui-view></div>
+      
+                
+      <!-- footer -->
     </div>
   </div>
-</div>
+  </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
 Task to be done later:
 1.Email validation (duplicacy) using ng-change (binding model and getting data on every alteration in model) call function which "gets" data from node, which "gets" 
   data from db and send particular response to angular and render the validation on the webpage.
-2.
+2.Header div's height is greater so their is gap between header and view.
+(use npm --save to install packages)

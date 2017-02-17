@@ -1,21 +1,20 @@
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,700,500);
-body {
+/*body {
   padding-top: 90px;
   padding-bottom: 90px;
   font-weight:100;
-}
+}*/
 
-body{
+/*body{
   width: 100%;
 
   background: -webkit-linear-gradient(left, #22d686, #24d3d3, #22d686, #24d3d3);
   background: linear-gradient(to right, #22d686, #24d3d3, #22d686, #24d3d3);
   background-size: 600% 100%;
-  //background-image: url("/images/back-reg.jpg");
   /*-webkit-animation: HeroBG 20s ease infinite;
           animation: HeroBG 20s ease infinite;*/
-}
+}*/
 
 @media (min-width: 768px) {
 .my-custom-container{
