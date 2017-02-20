@@ -1,7 +1,7 @@
 <div class="container box">
   <br>
   <h1 class="text-center">Add a Product</h1><hr><br>
-  <form class="form-horizontal" name="addProductForm" ng-submit="shCtrl.productAddfunc()" novalidate> 
+  <form class="form-horizontal" name="addProductForm" ng-submit="shCtrl.productAddfunc()" novalidate>
     <div class="row">
       <div class="col-sm-6">
 
@@ -15,7 +15,7 @@
         <div class="form-group">
           <div class="col-xs-4"><label class="control-label" style="font-size: 125%">Category</label></div>
           <div class="col-xs-8">
-            <select class="form-control" name="category" id="category">
+            <select class="form-control" ng-model ="shCtrl.product.Category" "category" id="category">
               <option>Kitchen</option>
               <option>Breakfast</option>
               <option>Cosmetics</option>
@@ -28,7 +28,7 @@
         <br>
 
         <div class="form-group">
-          <div class="col-xs-4"><label class="control-label" style="font-size: 125%">Quantity</label></div> 
+          <div class="col-xs-4"><label class="control-label" style="font-size: 125%">Quantity</label></div>
           <div class="col-xs-8"><input type="number" class="form-control" name="pquantity" ng-model="shCtrl.product.Quantity" id="pquantity" placeholder="Quantity"></div>
         </div>
 
@@ -50,18 +50,18 @@
 
       </div>
 
-      <div class="col-sm-offset-1 col-sm-5 text-center">                        
+      <div class="col-sm-offset-1 col-sm-5 text-center">
         <div class="row imgDisplay">
           <img class="text-center" src="http://placehold.it/200x200" alt="Error">
-        </div>                                        
+        </div>
         <br><br>
         <div class="row"><div class="col-xs-offset-2 col-xs-8"><input class="form-control" accept=".jpg,.png" id="uploadImage" ng-model="shCtrl.product.ImgSrc" type="file"></div></div>
       </div>
 
     </div>
 
-    <div class="row text-center">  
-      <br><br>    
+    <div class="row text-center">
+      <br><br>
       <input type="submit" name="product-submit" id="product-submit" class="btn btn-primary" value ="Add Product">
     </div>
   </form>

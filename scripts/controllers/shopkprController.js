@@ -10,6 +10,7 @@ app.controller('shopkprController',function($http,$state){
 	};
 	this.product = {
 		Pname : '',
+		Category : '',
 		UnitPrice : '',
 		Discount : '',
 		Quantity: '',

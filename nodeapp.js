@@ -1,4 +1,4 @@
-var express = require('express'); 
+var express = require('express');
 var mysql = require('mysql');
 var app = express();
 var http = require('http');
@@ -12,12 +12,12 @@ var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'custom'
+    database: 'buck'
 });
 connection.connect(function(error){
     if(!!error){
         console.log("Error");
-    } 
+    }
     else{
         console.log("connection established");
     }
@@ -31,7 +31,7 @@ app.post('/shopadd', function(req,res){
 	var query = connection.query('insert into users set ?', cope, function(err, result) {
 		if (err){
 			console.log("Error detected");
-		} 
+		}
 		else  {
 			console.log("done");
 		}
@@ -47,7 +47,7 @@ app.post('/custadd', function(req,res){
 	var query = connection.query('insert into users set ?', cope, function(err, result) {
 		if (err){
 			console.log("Error detected");
-		} 
+		}
 		else  {
 			console.log("done");
 		}
@@ -61,7 +61,7 @@ app.post('/additem', function(req,res){
 		connection.query('SELECT ITCid FROM itemcategory WHERE ITCtype = ?', cope.ITCtype, function(err, rows) {
 			if (err) {
 				callback(err, null);
-			} else 
+			} else
 			callback(null, rows[0].ITCid);
 		});
 	}
@@ -96,14 +96,38 @@ function createToken(cope , res){
     });
 }
 app.post('/login' , function(req,res){
-    var cope = req.body;
-    if(cope.email === 'baibhav19@outlook.com' && cope.password === '123'){
-        createToken(cope , res);
-    }
-    else{
-        res.status(401).send({
-            message:'Invalid email or password'
+    var username = req.body.Email;
+    var password = req.body.Password;
+    var salt = bcrypt.genSaltSync(10);
+    username = bcrypt.hashSync(username , salt);
+    connection.query('SELECT count(*) as names from users where Email = ?',[username], function(error, result) {
+    if(result[0].names == 1)
+    {
+        connection.query('SELECT Password from users where Email = ?' , [username] , function(error , result){
+            console.log(result[0].Password);
+            if(result[0].Password == password)
+            {
+                createToken(username , res);
+                res.status(200).send("ok");
+            }
+            else
+            {
+                res.status(500).send("error");
+            }
         });
     }
+    else
+    {
+        res.status(500).send("error");
+    }
+
+    // if(cope.email === 'baibhav19@outlook.com' && cope.password === '123'){
+    //     createToken(cope , res);
+    // }
+    // else{
+    //     res.status(401).send({
+    //         message:'Invalid email or password'
+    //     });
+});
 });
 app.listen(8091);
