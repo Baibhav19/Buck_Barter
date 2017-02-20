@@ -1,16 +1,22 @@
-app.controller('loginController',function($http, $state){
+app.controller('loginController',function($http, $state ,$window ,authToken){
 	 this.user = {
 		email : '',
-		pass : ''
+		password : ''
 	 };
 
-	 this.auth = function(){
+	this.auth = function(){
 	 	console.log("hello");
-	 	//$http.getthis.user.email
-	 	if(this.user.email == "hello@123bb.com" &&  this.user.pass == "123"){
-	 		$state.go("home");
-	 		console.log("sdc");
-	 	}
-	 	this.user={};
-	 };
+	 	$http.post("/login",this.user).then(function successCallback(response) {
+	        	console.log(response.token);
+	        	authToken.setToken(response.token);
+	        	$state.go('home');
+	        	$window.location.reload(true);
+        	} ,
+        	function errorCallback(response){
+        		alert("Invalid email or password!! Login again");
+        		$state.go('login');
+        		console.log(response.status);
+        	});
+    	this.user = {};
+	};
 });

@@ -2,8 +2,12 @@
   "name": "mysqlAPP",
   "version": "1.0.0",
   "dependencies": {
+    "angular-google-maps": "^2.4.1",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.16.0",
+    "crypto": "0.0.3",
     "express": "^4.13.4",
+    "jwt-simple": "^0.5.1",
     "mysql": "^2.10.2"
   }
 }

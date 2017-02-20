@@ -1,0 +1,33 @@
+.footer {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.footer ul {
+	margin-top: 15px;
+}
+.footer ul li a {
+	padding: 0 0 5px 0;
+}
+
+.footer .heading{
+	color: white;
+	font-size: 125%;
+}
+
+.social:hover {
+     -webkit-transform: scale(1.1);
+ }
+ .social {
+     -webkit-transform: scale(0.8);
+     -webkit-transition-duration: 0.5s;
+ }
+
+ #social-fb:hover {
+     color: #3B5998;
+ }
+ #social-tw:hover {
+     color: #4099FF;
+ }
+ #social-gp:hover {
+     color: #d34836;
+ }

@@ -1,0 +1,74 @@
+.box1 .box2 input[type="text"] {
+  height: 35px;
+  font-size: 16px;
+  border-bottom: 1px solid #e7e7e7;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+.box3{
+  	border-top-right-radius: 7px;
+  	border-bottom-right-radius: 7px;
+}
+
+.box4{
+	height: 35px;
+}
+
+.box input[type="text"], .box input[type="number"] {
+  border: 0;
+  font-size: 16px;
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+  border-bottom: 1px solid #e7e7e7;
+  border-radius: 7px;
+  padding: 6px 0px;
+}
+
+.box select {
+  border: 0;
+  font-size: 16px;
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+  border-bottom: 1px solid #e7e7e7;
+  border-radius: 7px;
+  padding: 6px 0px;
+}
+
+.box input:hover,
+.box input:focus{
+  border: solid 0.5px #707070;
+  box-shadow: 0 0 5px 0.5px #969696;
+  border-radius: 7px;
+}
+
+.box select:hover,
+.bos select:focus{
+  border: solid 0.5px #707070;
+  box-shadow: 0 0 5px 0.5px #969696;
+  border-radius: 7px;
+}
+
+.box #uploadimage{
+  border: none;
+  box-shadow: none;
+}
+
+.box .widthset{
+  width: 30%;
+}
+
+.navborder{
+  border: 0.05px solid blue;
+  border-radius: 7px;
+}
+
+li.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+.imgDisplay{
+  border: 2px solid grey;
+  height: 205px;
+  width: 205px;
+}

@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="css/custom/shopkeeper.css">
+<div class="container-fluid">
+  
+  <!-- Main Header finish -->
+
+  <div ng-controller="shopkprController as shCtrl" class="row">
+    <div class="col-sm-12">
+      <ul class="nav nav-pills nav-justified navborder">
+        <li ng-class="{active: shCtrl.isSelected(1)}"><a href ng-click="shCtrl.setTab(1)"><b>Show all Products</b></a></li>
+        <li ng-class="{active: shCtrl.isSelected(2)}"><a href ng-click="shCtrl.setTab(2)"><b>Add Product</b></a></li>
+        <li ng-class="{active: shCtrl.isSelected(3)}"><a href ng-click="shCtrl.setTab(3)"><b>Update Product</b></a></li>
+        <li ng-class="{active: shCtrl.isSelected(4)}"><a href ng-click="shCtrl.setTab(4)"><b>Delete Product</b></a></li>
+      </ul>
+      
+      <div class="tab-content">
+
+        <div class="panel" ng-if="shCtrl.isSelected(1)">
+          <!-- Show all Products -->     
+          <h1>Hello{{shCtrl.name}}</h1>     
+        </div>
+
+        <div class="panel" ng-if="shCtrl.isSelected(2)">
+          <add-product></add-product>
+        </div>
+
+        <div class="panel" ng-if="shCtrl.isSelected(3)">
+          <!-- Update Product -->
+          <h1>in process</h1>
+        </div>
+
+        <div class="panel" ng-if="shCtrl.isSelected(4)">
+          <!-- Delete Prodect -->
+          <h1>in process</h1>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

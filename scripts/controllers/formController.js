@@ -1,4 +1,4 @@
-app.controller('formController' , function($http){
+app.controller('formController' , function($http , $state ,authToken ,$window){
 	this.tab = 1;
 	this.setTab = function(tabno){
 		this.tab = tabno ;
@@ -33,12 +33,20 @@ app.controller('formController' , function($http){
 	};
 	this.custRegister = function(){
 		console.log("registered customer" , this.cust);
-		$http.post("/contact",this.cust).then(function(response) {
-        	this.bol = true;
-        	console.log(bol);
-    	});
+		$http.post("/contact",this.cust).then(function successCallback(response) {
+	        	alert("successfully registered");
+	        	console.log(response.token);
+	        	authToken.setToken(response.token);
+	        	$state.go('home');
+	        	$window.location.reload(true);
+	        	//console.log(response.data);
+        	} ,
+        	function errorCallback(response){
+        		alert("error while registering!!! Register again");
+        		$state.go('register');
+        		console.log(response.status);
+        	});
     	this.cust = {};
-    	//this.regCustForm.$setPristine();
 	};
 	this.shopkprRegister = function(){
 		console.log("registered shopkeeper" , this.shopkpr);
