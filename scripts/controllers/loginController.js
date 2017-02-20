@@ -1,7 +1,7 @@
 app.controller('loginController',function($http, $state ,$window ,authToken){
 	 this.user = {
-		email : '',
-		password : ''
+		Email : '',
+		Password : ''
 	 };
 
 	this.auth = function(){

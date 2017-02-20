@@ -22,6 +22,60 @@ connection.connect(function(error){
         console.log("connection established");
     }
 });
+
+app.post('/shopadd', function(req,res){
+	var cope = req.body;
+	console.log(cope);
+	var salt = bcrypt.genSaltSync(10);
+	cope.Password = bcrypt.hashSync(cope.Password , salt);
+	var query = connection.query('insert into users set ?', cope, function(err, result) {
+		if (err){
+			console.log("Error detected");
+		} 
+		else  {
+			console.log("done");
+		}
+	});
+	res.json({message : "completed"});
+});
+
+app.post('/custadd', function(req,res){
+	var cope = req.body;
+	console.log(cope);
+	var salt = bcrypt.genSaltSync(10);
+	cope.Password = bcrypt.hashSync(cope.Password , salt);
+	var query = connection.query('insert into users set ?', cope, function(err, result) {
+		if (err){
+			console.log("Error detected");
+		} 
+		else  {
+			console.log("done");
+		}
+	});
+	res.json({message : "completed"});
+});
+
+app.post('/additem', function(req,res){
+	var cope = req.body;
+	function fetchID(callback) {
+		connection.query('SELECT ITCid FROM itemcategory WHERE ITCtype = ?', cope.ITCtype, function(err, rows) {
+			if (err) {
+				callback(err, null);
+			} else 
+			callback(null, rows[0].ITCid);
+		});
+	}
+	var user_id;
+	fetchID(function(err, content) {
+		if (err) {
+			console.log(err);
+			return next("Mysql error, check your query");
+		} else {
+			user_id = content;
+            console.log(user_id); //undefined
+        }
+    });
+});
 var name = "baibhav";
 app.get('/showProduct' , function(req,res){
     if(!req.headers.authorization){
@@ -51,42 +105,5 @@ app.post('/login' , function(req,res){
             message:'Invalid email or password'
         });
     }
-});
-app.post('/contact', function(req,res,next){
-    var cope = req.body;
-    var salt = bcrypt.genSaltSync(10);
-    cope.password = bcrypt.hashSync(cope.password , salt);
-    var query = connection.query('insert into customer set ?', cope, function(err, result) {
-        if (err){
-            if (err.code === 'ER_DUP_ENTRY'){
-                g = true;
-                console.log("mylog : fb ER_DUP_ENTRY detected");
-                res.status(409).send(g);
-            }
-            else{
-                console.log(err);
-            }
-        }  
-        else {
-            console.log("done");
-            createToken(cope , res);
-        }
-    });
-  //res.json({message : "completed"});
-});
-app.post('/contact_shop', function(req,res){
-  var cope = req.body;
-  console.log(cope);
-  var query = connection.query('insert into shopkeeper set ?', cope, function(err, result) {
-    if (err){
-      if (err.code === 'ER_DUP_ENTRY') {
-        console.log("mylog : fb ER_DUP_ENTRY detected");
-    }
-} 
-else  {
-  console.log("done");
-}
-});
-  res.json({message : "completed"});
 });
 app.listen(8091);

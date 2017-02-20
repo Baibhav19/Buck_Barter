@@ -14,42 +14,47 @@
                 <h2 style="font-family:verdana; color:red"><strong><center>REGISTER AS CUSTOMER</center></strong></h2>
                   <div class="row">
                     <div class="col-md-3"><label>First Name</label></div>
-                    <div class="col-md-offset-1 col-md-8"><input type="text" ng-model = "frmCtrl.cust.fname" name="fname" id="firstname" tabindex="1" placeholder="First Name" ng-class= "{error: regCustForm.fname.$dirty && regCustForm.fname.$invalid}" required></div>
+                    <div class="col-md-offset-1 col-md-8"><input type="text" ng-model = "frmCtrl.cust.Fname" name="Fname" id="firstname" tabindex="1" placeholder="First Name" ng-class= "{error: regCustForm.fname.$dirty && regCustForm.fname.$invalid}" required></div>
                   </div>
                   <br>
                   <div class="row">
                     <div class="col-md-3"><label>Last Name</label></div>
-                    <div class="col-md-offset-1 col-md-8"><input type="text" ng-model = "frmCtrl.cust.lname" name="lname" id="lastname" tabindex="1" placeholder="Last Name" required></div>
+                    <div class="col-md-offset-1 col-md-8"><input type="text" ng-model = "frmCtrl.cust.Lname" name="Lname" id="lastname" tabindex="1" placeholder="Last Name" required></div>
                   </div>
                   <br>
                   <div class="row">
                     <div class="col-md-3"><label>Email ID</label></div>
-                    <div class="col-md-offset-1 col-md-8"><input type="email" ng-model = "frmCtrl.cust.email" name="email" id="em" tabindex="1" placeholder="Email ID"></div>
+                    <div class="col-md-offset-1 col-md-8"><input type="email" ng-model = "frmCtrl.cust.Email" name="Email" id="em" tabindex="1" placeholder="Email ID"></div>
                   </div>
                   <br>
                   <div class="row">
                     <div class="col-md-3"><label>Password</label></div>
-                    <div class="col-md-offset-1 col-md-8"><input type="password" ng-model = "frmCtrl.cust.password" name="password" id="password" tabindex="1" placeholder="Password" required></div>
+                    <div class="col-md-offset-1 col-md-8"><input type="password" ng-model = "frmCtrl.cust.Password" name="Password" id="password" tabindex="1" placeholder="Password" required></div>
                   </div>
                   <br>
                   <div class="row">
                     <div class="col-md-4"><label>Confirm Password</label></div>
-                    <div class="col-md-offset-0 col-md-8"><input type="password" ng-model = "frmCtrl.cust.cpassword" name="password" id="cpassword" tabindex="1" placeholder="Confirm Password" required></div>
+                    <div class="col-md-offset-0 col-md-8"><input type="password" name="password" id="cpassword" tabindex="1" placeholder="Confirm Password" required></div>
                   </div>
                   <br>
                   <div class="row">
                     <div class="col-md-3"><label>Phone Number</label></div>
-                    <div class="col-md-offset-1 col-md-8"><input type="text" ng-model = "frmCtrl.cust.phone" name="phone" id="edit-phone" tabindex="1" placeholder="Phone number" ng-maxlength="10" required></div>
+                    <div class="col-md-offset-1 col-md-8"><input type="text" ng-model = "frmCtrl.cust.PhoneNo" name="PhoneNo" id="edit-phone" tabindex="1" placeholder="Phone number" ng-maxlength="10" required></div>
                   </div>
                   <br>
                   <div class="row">
+                    <div class="col-md-3"><label>Address</label></div>
+                    <div class="col-md-offset-1 col-md-8"><input type="text" ng-model = "frmCtrl.cust.Address" name= "Address" id="address" tabindex="1" placeholder="Address"></div>
+                </div>
+                <br>
+                  <div class="row">
                     <div class="col-md-3"><label>City</label></div>
-                    <div class="col-md-offset-1 col-md-8"><input type="text" ng-model = "frmCtrl.cust.city" name="city" id="city" tabindex="1" placeholder="City" required></div>
+                    <div class="col-md-offset-1 col-md-8"><input type="text" name="city" id="city" tabindex="1" placeholder="City" required></div>
                   </div>
                   <br>
                   <div class="row">
                     <div class="col-md-3"><label>State</label></div>
-                    <div class="col-md-offset-1 col-md-8"><input type="text" ng-model = "frmCtrl.cust.state" name="state" id="state" tabindex="1" placeholder="State" required></div>
+                    <div class="col-md-offset-1 col-md-8"><input type="text" name="state" id="state" tabindex="1" placeholder="State" required></div>
                   </div>
                   <br>
                   <br>
