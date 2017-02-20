@@ -1,4 +1,4 @@
-app.controller('formController' , function($http , $state, authToken){
+app.controller('formController' , function($http , $state, authToken ,$window){
 	this.tab = 1;
 	this.setTab = function(tabno){
 		this.tab = tabno ;
@@ -12,7 +12,7 @@ app.controller('formController' , function($http , $state, authToken){
 		Fname : '',
 		Lname : '',
 		Email : '',
-		Password: '',
+		Password : '',
 		PhoneNo: '',
 		Uid: '1',
 		Address : ''
@@ -34,7 +34,6 @@ app.controller('formController' , function($http , $state, authToken){
 	        	authToken.setToken(response.token);
 	        	$state.go('home');
 	        	$window.location.reload(true);
-	        	$state.go('login');
 	        	console.log(response.data);
         	} ,
         	function errorCallback(response){
