@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var app = express();
 var http = require('http');
 var bodyParser = require('body-parser');
-var bcrypt = require('bcrypt-nodejs');
+var bcrypt = require('bcrypt');
 var jwt = require('jwt-simple');
 app.use(express.static(__dirname + '/'))
 app.use(bodyParser.json());
@@ -26,16 +26,17 @@ connection.connect(function(error){
 app.post('/shopadd', function(req,res){
 	var cope = req.body;
 	console.log(cope);
-	var salt = bcrypt.genSaltSync(10);
-	cope.Password = bcrypt.hashSync(cope.Password , salt);
-	var query = connection.query('insert into users set ?', cope, function(err, result) {
+    cope.Password = passwordHash.generate(cope.Password),
+	// var salt = bcrypt.genSaltSync(10);
+	// cope.Password = bcrypt.hashSync(cope.Password , salt);
+	 connection.query('insert into users set ?', [cope], function(err, result) {
 		if (err){
 			console.log("Error detected");
 		}
 		else  {
 			console.log("done");
 		}
-	});
+});
 	res.json({message : "completed"});
 });
 
@@ -55,27 +56,70 @@ app.post('/custadd', function(req,res){
 	res.json({message : "completed"});
 });
 
-app.post('/additem', function(req,res){
+app.post('/addProducts', function(req,res){
 	var cope = req.body;
-	function fetchID(callback) {
-		connection.query('SELECT ITCid FROM itemcategory WHERE ITCtype = ?', cope.ITCtype, function(err, rows) {
-			if (err) {
-				callback(err, null);
-			} else
-			callback(null, rows[0].ITCid);
-		});
-	}
-	var user_id;
-	fetchID(function(err, content) {
-		if (err) {
-			console.log(err);
-			return next("Mysql error, check your query");
-		} else {
-			user_id = content;
-            console.log(user_id); //undefined
+    console.log(cope);
+    var pname = cope.Pname;
+    connection.query('SELECT count(*) as names from added_product where Pname = ?',[pname], function(error, result) {
+    if(result[0].names == 1)
+    {
+    connection.query('SELECT id from added_product where Pname = ?' , [pname] , function(error , result){
+        cope.pid = result[0].id;
+        var product =
+        {
+            pid : cope.pid,
+            Uid : cope.Uid,
+            UnitPrice : cope.UnitPrice,
+            Discount : cope.Discount,
+            Quantity : cope.Quantity,
+            Date_Time : cope.Date_Time
+        };
+        connection.query('insert into products set ?', product, function(err, result) {
+            if (err){
+                console.log("Error detected");
+            }
+            else  {
+            console.log("done");
+             }
+        });
+     });
+    }
+    else{
+        var id_category = connection.query('SELECT ITCid from itemcategory where ITCname = ?',[cope.ITCname] , function(error, result){
+            console.log(result[0].ITCid);
+
+        var added =
+        {
+            id:'',
+            Pname : cope.Pname,
+            ITCid : result[0].ITCid
         }
+        connection.query('insert into added_product set ?', added, function(err, result) {
+            var id_product = connection.query('SELECT id from added_product where ITCid = ?',[added.ITCid] , function(error, result){
+            console.log(result[0].id);
+            var product =
+            {
+                pid :result[0].id,
+                Uid : cope.Uid,
+                UnitPrice : cope.UnitPrice,
+                Discount : cope.Discount,
+                Quantity : cope.Quantity,
+                Date_Time : cope.Date_Time
+            }
+            connection.query('insert into products set ?', product, function(err, result) {
+            if (err){
+                console.log("Error detected");
+            }
+            else  {
+            console.log("done");
+             }
+        });
+            });
+        });
     });
+    }
 });
+    });
 var name = "baibhav";
 app.get('/showProduct' , function(req,res){
     if(!req.headers.authorization){
@@ -87,7 +131,7 @@ app.get('/showProduct' , function(req,res){
 });
 function createToken(cope , res){
     var payload =  {
-        sub : cope.email
+        sub : cope
     }
     var token = jwt.encode(payload , "hello");
     console.log('in create token');
@@ -98,36 +142,28 @@ function createToken(cope , res){
 app.post('/login' , function(req,res){
     var username = req.body.Email;
     var password = req.body.Password;
-    var salt = bcrypt.genSaltSync(10);
-    username = bcrypt.hashSync(username , salt);
+    // var salt = bcrypt.genSaltSync(10);
+    // password = bcrypt.hashSync(password , salt);
+    console.log(password);
     connection.query('SELECT count(*) as names from users where Email = ?',[username], function(error, result) {
     if(result[0].names == 1)
     {
         connection.query('SELECT Password from users where Email = ?' , [username] , function(error , result){
             console.log(result[0].Password);
-            if(result[0].Password == password)
-            {
-                createToken(username , res);
-                res.status(200).send("ok");
-            }
-            else
-            {
-                res.status(500).send("error");
-            }
-        });
+            var salt = bcrypt.genSaltSync(10);
+            if(result[0].Password == password) {
+                 createToken(username , res);
+                    }
+                    else
+                    {
+                        res.status(500).send("error");
+                    }
+                 });
     }
     else
     {
         res.status(500).send("error");
     }
-
-    // if(cope.email === 'baibhav19@outlook.com' && cope.password === '123'){
-    //     createToken(cope , res);
-    // }
-    // else{
-    //     res.status(401).send({
-    //         message:'Invalid email or password'
-    //     });
 });
 });
 app.listen(8091);
