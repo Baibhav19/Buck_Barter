@@ -1,16 +1,36 @@
 var app = angular.module('localDeals', [
-    'ui.router'
+    'ui.router',
+    'ngGeolocation'
 ]);
 
 app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
     $stateProvider
         .state("home", {
             url: '/home',
-            templateUrl: 'templates/mainpage.html'
+            templateUrl: 'templates/mainpage.html',
+            controller:'headerController',
+            controllerAs:'hdCtrl'
         })
         .state("shopkeeper", {
             url: '/shopkeeper',
+            abstract : true ,
             templateUrl: 'templates/shopkeeper.html'
+        })
+        .state("shopkeeper.showProduct", {
+            url: '/showProduct',
+            templateUrl: 'templates/showProduct.html'
+        })
+        .state("shopkeeper.addProduct", {
+            url: '/addProduct',
+            templateUrl: 'templates/shopAddProduct.html'
+        })
+        .state("shopkeeper.updateProduct", {
+            url: '/updateProduct',
+            template: 'in processsss'
+        })
+        .state("shopkeeper.deleteProduct", {
+            url: '/deleteProduct',
+            template: 'temp'
         })
         .state("register", {
         	url: '/register',

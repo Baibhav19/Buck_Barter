@@ -16,6 +16,29 @@ app.controller('shopkprController',function($http,$state){
 		Quantity: '',
 		ImgSrc:''
 	};
+	this.products=[
+		{
+			Pname : 'Maggi',
+			Category : 'Food',
+			UnitPrice : '12',
+			Discount : '2',
+			Quantity: '5',
+		},
+		{
+			Pname : 'Shampoo',
+			Category : 'Cosmetics',
+			UnitPrice : '55',
+			Discount : '5',
+			Quantity: '3',
+		},
+		{
+			Pname : 'Boro-Plus',
+			Category : 'Cosmetics',
+			UnitPrice : '70',
+			Discount : '5',
+			Quantity: '10',
+		},
+	]
 	this.productAddfunc = function(){
 		console.log("product_Added" , this.product);
 		$http.post("/addProducts",this.product).then(function sucessCallback(response) {

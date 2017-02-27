@@ -8,9 +8,10 @@ app.controller('loginController',function($http, $state ,$window ,authToken){
 	 	console.log("hello");
 	 	$http.post("/login",this.user).then(function successCallback(response) {
 	        	console.log(response.token);
-	        	authToken.setToken(response.token);
+	        	authToken.setToken(response.data.token);
+	        	authToken.setName(response.data.username);
 	        	$state.go('home');
-	        	$window.location.reload(true);
+	        	//$window.location.reload(true);
         	} ,
         	function errorCallback(response){
         		alert("Invalid email or password!! Login again");

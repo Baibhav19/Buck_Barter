@@ -13,10 +13,11 @@
         <div class="collapse navbar-collapse" id="myNavbar">
           <div class="row">           
             <ul class="nav navbar-nav navbar-right">
+              <li class="text-center test" ng-show="hdCtrl.isAuthenticated">Welcome {{hdCtrl.names}}</li>
               <li ng-hide="hdCtrl.isAuthenticated" ui-sref-active="active"><a ui-sref="register"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
               <li ng-show="hdCtrl.isAuthenticated" ui-sref-active="active"><a ui-sref="logout"><span class="glyphicon glyphicon-user"></span>LogOut</a></li>
               <li ng-hide="hdCtrl.isAuthenticated" ui-sref-active="active"><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-              <li ng-show="hdCtrl.isAuthenticated" ui-sref-active="active"><a ui-sref="shopkeeper"><span class="glyphicon glyphicon-log-in"></span> Shopkeeper</a></li>
+              
             </ul>
           </div>
         </div>

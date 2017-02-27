@@ -8,6 +8,10 @@ h3{
 	font-weight: bolder;
 }
 
+.test{
+  color: white;
+}
+
 .box1 .box2 input[type="text"] {
   height: 35px;
   /*width: 500px;*/

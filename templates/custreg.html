@@ -1,20 +1,21 @@
 <div class="row">
   <div class="col-lg-12">
-    <div class="alert alert-danger" ng-show="(regCustForm.Fname.$dirty && regCustForm.Fname.$error.required) || (regCustForm.Email.$dirty && regCustForm.Email.$error.required) || (regCustForm.Lname.$dirty && regCustForm.Lname.$error.required) || (regCustForm.Email.$dirty && regCustForm.email.$invalid) || (regCustForm.Phone.$dirty && regCustForm.Phone.$error.maxlength) || (regCustForm.phone.$dirty && regCustForm.phone.$error.required)">
-    <label for="firstname" ng-if="regCustForm.fname.$dirty && regCustForm.fname.$error.required" >First name is required. </label>
-    <label for="firstname" ng-if="regCustForm.fname.$dirty && regCustForm.fname.$invalid">enter a valid name. </label>
-    <label for="lastname" ng-if="regCustForm.lname.$dirty && regCustForm.lname.$error.required">Last name is required. </label>
-    <label for="em" ng-if="regCustForm.email.$dirty && regCustForm.email.$error.required">Email field is required.</label>
-    <label for="em" ng-if="regCustForm.email.$dirty && regCustForm.email.$invalid">Please enter a valid Email address.</label>
-    <label for="edit-phone" ng-if="regCustForm.phone.$dirty && regCustForm.phone.$error.maxlength">Mobile No. should be 10 digits</label>
-    <label for="edit-phone" ng-show ="frmCtrl.bol">phone no exists</label>
-    <label for="edit-phone" ng-if="regCustForm.phone.$dirty && regCustForm.phone.$error.required">Mobile No. is required</label>
+    <div class="alert alert-danger" ng-show="(regCustForm.Fname.$dirty && regCustForm.Fname.$error.required) || (regCustForm.Email.$dirty && regCustForm.Email.$error.required) || (regCustForm.Lname.$dirty && regCustForm.Lname.$error.required) || (regCustForm.Email.$dirty && regCustForm.Email.$invalid) || (regCustForm.cpassword.$dirty && regCustForm.cpassword.$invalid) || (regCustForm.PhoneNo.$dirty && regCustForm.PhoneNo.$error.maxlength) || (regCustForm.PhoneNo.$dirty && regCustForm.PhoneNo.$error.required)">
+    <label for="firstname" ng-if="regCustForm.Fname.$dirty && regCustForm.Fname.$error.required" >First name is required. </label>
+    <!-- <label for="firstname" ng-if="regCustForm.Fname.$dirty && regCustForm.Fname.$invalid">enter a valid name. </label> -->
+    <label for="lastname" ng-if="regCustForm.Lname.$dirty && regCustForm.Lname.$error.required">Last name is required. </label>
+    <label for="em" ng-if="regCustForm.Email.$dirty && regCustForm.Email.$error.required">Email field is required.</label>
+    <label for="em" ng-if="regCustForm.Email.$dirty && regCustForm.Email.$invalid">Please enter a valid Email address.</label>
+    <label for="cpassword" ng-if="regCustForm.cpassword.$dirty && regCustForm.cpassword.$invalid">Password don't match.</label>
+    <label for="edit-PhoneNo" ng-if="regCustForm.PhoneNo.$dirty && regCustForm.PhoneNo.$error.maxlength">Mobile No. should be 10 digits</label>
+    <!-- label for="edit-PhoneNo" ng-show ="frmCtrl.bol">PhoneNo exists</label> -->
+    <label for="edit-PhoneNo" ng-if="regCustForm.PhoneNo.$dirty && regCustForm.PhoneNo.$error.required">Mobile No. is required</label>
   </div>             
     <form id="register-customer" name = "regCustForm" ng-submit = "regCustForm.$valid && frmCtrl.custRegister()" novalidate>
-                <h2 style="font-family:verdana; color:red"><strong><center>REGISTER AS CUSTOMER</center></strong></h2>
+                <h2 style="font-family:verdana; color:blue"><strong><center>REGISTER AS CUSTOMER</center></strong></h2><hr>
                   <div class="row">
                     <div class="col-md-3"><label>First Name</label></div>
-                    <div class="col-md-offset-1 col-md-8"><input type="text" ng-model = "frmCtrl.cust.Fname" name="Fname" id="firstname" tabindex="1" placeholder="First Name" ng-class= "{error: regCustForm.fname.$dirty && regCustForm.fname.$invalid}" required></div>
+                    <div class="col-md-offset-1 col-md-8"><input type="text" ng-model = "frmCtrl.cust.Fname" name="Fname" id="firstname" tabindex="1" placeholder="First Name" ng-class= "{error: regCustForm.Fname.$dirty && regCustForm.Fname.$invalid}" required></div>
                   </div>
                   <br>
                   <div class="row">
@@ -24,7 +25,7 @@
                   <br>
                   <div class="row">
                     <div class="col-md-3"><label>Email ID</label></div>
-                    <div class="col-md-offset-1 col-md-8"><input type="email" ng-model = "frmCtrl.cust.Email" name="Email" id="em" tabindex="1" placeholder="Email ID"></div>
+                    <div class="col-md-offset-1 col-md-8"><input type="Email" ng-model = "frmCtrl.cust.Email" name="Email" id="em" tabindex="1" placeholder="Email ID"></div>
                   </div>
                   <br>
                   <div class="row">
@@ -34,12 +35,12 @@
                   <br>
                   <div class="row">
                     <div class="col-md-4"><label>Confirm Password</label></div>
-                    <div class="col-md-offset-0 col-md-8"><input type="password" name="password" id="cpassword" tabindex="1" placeholder="Confirm Password" required></div>
-                  </div>
+                    <div class="col-md-offset-0 col-md-8"><input type="password" ng-model="cpassword" name="cpassword" id="cpassword" tabindex="1" placeholder="Confirm Password" validate-password ='frmCtrl.cust.Password' required ></div>
+                </div>
                   <br>
                   <div class="row">
                     <div class="col-md-3"><label>Phone Number</label></div>
-                    <div class="col-md-offset-1 col-md-8"><input type="text" ng-model = "frmCtrl.cust.PhoneNo" name="PhoneNo" id="edit-phone" tabindex="1" placeholder="Phone number" ng-maxlength="10" required></div>
+                    <div class="col-md-offset-1 col-md-8"><input type="text" ng-model = "frmCtrl.cust.PhoneNo" name="PhoneNo" id="edit-PhoneNo" tabindex="1" placeholder="phone number" ng-maxlength="10" required></div>
                   </div>
                   <br>
                   <div class="row">

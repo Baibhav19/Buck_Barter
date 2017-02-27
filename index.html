@@ -12,6 +12,11 @@
   <script src="scripts/lib/angular.js"></script>
   <script type="text/javascript" src="app.js"></script>
   <script src="scripts/lib/angular-ui-router.min.js"></script>
+  <script src="scripts/lib/lodash.core.js"></script> 
+  <script src="scripts/lib/angular-simple-logger.js"></script> 
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDl_u7IjhwcmkGFCg4GNJhMTJv2Hg3mik "></script>
+  <script src="scripts/lib/angular-google-maps.js"></script> 
+  <script src="scripts/lib/geoLocation.js"></script>
   <script type="text/javascript" src="scripts/services/authToken.js"></script>
   <script type="text/javascript" src="scripts/services/authInterceptor.js"></script>
   <script type="text/javascript" src="scripts/controllers/formController.js"></script>
@@ -24,21 +29,22 @@
   <script type="text/javascript" src="scripts/directives/addProductDir.js"></script>
   <script type="text/javascript" src="scripts/directives/headerDir.js"></script>
   <script type="text/javascript" src="scripts/directives/footerDir.js"></script>
- 
+  <script type="text/javascript" src="scripts/directives/validate_password.js"></script>
+
 </head>
 <title>Buck Barter</title>
 <body>
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-12">
-        <page-header></page-header>
+
         <!--main content of page -->
         <div ui-view></div>
       </div>
     </div>
   </div>
   <footer>
-     <page-footer></page-footer>
-  </footer>
+   <page-footer></page-footer>
+ </footer>
 </body>
 </html>

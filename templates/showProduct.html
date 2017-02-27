@@ -1,0 +1,35 @@
+<style>
+table, th , td  {
+	border: 3px solid grey;
+	border-collapse: collapse;
+	padding: 8px;
+	font-weight: 20px;
+}
+table tr:nth-child(odd) {
+	background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+	background-color: #ffffff;
+}
+</style>
+<br><hr><br>
+<div class="container">
+	<table>
+		<th>S.No</th>
+		<th>Product Name</th>
+		<th>Category</th>
+		<th>Unit Price</th>
+		<th>Discount %</th>
+		<th>Quantity</th>
+
+		<tr ng-repeat="x in shCtrl.products">
+			<td></td>
+			<td>{{ x.Pname }}</td>
+			<td>{{ x.Category }}</td>
+			<td>{{ x.UnitPrice }}</td>
+			<td>{{ x.Discount }}%</td>
+			<td>{{ x.Quantity }}</td>
+		</tr>
+	</table>
+</div>
+<br><br>

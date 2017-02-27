@@ -8,6 +8,8 @@
     "crypto": "0.0.3",
     "express": "^4.13.4",
     "jwt-simple": "^0.5.1",
-    "mysql": "^2.10.2"
+    "mysql": "^2.10.2",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
   }
 }
