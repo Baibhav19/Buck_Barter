@@ -185,6 +185,22 @@ app.get('/showProduct' , function(req,res){
   });
 // });
 });
+app.get('/showCoords' , function(req,res){
+    var coords = new Array();
+    connection.query('SELECT users.Latitude,users.Longitude FROM users where Selectid = 2' , function(error , result){
+        if(error)
+        {
+            res.status(500).send(error);
+        }
+        else{
+            console.log(result);
+            for(var i = 0 ; i < result.length ;i++){
+                  coords.push(result[i]);
+            }
+          res.send(coords);
+      }
+  });
+});
 function createToken(cope , res){
     var payload =  {
         sub : cope

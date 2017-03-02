@@ -1,6 +1,7 @@
 var app = angular.module('localDeals', [
     'ui.router',
-    'ngGeolocation'
+    'ngGeolocation' ,
+    'uiGmapgoogle-maps'
 ]);
 
 app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
@@ -8,8 +9,8 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
         .state("home", {
             url: '/home',
             templateUrl: 'templates/mainpage.html',
-            controller:'headerController',
-            controllerAs:'hdCtrl'
+            controller:'mainpageController',
+            controllerAs:'mpCtrl'
         })
         .state("shopkeeper", {
             url: '/shopkeeper',
