@@ -9,12 +9,14 @@ app.controller('shopkprController',function($http,$state){
 		return this.tab === tabno;
 	};
 	this.product = {
+		pid : '',
+		Userid: '1',
+		ITCname: '',
 		Pname : '',
-		Category : '',
 		UnitPrice : '',
 		Discount : '',
 		Quantity: '',
-		ImgSrc:''
+		Date_Time: Date.now()
 	};
 	this.products=[
 		{

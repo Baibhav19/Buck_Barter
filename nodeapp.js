@@ -65,7 +65,7 @@ passport.use(strategy);*/
 app.post('/shopadd', function(req,res){
     var cope = req.body;
     console.log(cope);
-    cope.Password = passwordHash.generate(cope.Password),
+    //cope.Password = passwordHash.generate(cope.Password),
     // var salt = bcrypt.genSaltSync(10);
     // cope.Password = bcrypt.hashSync(cope.Password , salt);
     connection.query('insert into users set ?', [cope], function(err, result) {
