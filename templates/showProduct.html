@@ -1,5 +1,5 @@
 <style>
-table, th , td  {
+/*table, th , td  {
 	border: 3px solid grey;
 	border-collapse: collapse;
 	padding: 8px;
@@ -10,18 +10,25 @@ table tr:nth-child(odd) {
 }
 table tr:nth-child(even) {
 	background-color: #ffffff;
-}
+}*/
 </style>
 <br><hr><br>
-<div class="container">
-	<table>
-		<th>S.No</th>
-		<th>Product Name</th>
-		<th>Category</th>
-		<th>Unit Price</th>
-		<th>Discount %</th>
-		<th>Quantity</th>
+<div class="container table-responsive">
+	<table class="table table-bordered table-hover">
+		<thead style="font-size: 150%">
+		<tr>
+			<th>S.No</th>
+			<th>Product Name</th>
+			<th>Category</th>
+			<th>Unit Price</th>
+			<th>Discount %</th>
+			<th>Quantity</th>
+			<th><!-- Update --></th>
+			<th><!-- Delete --></th>
+		</tr>
+		</thead>
 
+		<tbody>
 		<tr ng-repeat="x in shCtrl.products">
 			<td></td>
 			<td>{{ x.Pname }}</td>
@@ -29,7 +36,10 @@ table tr:nth-child(even) {
 			<td>{{ x.UnitPrice }}</td>
 			<td>{{ x.Discount }}%</td>
 			<td>{{ x.Quantity }}</td>
+			<td class="text-center"><a href="#" class="text-primary"><i class="fa fa-pencil"></i></a></td>
+			<td class="text-center"><a href="#" class="text-danger"><i class="fa fa-times"></i></a></td>
 		</tr>
+		</tbody>
 	</table>
 </div>
 <br><br>
