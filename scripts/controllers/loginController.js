@@ -12,7 +12,6 @@ app.controller('loginController',function($http, $state ,$window ,authToken){
 	        	authToken.setName(response.data.username);
 	        	authToken.setId(response.data.useridd);
 	        	$state.go('home');
-	        	//$window.location.reload(true);
         	} ,
         	function errorCallback(response){
         		alert("Invalid email or password!! Login again");

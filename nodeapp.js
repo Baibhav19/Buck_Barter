@@ -106,7 +106,6 @@ app.post('/shopadd', function(req,res){
             console.log("Error detected");
         }
         else  {
-            createToken(cope.Email,res);
             console.log("done");
         }
     });
@@ -123,7 +122,6 @@ app.post('/custadd', function(req,res){
             console.log("Error detected");
         }
         else  {
-            createToken(cope.Email , res);
             console.log("done");
         }
     });
@@ -131,11 +129,10 @@ app.post('/custadd', function(req,res){
 
 app.post('/addProducts', function(req,res){
     var cope = req.body;
-    console.log(cope);
     var pname = cope.Pname;
     var s = req.headers.authorization.toString().split(" ");
     console.log(s[0]);
-    cope.Userid = s[0];
+    cope.Userid = parseInt(s[0]);
     connection.query('SELECT count(*) as names from added_product where Pname = ?',[pname], function(error, result) {
         if(result[0].names == 1)
         {
@@ -143,6 +140,7 @@ app.post('/addProducts', function(req,res){
                 cope.Pid = result[0].Pid;
                 var product =
                 {
+                    S_No :'',
                     Pid : cope.Pid,
                     Userid : cope.Userid,
                     UnitPrice : cope.UnitPrice,
@@ -150,6 +148,7 @@ app.post('/addProducts', function(req,res){
                     Quantity : cope.Quantity,
                     Date_Time : cope.Date_Time
                 };
+                console.log(product);
                 connection.query('insert into products set ?', product, function(err, result) {
                     if (err){
                         console.log("Error detected");
@@ -177,6 +176,7 @@ app.post('/addProducts', function(req,res){
                         console.log(result[0].Pid);
                         var product =
                         {
+                            S_No :'',
                             Pid :result[0].Pid,
                             Userid : cope.Userid,
                             UnitPrice : cope.UnitPrice,

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2017 at 06:09 PM
+-- Generation Time: Mar 03, 2017 at 08:13 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -45,9 +45,7 @@ INSERT INTO `added_product` (`Pid`, `Pname`, `ITCid`) VALUES
 (16, 'Tropicana Juice', 1),
 (18, 'Red Label', 1),
 (19, 'Tazza', 1),
-(20, 'Parle-G', 1),
-(21, 'Vim bar', 1),
-(22, 'Dettol Hand Wash', 5);
+(20, 'Parle-G', 1);
 
 -- --------------------------------------------------------
 
@@ -78,6 +76,7 @@ INSERT INTO `itemcategory` (`ITCid`, `ITCname`) VALUES
 --
 
 CREATE TABLE `products` (
+  `S_No` int(11) NOT NULL,
   `Pid` int(11) NOT NULL,
   `Userid` int(11) NOT NULL,
   `UnitPrice` double NOT NULL,
@@ -90,17 +89,9 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`Pid`, `Userid`, `UnitPrice`, `Discount`, `Quantity`, `Date_Time`) VALUES
-(0, 1, 10, 5, 25, '0000-00-00 00:00:00'),
-(10, 2, 50, 25, 1000, '0000-00-00 00:00:00'),
-(11, 1, 150, 10, 10, '0000-00-00 00:00:00'),
-(13, 1, 75, 8, 5, '0000-00-00 00:00:00'),
-(14, 1, 140, 3, 6, '0000-00-00 00:00:00'),
-(15, 1, 90, 4, 8, '0000-00-00 00:00:00'),
-(16, 1, 60, 2, 8, '0000-00-00 00:00:00'),
-(18, 0, 25, 5, 65, '0000-00-00 00:00:00'),
-(21, 20, 20, 2, 25, '0000-00-00 00:00:00'),
-(22, 20, 70, 32, 25, '0000-00-00 00:00:00');
+INSERT INTO `products` (`S_No`, `Pid`, `Userid`, `UnitPrice`, `Discount`, `Quantity`, `Date_Time`) VALUES
+(1, 13, 31, 50, 4, 5, '0000-00-00 00:00:00'),
+(2, 14, 31, 140, 4, 6, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -133,9 +124,9 @@ INSERT INTO `users` (`Userid`, `Fname`, `Lname`, `Email`, `PhoneNo`, `Password`,
 (23, 'sd', 'hdb', 'hfvb@jhd', 32823, 'as', 'isc', 1, 30.509540100000002, 76.6585865),
 (25, 'sd', 'cd', 'fg@dk', 2322332, 'aaaa', 'c', 1, 30.7334026, 76.7796079),
 (27, 'wq', 'e', 'e@ed', 2322232372, '1', 'hcs', 1, 0, 0),
-(28, 'karan', 'Arora', 'arora15karan1996@gmail.com', 3489629382, 'qwerty', 'jfdjn,fok', 1, 0, 0),
-(29, 'Saurabh', 'Thakur', 'thakur295@gmail.com', 23582735, 'qwerty', 'hdcb', 1, 30.520534400000003, 76.6585865),
-(30, 'iehdc', 'jh', 'dh@kjf', 26385487, '$2a$10$vMCqBj.AYw1hRRVseHjC3uMXdKClqNDqgagQ6Wx3Xbgs30FEptJyi', 'uyd', 1, 0, 0);
+(30, 'iehdc', 'jh', 'dh@kjf', 26385487, '$2a$10$vMCqBj.AYw1hRRVseHjC3uMXdKClqNDqgagQ6Wx3Xbgs30FEptJyi', 'uyd', 1, 0, 0),
+(31, 'Gaurav', 'Yadav', 'gaurav217@gmail.com', 437347, '$2a$10$8IaPO3x9TLzd3sZI5laCLOakL4soiaAXwNQC.U3CWz3tkUNCllDOu', 'fhvb', 2, 30.520468100000002, 76.6585865),
+(32, 'Saurabh', 'Thakur', 'thakur295@gmail.com', 232323224, '$2a$10$qBXkCgy1cDRyhHX/8JsVwOSbTpxDy6V7R4dIAdqe8W2PBM9JU4TUS', '3dc', 2, 30.520534400000003, 76.6585865);
 
 --
 -- Indexes for dumped tables
@@ -158,7 +149,7 @@ ALTER TABLE `itemcategory`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD UNIQUE KEY `Pid` (`Pid`);
+  ADD PRIMARY KEY (`S_No`);
 
 --
 -- Indexes for table `users`
@@ -179,12 +170,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `added_product`
 --
 ALTER TABLE `added_product`
-  MODIFY `Pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `Pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `S_No` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `Userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `Userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

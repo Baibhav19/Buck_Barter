@@ -48,13 +48,9 @@ app.controller('formController' , function($http , $state, authToken ,$window , 
       }
       $http.post("/custadd",this.cust).then(function successCallback(response) {
         alert("successfully registered");
-        authToken.setToken(response.data.token);
-        console.log(response.data.username);
-        authToken.setName(response.data.username);
-        $state.go('home');
-	        	//$window.location.reload(true);
+        $state.go('login');
 	        	console.log(response.data);
-	        } ,
+	        },
 	        function errorCallback(response){
 	        	alert("error while registering!!! Register again");
 	        	$state.go('register');
@@ -73,10 +69,7 @@ app.controller('formController' , function($http , $state, authToken ,$window , 
         this.shopkpr.Longitude = $geolocation.position.coords.longitude;
         $http.post("/shopadd",this.shopkpr).then(function successCallback(response) {
             alert("successfully registered");
-            authToken.setToken(response.token);
-            authToken.setName(response.username);
-	        	//$state.go('login');
-	        	$state.go('home');
+	        	$state.go('login');
 	        	console.log(response.data);
 	        } ,
 	        function errorCallback(response){
