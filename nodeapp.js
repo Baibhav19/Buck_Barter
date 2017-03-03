@@ -62,12 +62,45 @@ app.use(req,res,next){
     });
     });
 passport.use(strategy);*/
+
+app.post('/deleteProduct' , function(req , res){
+    var cope = req.body;
+    console.log(cope.Pname + ' ' + cope.U_id);
+    connection.query('SELECT Pid from added_product where Pname = ?',[cope.Pname] , function(error, Pid_result){
+        console.log(Pid_result[0].Pid);
+        connection.query('DELETE FROM products where Userid = ? AND Pid =?',[cope.U_id , Pid_result[0].Pid]  , function(error, result){
+            if(error)
+                res.status(501).send("error in DELETE");
+            else
+                res.send("1 row effected");
+        });
+    });
+});
+
+app.post('/updateProduct' , function(req , res)
+{
+    var cope = req.body;
+    connection.query('SELECT Userid from users where Email = ?',[cope.Email] , function(error, result){
+        console.log(result[0].Userid);
+        connection.query('SELECT Pid from added_product where Pname = ?',[cope.Pname] , function(error, Pid_result){
+            console.log(Pid_result[0].Pid);
+            connection.query('UPDATE products SET ? WHERE Userid = :result[0].Userid AND Pid = :Pid_result[0].Pid',{UnitPrice : cope.UnitPrice, Discount : cope.Discount , Quantity : cope.Quantity} , function(err,result)
+            {
+                if(err)
+                 res.status(500).send("error in updating");
+             else
+                res.status(200).send('Updated successfully');
+        });
+        });
+    });
+
+});
 app.post('/shopadd', function(req,res){
     var cope = req.body;
     console.log(cope);
     //cope.Password = passwordHash.generate(cope.Password),
-    // var salt = bcrypt.genSaltSync(10);
-    // cope.Password = bcrypt.hashSync(cope.Password , salt);
+    var salt = bcrypt.genSaltSync(10);
+    cope.Password = bcrypt.hashSync(cope.Password , salt);
     connection.query('insert into users set ?', [cope], function(err, result) {
         if (err){
             console.log("Error detected");
@@ -83,8 +116,8 @@ app.post('/shopadd', function(req,res){
 app.post('/custadd', function(req,res){
     var cope = req.body;
     console.log(cope);
-    //var salt = bcrypt.genSaltSync(10);
-    //cope.Password = bcrypt.hashSync(cope.Password , salt);
+    var salt = bcrypt.genSaltSync(10);
+    cope.Password = bcrypt.hashSync(cope.Password , salt);
     var query = connection.query('insert into users set ?', cope, function(err, result) {
         if (err){
             console.log("Error detected");
@@ -100,14 +133,17 @@ app.post('/addProducts', function(req,res){
     var cope = req.body;
     console.log(cope);
     var pname = cope.Pname;
+    var s = req.headers.authorization.toString().split(" ");
+    console.log(s[0]);
+    cope.Userid = s[0];
     connection.query('SELECT count(*) as names from added_product where Pname = ?',[pname], function(error, result) {
         if(result[0].names == 1)
         {
-            connection.query('SELECT id from added_product where Pname = ?' , [pname] , function(error , result){
-                cope.pid = result[0].id;
+            connection.query('SELECT Pid from added_product where Pname = ?' , [pname] , function(error , result){
+                cope.Pid = result[0].Pid;
                 var product =
                 {
-                    pid : cope.pid,
+                    Pid : cope.Pid,
                     Userid : cope.Userid,
                     UnitPrice : cope.UnitPrice,
                     Discount : cope.Discount,
@@ -117,9 +153,11 @@ app.post('/addProducts', function(req,res){
                 connection.query('insert into products set ?', product, function(err, result) {
                     if (err){
                         console.log("Error detected");
+                        res.send("error");
                     }
                     else  {
-                        console.log("done");
+                        console.log("done 1 more");
+                        res.send("done");
                     }
                 });
             });
@@ -130,16 +168,16 @@ app.post('/addProducts', function(req,res){
 
                 var added =
                 {
-                    id:'',
+                    Pid:'',
                     Pname : cope.Pname,
                     ITCid : result[0].ITCid
                 }
                 connection.query('insert into added_product set ?', added, function(err, result) {
-                    var id_product = connection.query('SELECT id from added_product where Pname = ?',[pname] , function(error, result){
-                        console.log(result[0].id);
+                    var id_product = connection.query('SELECT Pid from added_product where Pname = ?',[pname] , function(error, result){
+                        console.log(result[0].Pid);
                         var product =
                         {
-                            pid :result[0].id,
+                            Pid :result[0].Pid,
                             Userid : cope.Userid,
                             UnitPrice : cope.UnitPrice,
                             Discount : cope.Discount,
@@ -149,18 +187,19 @@ app.post('/addProducts', function(req,res){
                         connection.query('insert into products set ?', product, function(err, result) {
                             if (err){
                                 console.log("Error detected");
+                                res.send("errrrrr");
                             }
                             else  {
                                 console.log("done");
+                                res.send("done 1st");
                             }
                         });
                     });
                 });
+            });
+        }
 });
-}
 });
-});
-var name = "baibhav";
 app.get('/showProduct' , function(req,res){
     // if(!req.headers.authorization){
     //     return res.status(401).send({
@@ -168,24 +207,31 @@ app.get('/showProduct' , function(req,res){
     //     });
     // connection.query('SELECT * from products where Userid = ?',[Userid] , function(error, result){
     //     console.log(result);
+
     var product = new Array();
-    connection.query('SELECT added_product.Pname ,products.Userid , products.UnitPrice, products.Discount , products.Quantity FROM added_product LEFT JOIN products ON (products.pid = added_product.id)' , function(error , result){
+    if(!req.headers.authorization){
+        return res.status(401).send({
+            message:'not authentiated'
+        });
+    }
+    var s = req.headers.authorization.toString().split(" ");
+    //console.log(s[0]);
+    connection.query('SELECT added_product.Pname ,products.Userid , products.UnitPrice, products.Discount , products.Quantity FROM added_product LEFT JOIN products ON (products.Pid = added_product.Pid)' , function(error , result){
         if(error)
         {
             res.status(500).send(error);
         }
         else{
-            console.log(result);
+                //console.log(result);
             for(var i = 0 ; i < result.length ;i++){
-                if(result[i].Userid == '1')
-                  product.push(result[i]);
-          }
-          res.send(product);
-      }
-  });
-// });
+                if(result[i].Userid == s[0])
+                    product.push(result[i]);
+            }
+            res.send(product);
+        }
+    });
 });
-app.get('/showCoords' , function(req,res){
+    app.get('/showCoords' , function(req,res){
     var coords = new Array();
     connection.query('SELECT users.Latitude,users.Longitude FROM users where Selectid = 2' , function(error , result){
         if(error)
@@ -195,8 +241,8 @@ app.get('/showCoords' , function(req,res){
         else{
             console.log(result);
             for(var i = 0 ; i < result.length ;i++){
-                  coords.push(result[i]);
-            }
+              coords.push(result[i]);
+          }
           res.send(coords);
       }
   });
@@ -207,9 +253,12 @@ function createToken(cope , res){
     }
     var token = jwt.encode(payload , "hello");
     console.log('in create token');
-    res.send({
-        username: cope ,
-        token : token
+    var query = connection.query('SELECT Userid from users where Email = ?' , [cope] , function(error , result){
+        res.send({
+            username: cope ,
+            useridd: result[0].Userid,
+            token : token
+        });
     });
 }
 app.post('/login' , function(req,res){
@@ -223,12 +272,13 @@ app.post('/login' , function(req,res){
         {
             connection.query('SELECT Password from users where Email = ?' , [username] , function(error , result){
                 console.log(result[0].Password);
-                var salt = bcrypt.genSaltSync(10);
-                if(result[0].Password == password) {
-                 createToken(username , res);
-             }
-             else
-             {
+                //var salt = bcrypt.genSaltSync(10);
+                console.log(bcrypt.compareSync(password , result[0].Password ));
+                if(bcrypt.compareSync(password , result[0].Password )) {
+                   createToken(username , res);
+               }
+               else
+               {
                 res.status(500).send("error");
             }
         });

@@ -1,7 +1,7 @@
 app.controller('mainpageController' , function(authToken , $http , $geolocation){
     var gets=this;
     gets.coords=[];
-    $geolocation.watchPosition({
+    /*$geolocation.watchPosition({
         timeout: 60000,
         maximumAge: 250,
         enableHighAccuracy: true
@@ -16,7 +16,7 @@ app.controller('mainpageController' , function(authToken , $http , $geolocation)
     },
     function errorCallback(response){
        alert(response.message);
-    });
+    });*/
     this.map = {
         center: {
             latitude: 30.7333,

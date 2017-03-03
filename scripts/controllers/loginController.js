@@ -10,6 +10,7 @@ app.controller('loginController',function($http, $state ,$window ,authToken){
 	        	console.log(response.token);
 	        	authToken.setToken(response.data.token);
 	        	authToken.setName(response.data.username);
+	        	authToken.setId(response.data.useridd);
 	        	$state.go('home');
 	        	//$window.location.reload(true);
         	} ,

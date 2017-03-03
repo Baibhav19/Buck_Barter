@@ -1,7 +1,8 @@
-app.controller('shopkprController',function($http,$state){
+app.controller('shopkprController',function($http,$state , authToken){
 	this.tab = 1;
 	var gets = this;
-	gets.name ;
+	gets.no_products= false;
+	gets.names = [] ;
 	this.setTab= function(tabno){
 		this.tab = tabno;
 	};
@@ -10,7 +11,7 @@ app.controller('shopkprController',function($http,$state){
 	};
 	this.product = {
 		pid : '',
-		Userid: '1',
+		Userid: '',
 		ITCname: '',
 		Pname : '',
 		UnitPrice : '',
@@ -18,46 +19,54 @@ app.controller('shopkprController',function($http,$state){
 		Quantity: '',
 		Date_Time: Date.now()
 	};
-	this.products=[
-		{
-			Pname : 'Maggi',
-			Category : 'Food',
-			UnitPrice : '12',
-			Discount : '2',
-			Quantity: '5',
-		},
-		{
-			Pname : 'Shampoo',
-			Category : 'Cosmetics',
-			UnitPrice : '55',
-			Discount : '5',
-			Quantity: '3',
-		},
-		{
-			Pname : 'Boro-Plus',
-			Category : 'Cosmetics',
-			UnitPrice : '70',
-			Discount : '5',
-			Quantity: '10',
-		},
-	]
-	this.productAddfunc = function(){
-		console.log("product_Added" , this.product);
-		$http.post("/addProducts",this.product).then(function sucessCallback(response) {
-				alert("product added successfully");
-        		$state.go("home");
-       		} ,
-       		function errorCallback(response){
-       			alert("something went wrong");
-       	});
-    	this.product = {};
-	};
+
 	$http.get("/showProduct").then(function sucessCallback(response){
-			gets.name = response.data;
-			console.log("hello");
-			console.log(response.data);
+			gets.names = response.data;
+			console.log(gets.names);
+			if(gets.names.length == 0){
+				gets.no_products = true;
+			}
+			else{
+				gets.no_products = false;
+			}
+			console.log(gets.no_products);
 		},
 		function errorCallback(response){
 			alert(response.message);
 	});
+	this.productAddfunc = function(){
+		console.log("product_Added" , this.product);
+		$http.post("/addProducts",this.product).then(function sucessCallback(response) {
+				alert("product added successfully");
+        		console.log(response.data);
+        		$state.go("home");
+       		} ,
+       		function errorCallback(response){
+       			console.log(response.data);
+       			alert("something went wrong");
+       	});
+    	this.product = {};
+	};
+	
+	this.update = function(){
+
+	};
+	this.productDelete = {
+		Pname: '',
+		U_id: ''
+	}
+	this.deletee = function(pname){
+		this.productDelete.Pname= pname;
+		console.log(pname);
+		this.productDelete.U_id= authToken.getId();
+		$http.post("/deleteProduct",this.productDelete).then(function sucessCallback(response) {
+			alert("product deleted successfully");
+			console.log();
+			$state.go("home");
+		} ,
+		function errorCallback(response){
+			alert("something went wrong");
+		});
+		this.productDelete = {};
+	};
 });

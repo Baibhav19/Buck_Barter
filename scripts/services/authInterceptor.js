@@ -2,8 +2,10 @@ app.factory('authInterceptor' , function(authToken){
 	return{
 		request : function(config){
 			var token = authToken.getToken();
+			var email = authToken.getName();
+			var id = authToken.getId();
 			if(token){
-				config.headers.Authorization = 'Bearer ' + token;
+				config.headers.Authorization = id + ' ' + email + ' ' + 'Bearer ' + token;
 			}
 			return config;
 		},

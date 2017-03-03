@@ -2,13 +2,11 @@ app.factory('authToken' , function($window){
 	var storage = $window.localStorage;
 	var cachedToken ;
 	var name;
-	//var isAuthenticated = false;
+	var us_id;
 	return {
 		setToken: function(token){
 			cachedToken = token;
 			storage.setItem('userToken' , token);
-			console.log("here");
-			//isAuthenticated = true;
 		},
 		getToken: function(){
 			if(!cachedToken){
@@ -22,14 +20,28 @@ app.factory('authToken' , function($window){
 		removeToken: function(){
 			cachedToken = null ;
 			storage.removeItem('userToken');
+			storage.removeItem('id');
+			storage.removeItem('name');
 		},
 		setName:function(user){
 			name=user;
-			console.log("in setname");
+			storage.setItem('name' , user);
 		},
 		getName:function(){
-			console.log("in getName");
+			if(!name){
+				name = storage.getItem('name');  
+			}
 			return name;
+		},
+		setId:function(id){
+			us_id=id;
+			storage.setItem('id' , us_id);
+		},
+		getId:function(){
+			if(!us_id){
+				us_id = storage.getItem('id');  
+			}
+			return us_id;
 		}
 	}
 });

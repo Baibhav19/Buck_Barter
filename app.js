@@ -23,15 +23,15 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
         })
         .state("shopkeeper.addProduct", {
             url: '/addProduct',
-            templateUrl: 'templates/shopAddProduct.html'
+            template : '<add-product></add-product>'
         })
         .state("shopkeeper.updateProduct", {
             url: '/updateProduct',
-            template: 'in processsss'
+            template: '<shop-dir></shop-dir>'
         })
         .state("shopkeeper.deleteProduct", {
             url: '/deleteProduct',
-            template: 'temp'
+            template: '<shop-dir></shop-dir>'
         })
         .state("register", {
         	url: '/register',

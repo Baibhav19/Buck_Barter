@@ -1,43 +1,31 @@
-<style>
-/*table, th , td  {
-	border: 3px solid grey;
-	border-collapse: collapse;
-	padding: 8px;
-	font-weight: 20px;
-}
-table tr:nth-child(odd) {
-	background-color: #f1f1f1;
-}
-table tr:nth-child(even) {
-	background-color: #ffffff;
-}*/
-</style>
 <br><hr><br>
 <div class="container table-responsive">
-	<table class="table table-bordered table-hover">
+	<div ng-show="shCtrl.no_products"><h3> NO PRODUCTS ADDED</h3></div>
+	
+	<table ng-show="!shCtrl.no_products" class="table table-bordered table-hover">
 		<thead style="font-size: 150%">
 		<tr>
 			<th>S.No</th>
 			<th>Product Name</th>
-			<th>Category</th>
+			<!-- <th>Category</th> -->
 			<th>Unit Price</th>
 			<th>Discount %</th>
 			<th>Quantity</th>
-			<th><!-- Update --></th>
-			<th><!-- Delete --></th>
+			<th ng-if="shCtrl.isSelected(3)">Update</th>
+			<th ng-if="shCtrl.isSelected(4)">Delete</th>
 		</tr>
 		</thead>
 
 		<tbody>
-		<tr ng-repeat="x in shCtrl.products">
-			<td></td>
+		<tr ng-repeat="x in shCtrl.names">
+			<td>{{$index + 1}}</td>
 			<td>{{ x.Pname }}</td>
-			<td>{{ x.Category }}</td>
+			<!-- <td>{{ x.Category }}</td> -->
 			<td>{{ x.UnitPrice }}</td>
 			<td>{{ x.Discount }}%</td>
 			<td>{{ x.Quantity }}</td>
-			<td class="text-center"><a href="#" class="text-primary"><i class="fa fa-pencil"></i></a></td>
-			<td class="text-center"><a href="#" class="text-danger"><i class="fa fa-times"></i></a></td>
+			<td class="text-center" ng-if="shCtrl.isSelected(3)"><a ng-click="shCtrl.update()" class="text-primary"><i class="fa fa-pencil"></i></a></td>
+			<td class="text-center" ng-if="shCtrl.isSelected(4)"><a ng-click="shCtrl.deletee(x.Pname)" class="text-danger"><i class="fa fa-times"></i></a></td>
 		</tr>
 		</tbody>
 	</table>
