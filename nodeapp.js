@@ -65,7 +65,6 @@ passport.use(strategy);*/
 
 app.post('/deleteProduct' , function(req , res){
     var cope = req.body;
-    console.log(cope.Pname + ' ' + cope.U_id);
     connection.query('SELECT Pid from added_product where Pname = ?',[cope.Pname] , function(error, Pid_result){
         console.log(Pid_result[0].Pid);
         connection.query('DELETE FROM products where Userid = ? AND Pid =?',[cope.U_id , Pid_result[0].Pid]  , function(error, result){
@@ -77,28 +76,21 @@ app.post('/deleteProduct' , function(req , res){
     });
 });
 
-app.post('/updateProduct' , function(req , res)
-{
+app.post('/updateProduct' , function(req , res){
     var cope = req.body;
-    connection.query('SELECT Userid from users where Email = ?',[cope.Email] , function(error, result){
-        console.log(result[0].Userid);
-        connection.query('SELECT Pid from added_product where Pname = ?',[cope.Pname] , function(error, Pid_result){
-            console.log(Pid_result[0].Pid);
-            connection.query('UPDATE products SET ? WHERE Userid = :result[0].Userid AND Pid = :Pid_result[0].Pid',{UnitPrice : cope.UnitPrice, Discount : cope.Discount , Quantity : cope.Quantity} , function(err,result)
-            {
-                if(err)
+    connection.query('SELECT Pid from added_product where Pname = ?',[cope.Pname] , function(error, Pid_result){
+        connection.query('UPDATE products SET UnitPrice = ? , Discount= ? , Quantity= ? WHERE Userid = ? AND Pid = ? ',[cope.UnitPrice, cope.Discount , cope.Quantity , cope.U_id , Pid_result[0].Pid] , function(err,result)
+        {
+            if(err)
                  res.status(500).send("error in updating");
-             else
+            else
                 res.status(200).send('Updated successfully');
         });
-        });
     });
-
 });
 app.post('/shopadd', function(req,res){
     var cope = req.body;
     console.log(cope);
-    //cope.Password = passwordHash.generate(cope.Password),
     var salt = bcrypt.genSaltSync(10);
     cope.Password = bcrypt.hashSync(cope.Password , salt);
     connection.query('insert into users set ?', [cope], function(err, result) {
@@ -148,7 +140,6 @@ app.post('/addProducts', function(req,res){
                     Quantity : cope.Quantity,
                     Date_Time : cope.Date_Time
                 };
-                console.log(product);
                 connection.query('insert into products set ?', product, function(err, result) {
                     if (err){
                         console.log("Error detected");
@@ -164,7 +155,6 @@ app.post('/addProducts', function(req,res){
         else{
             var id_category = connection.query('SELECT ITCid from itemcategory where ITCname = ?',[cope.ITCname] , function(error, result){
                 console.log(result[0].ITCid);
-
                 var added =
                 {
                     Pid:'',
@@ -173,7 +163,6 @@ app.post('/addProducts', function(req,res){
                 }
                 connection.query('insert into added_product set ?', added, function(err, result) {
                     var id_product = connection.query('SELECT Pid from added_product where Pname = ?',[pname] , function(error, result){
-                        console.log(result[0].Pid);
                         var product =
                         {
                             S_No :'',
@@ -198,7 +187,7 @@ app.post('/addProducts', function(req,res){
                 });
             });
         }
-});
+    });
 });
 app.get('/showProduct' , function(req,res){
     // if(!req.headers.authorization){
@@ -215,14 +204,12 @@ app.get('/showProduct' , function(req,res){
         });
     }
     var s = req.headers.authorization.toString().split(" ");
-    //console.log(s[0]);
     connection.query('SELECT added_product.Pname ,products.Userid , products.UnitPrice, products.Discount , products.Quantity FROM added_product LEFT JOIN products ON (products.Pid = added_product.Pid)' , function(error , result){
         if(error)
         {
             res.status(500).send(error);
         }
         else{
-                //console.log(result);
             for(var i = 0 ; i < result.length ;i++){
                 if(result[i].Userid == s[0])
                     product.push(result[i]);
@@ -264,16 +251,10 @@ function createToken(cope , res){
 app.post('/login' , function(req,res){
     var username = req.body.Email;
     var password = req.body.Password;
-    // var salt = bcrypt.genSaltSync(10);
-    // password = bcrypt.hashSync(password , salt);
-    console.log(password);
     connection.query('SELECT count(*) as names from users where Email = ?',[username], function(error, result) {
         if(result[0].names == 1)
         {
             connection.query('SELECT Password from users where Email = ?' , [username] , function(error , result){
-                console.log(result[0].Password);
-                //var salt = bcrypt.genSaltSync(10);
-                console.log(bcrypt.compareSync(password , result[0].Password ));
                 if(bcrypt.compareSync(password , result[0].Password )) {
                    createToken(username , res);
                }

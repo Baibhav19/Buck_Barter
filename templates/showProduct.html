@@ -1,32 +1,100 @@
 <br><hr><br>
+<div class="modal fade" id="myModal">
+	<div class="container-fluid">
+		<div class="modal-dialog modalsize">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">x</button>
+				<h3 class="text-center">Update a Product</h3>
+			</div>
+
+			<br>
+
+			<div class="modal-body">          
+				<div class="container-fluid box">
+					<div class="row">
+						<div class="col-sm-12" style="font-size: 125%">
+							<form class="form-horizontal" name="update-product">                     
+								<div class="form-group">
+									<div class="col-xs-4"><label class="control-label">Name</label></div>
+									<div class="col-xs-6"><div><p ng-bind= "shCtrl.productUpdate.Pname"></p></div></div>
+								</div>
+
+								<br>
+
+								<!-- <div class="form-group">
+									<div class="col-xs-4"><label class="control-label">Category</label></div>
+									<div class="col-xs-6">
+										<div><p></p></div>
+									</div>
+								</div> -->
+
+								<!-- <br> -->
+
+								<div class="form-group">
+									<div class="col-xs-4"><label class="control-label">Quantity</label></div> 
+									<div class="col-xs-6"><input type="number" ng-model = "shCtrl.productUpdate.Quantity" class="form-control" name="pquantity" id="pquantity"></div>
+								</div>
+
+								<br>
+
+								<div class="form-group">
+									<div class="col-xs-4"><label class="control-label">Price</label></div>
+									<div class="col-xs-6"><input type="number" ng-model = "shCtrl.productUpdate.UnitPrice" class="form-control" name="pprice" id="pprice" step=0.01></div>
+								</div>
+
+								<br>
+
+								<div class="form-group">
+									<div class="col-xs-4"><label class="control-label">Discount</label></div>
+									<div class="col-xs-4 col-sm-5"><input type="number" ng-model = "shCtrl.productUpdate.Discount" class="form-control" name="pdiscount" id="pdiscount" step=0.01></div>
+									<div class="col-xs-4 col-sm-3 pull-left" id="perc" style="font-weight: bold">%</div>
+								</div>
+
+							</form>
+						</div>                       
+					</div>
+				</div>     
+			</div>
+
+			<div class="modal-footer">
+				<br>
+				<button ng-click="shCtrl.update()" class="btn btn-primary btn-lg" data-dismiss="modal">Save Changes</button>
+			</div>
+
+		</div>
+	</div>
+</div>
 <div class="container table-responsive">
 	<div ng-show="shCtrl.no_products"><h3> NO PRODUCTS ADDED</h3></div>
 	
 	<table ng-show="!shCtrl.no_products" class="table table-bordered table-hover">
 		<thead style="font-size: 150%">
-		<tr>
-			<th>S.No</th>
-			<th>Product Name</th>
-			<!-- <th>Category</th> -->
-			<th>Unit Price</th>
-			<th>Discount %</th>
-			<th>Quantity</th>
-			<th ng-if="shCtrl.isSelected(3)">Update</th>
-			<th ng-if="shCtrl.isSelected(4)">Delete</th>
-		</tr>
+			<tr>
+				<th>S.No</th>
+				<th>Product Name</th>
+				<!-- <th>Category</th> -->
+				<th>Unit Price</th>
+				<th>Discount %</th>
+				<th>Quantity</th>
+				<th ng-if="shCtrl.isSelected(3)">Update</th>
+				<th ng-if="shCtrl.isSelected(4)">Delete</th>
+			</tr>
 		</thead>
 
 		<tbody>
-		<tr ng-repeat="x in shCtrl.names">
-			<td>{{$index + 1}}</td>
-			<td>{{ x.Pname }}</td>
-			<!-- <td>{{ x.Category }}</td> -->
-			<td>{{ x.UnitPrice }}</td>
-			<td>{{ x.Discount }}%</td>
-			<td>{{ x.Quantity }}</td>
-			<td class="text-center" ng-if="shCtrl.isSelected(3)"><a ng-click="shCtrl.update()" class="text-primary"><i class="fa fa-pencil"></i></a></td>
-			<td class="text-center" ng-if="shCtrl.isSelected(4)"><a ng-click="shCtrl.deletee(x.Pname)" class="text-danger"><i class="fa fa-times"></i></a></td>
-		</tr>
+			<tr ng-repeat="x in shCtrl.names">
+				<td>{{$index + 1}}</td>
+				<td>{{ x.Pname }}</td>
+				<!-- <td>{{ x.Category }}</td> -->
+				<td>{{ x.UnitPrice }}</td>
+				<td>{{ x.Discount }}%</td>
+				<td>{{ x.Quantity }}</td>
+				<td class="text-center" ng-if="shCtrl.isSelected(3)">
+					<button class="btn btn-primary" data-toggle="modal" href="#myModal" ng-click="shCtrl.updateValue(x)">Update</button>
+				</td>
+				<td class="text-center" ng-if="shCtrl.isSelected(4)"><a ng-click="shCtrl.deletee(x.Pname)" class="text-danger"><i class="fa fa-times"></i></a></td>
+			</tr>
 		</tbody>
 	</table>
 </div>

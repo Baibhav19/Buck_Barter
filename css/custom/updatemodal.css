@@ -1,0 +1,41 @@
+.modalsize{
+	background-color: white;
+	font-size: 15px;
+	border-radius: 12px;
+}
+
+h3{
+	font-weight: bolder;
+}
+
+.box input[type="text"], .box input[type="number"] {
+  border: 0;
+  font-size: 16px;
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+  border-bottom: 1px solid #e7e7e7;
+  border-radius: 7px;
+  padding: 6px 0px;
+}
+
+.box select {
+  border: 0;
+  font-size: 16px;
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+  border-bottom: 1px solid #e7e7e7;
+  border-radius: 7px;
+  padding: 6px 0px;
+}
+
+.box input:hover,
+.box input:focus{
+  border: solid 0.5px #707070;
+  box-shadow: 0 0 5px 0.5px #969696;
+}
+
+.box select:hover,
+.bos select:focus{
+  border: solid 0.5px #707070;
+  box-shadow: 0 0 5px 0.5px #969696;
+}

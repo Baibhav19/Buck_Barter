@@ -1,0 +1,85 @@
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="updatemodal.css">
+<link rel="stylesheet" href="css/lib/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="scripts/lib/bootstrap.min.js"></script>
+</head>
+
+<body>
+<script src="scripts/lib/angular.min.js"></script>
+<button class="btn btn-primary" data-toggle="modal" href="#myModal">Update</button>
+
+
+
+<div class="modal fade" id="myModal">
+    <div class="container-fluid">
+    <div class="modal-dialog modalsize">
+
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">x</button>
+          <h3 class="text-center">Update a Product</h3>
+      </div>
+
+      <br>
+
+      <div class="modal-body">          
+          <div class="container-fluid box">
+            <div class="row">
+                <div class="col-sm-12" style="font-size: 125%">
+                    <form class="form-horizontal" method="post" action='' name="update-product">                     
+                          <div class="form-group">
+                              <div class="col-xs-4"><label class="control-label">Name</label></div>
+                              <div class="col-xs-6"><div ng-app="" ng-init="productname='Name of the product'"><p>{{productname}}</p></div></div>
+                          </div>
+
+                          <br>
+                          
+                          <div class="form-group">
+                              <div class="col-xs-4"><label class="control-label">Category</label></div>
+                              <div class="col-xs-6">
+                                  <div><p></p></div>
+                              </div>
+                          </div>
+
+                          <br>
+
+                          <div class="form-group">
+                              <div class="col-xs-4"><label class="control-label">Quantity</label></div> 
+                              <div class="col-xs-6"><input type="number" value="2" class="form-control" name="pquantity" id="pquantity"></div>
+                          </div>
+
+                          <br>
+                          
+                          <div class="form-group">
+                              <div class="col-xs-4"><label class="control-label">Price</label></div>
+                              <div class="col-xs-6"><input type="number" value="50" class="form-control" name="pprice" id="pprice" step=0.01></div>
+                          </div>
+
+                          <br>
+
+                          <div class="form-group">
+                              <div class="col-xs-4"><label class="control-label">Discount</label></div>
+                              <div class="col-xs-4 col-sm-5"><input type="number" value="10" class="form-control" name="pdiscount" id="pdiscount" step=0.01></div>
+                              <div class="col-xs-4 col-sm-3 pull-left" id="perc" style="font-weight: bold">%</div>
+                          </div>
+                      
+                    </form>
+                </div>                       
+            </div>
+          </div>     
+      </div>
+
+      <div class="modal-footer">
+      	  <br>
+          <button class="btn btn-primary btn-lg">Save Changes</button>
+      </div>
+
+    </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,25 +1,19 @@
-<!-- <div class="modal fade" id="myModal"> -->
-    <page-header></page-header>
+ <page-header></page-header>
     <div class="container-fluid">
-    <!-- <div class="modal-dialog modalsize"> -->
 
-     <!--  <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">x</button>
-          <h3 class="text-center">Login to BuckBarter.com</h3>
-      </div> -->
       <br>
       <h1 class="text-center">Login to BuckBarter.com</h1>
       <div class="modal-body" ng-controller = "loginController as logCtrl">
-        <div class="alert alert-danger" ng-show="(login_form.pass.$dirty && login_form.pass.$error.required) || (login_form.email.$dirty && login_form.email.$error.required) || (login_form.email.$dirty && login_form.email.$invalid)">
-        <label for="firstname" ng-if="login_form.pass.$dirty && login_form.pass.$error.required" >password is required. </label>
-        <label for="em" ng-if="login_form.email.$dirty && login_form.email.$error.required">Email field is required.</label>
-        <label for="em" ng-if="login_form.email.$dirty && login_form.email.$invalid">Please enter a valid Email address.</label>
+        <div class="alert alert-danger" ng-show="(login_form.Password.$dirty && login_form.Password.$error.required) || (login_form.Email.$dirty && login_form.Email.$error.required) || (login_form.Email.$dirty && login_form.Email.$invalid)">
+        <label for="firstname" ng-if="login_form.Password.$dirty && login_form.Password.$error.required" >Password is required. </label>
+        <label for="em" ng-if="login_form.Email.$dirty && login_form.Email.$error.required">Email field is required.</label>
+        <label for="em" ng-if="login_form.Email.$dirty && login_form.Email.$invalid">Please enter a valid Email address.</label>
         </div>      
         <div class="box" >
           <form name="login_form" ng-submit = "logCtrl.auth()" novalidate>          
               <div style="text-align: center;">
-                  <p><input type="email" name="Email" id="email" ng-model = "logCtrl.user.Email" placeholder="Email" required></p>
-                  <p><input type="password" name="Password" id="pass" ng-model = "logCtrl.user.Password" placeholder="Password" required></p>
+                  <p><input type="Email" name="Email" id="Email" ng-model = "logCtrl.user.Email" placeholder="Email" required></p>
+                  <p><input type="Password" name="Password" id="Password" ng-model = "logCtrl.user.Password" placeholder="Password" required></p>
                   <p><button type="submit" ng-disabled = "login_form.$invalid" class="btn btn-primary btn-lg">Log in</button></p>
               </div>     
               <br>
@@ -32,7 +26,4 @@
           New To BuckBarter.com?
           <a ui-sref="register" class="btn btn-primary">Register</a>
       </div>
-
-    <!-- </div> -->
     </div>
-<!-- </div> -->

@@ -1,4 +1,4 @@
-app.controller('loginController',function($http, $state ,$window ,authToken){
+app.controller('loginController',function($http, $state ,authToken){
 	 this.user = {
 		Email : '',
 		Password : ''
@@ -7,7 +7,6 @@ app.controller('loginController',function($http, $state ,$window ,authToken){
 	this.auth = function(){
 	 	console.log("hello");
 	 	$http.post("/login",this.user).then(function successCallback(response) {
-	        	console.log(response.token);
 	        	authToken.setToken(response.data.token);
 	        	authToken.setName(response.data.username);
 	        	authToken.setId(response.data.useridd);
