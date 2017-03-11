@@ -29,10 +29,10 @@ app.controller('formController' , function($http , $state, authToken ,$window , 
        Fname : '',
        Lname : '',
        Email : '',
-       Password : '',
        PhoneNo : '',
-       Selectid : '2',
+       Password : '',
        Address : '' ,
+       Selectid : '2',
        Latitude: '',
        Longitude:''
    };
@@ -62,7 +62,7 @@ app.controller('formController' , function($http , $state, authToken ,$window , 
     console.log("registered shopkeeper" , this.shopkpr);
     if($geolocation.position.error){
       alert("browser doesn't support location. Register again :(");
-          $state.go('register');  
+          $state.go('register');
       }
       else{
         this.shopkpr.Latitude = $geolocation.position.coords.latitude;

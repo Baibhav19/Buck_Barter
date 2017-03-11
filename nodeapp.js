@@ -65,9 +65,9 @@ passport.use(strategy);*/
 
 app.post('/deleteProduct' , function(req , res){
     var cope = req.body;
-    connection.query('SELECT Pid from added_product where Pname = ?',[cope.Pname] , function(error, Pid_result){
+    connection.query('SELECT pid from added_product where Pname = ?',[cope.Pname] , function(error, Pid_result){
         console.log(Pid_result[0].Pid);
-        connection.query('DELETE FROM products where Userid = ? AND Pid =?',[cope.U_id , Pid_result[0].Pid]  , function(error, result){
+        connection.query('DELETE FROM products where Userid = ? AND pid =?',[cope.U_id , Pid_result[0].pid]  , function(error, result){
             if(error)
                 res.status(501).send("error in DELETE");
             else
@@ -78,8 +78,9 @@ app.post('/deleteProduct' , function(req , res){
 
 app.post('/updateProduct' , function(req , res){
     var cope = req.body;
-    connection.query('SELECT Pid from added_product where Pname = ?',[cope.Pname] , function(error, Pid_result){
-        connection.query('UPDATE products SET UnitPrice = ? , Discount= ? , Quantity= ? WHERE Userid = ? AND Pid = ? ',[cope.UnitPrice, cope.Discount , cope.Quantity , cope.U_id , Pid_result[0].Pid] , function(err,result)
+    connection.query('SELECT pid from added_product where Pname = ?',[cope.Pname] , function(error, Pid_result){
+        console.log(Pid_result);
+        connection.query('UPDATE products SET UnitPrice = ? , Discount= ? , Quantity= ? WHERE Userid = ? AND pid = ? ',[cope.UnitPrice, cope.Discount , cope.Quantity , cope.U_id , Pid_result[0].pid] , function(err,result)
         {
             if(err)
                  res.status(500).send("error in updating");
@@ -93,15 +94,17 @@ app.post('/shopadd', function(req,res){
     console.log(cope);
     var salt = bcrypt.genSaltSync(10);
     cope.Password = bcrypt.hashSync(cope.Password , salt);
-    connection.query('insert into users set ?', [cope], function(err, result) {
+    var query = connection.query('insert into users set ?',cope, function(err, result) {
         if (err){
-            console.log("Error detected");
+            console.log(err);
+            res.status(500).send("error");
         }
         else  {
             console.log("done");
+            res.send("registered successfully");
+
         }
     });
-    res.json({message : "completed"});
 });
 
 app.post('/custadd', function(req,res){
@@ -126,21 +129,22 @@ app.post('/addProducts', function(req,res){
     console.log(s[0]);
     cope.Userid = parseInt(s[0]);
     connection.query('SELECT count(*) as names from added_product where Pname = ?',[pname], function(error, result) {
+        console.log(result[0].names);
         if(result[0].names == 1)
         {
-            connection.query('SELECT Pid from added_product where Pname = ?' , [pname] , function(error , result){
-                cope.Pid = result[0].Pid;
+            connection.query('SELECT pid from added_product where Pname = ?' , [pname] , function(error , result){
+                console.log(result[0].pid);
+                cope.pid = result[0].pid;
                 var product =
                 {
-                    S_No :'',
-                    Pid : cope.Pid,
+                    pid : cope.pid,
                     Userid : cope.Userid,
                     UnitPrice : cope.UnitPrice,
                     Discount : cope.Discount,
                     Quantity : cope.Quantity,
                     Date_Time : cope.Date_Time
                 };
-                connection.query('insert into products set ?', product, function(err, result) {
+                connection.query('insert into products set ?', [product], function(err, result) {
                     if (err){
                         console.log("Error detected");
                         res.send("error");
@@ -157,7 +161,7 @@ app.post('/addProducts', function(req,res){
                 console.log(result[0].ITCid);
                 var added =
                 {
-                    Pid:'',
+                    pid:'',
                     Pname : cope.Pname,
                     ITCid : result[0].ITCid
                 }
@@ -165,8 +169,7 @@ app.post('/addProducts', function(req,res){
                     var id_product = connection.query('SELECT Pid from added_product where Pname = ?',[pname] , function(error, result){
                         var product =
                         {
-                            S_No :'',
-                            Pid :result[0].Pid,
+                            pid :result[0].Pid,
                             Userid : cope.Userid,
                             UnitPrice : cope.UnitPrice,
                             Discount : cope.Discount,
