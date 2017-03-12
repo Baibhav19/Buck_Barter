@@ -3,6 +3,3 @@ Task to be done later:
   data from db and send particular response to angular and render the validation on the webpage.
 2.Header div's height is greater so their is gap between header and view.
 (use npm --save to install packages)
-
-Change the Categories of products in ShopAddProduct.html
-Change the controller ShopController.js and change the object acc to the database.
