@@ -73,11 +73,13 @@ app.controller('shopkprController',function($http,$state , authToken){
 	};
 	this.productDelete = {
 		Pname: '',
+		UnitPrice: '',
 		U_id: ''
 	}
-	this.deletee = function(pname){
+	this.deletee = function(pname , unitPrice){
 		this.productDelete.Pname= pname;
 		console.log(pname);
+		this.productDelete.UnitPrice = unitPrice;
 		this.productDelete.U_id= authToken.getId();
 		$http.post("/deleteProduct",this.productDelete).then(function sucessCallback(response) {
 			alert("product deleted successfully");
