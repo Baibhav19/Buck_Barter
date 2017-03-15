@@ -38,7 +38,6 @@ app.controller('formController' , function($http , $state, authToken ,$window , 
    };
    this.custRegister = function(){
        console.log("registered customer" , this.cust);
-       console.log($geolocation.position.error);
        if($geolocation.position.error){
           alert("browser doesn't support location.");
       }

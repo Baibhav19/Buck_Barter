@@ -1,5 +1,5 @@
 <page-header></page-header>
-<div>
+<div ng-controller = "mainpageController as mpCtrl" ng-init = "mpCtrl.fetchLocation()">
   <div class="row box1">
     <nav class = "nav navbar-inverse">
       <div class="col-sm-3">
@@ -119,9 +119,12 @@
               </a>
             </div>
           </div>
-          <div class="col-sm-5" id="map_canvas">
+          <div class="col-sm-5" id="map_canvas" ng-if = "mpCtrl.isLoaded()">
             <!-- map here-->
+
             <ui-gmap-google-map center="mpCtrl.map.center" zoom="mpCtrl.map.zoom" draggable="true" options="mpCtrl.options">
+              <ui-gmap-circle ng-repeat="c in mpCtrl.circles track by c.id" center="c.center" stroke="c.stroke" fill="c.fill" radius="c.radius"
+                visible="c.visible" geodesic="c.geodesic" clickable="c.clickable" control="c.control"></ui-gmap-circle> 
               <ui-gmap-markers models="mpCtrl.randomMarkers" coords="'self'" icon="'icon'" click="mpCtrl.onClick">
                 <ui-gmap-windows show="show">
                   <div ng-non-bindable>{{title}}</div>

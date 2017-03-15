@@ -9,8 +9,6 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
     .state("home", {
         url: '/home',
         templateUrl: 'templates/mainpage.html',
-        controller:'mainpageController',
-        controllerAs:'mpCtrl'
     })
     .state("shopkeeper", {
         url: '/shopkeeper',
@@ -63,4 +61,3 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
         }
     }
 });
-
