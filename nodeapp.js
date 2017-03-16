@@ -2,6 +2,7 @@ var express = require('express');
 var mysql = require('mysql');
 var app = express();
 var http = require('http');
+var dateFormat = require('dateformat');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jwt-simple');
@@ -79,10 +80,11 @@ app.post('/deleteProduct' , function(req , res){
 
 app.post('/updateProduct' , function(req , res){
     var cope = req.body;
+    cope.Date_Time = dateFormat(new Date(), "yyyy-mm-dd h:MM:ss");
     connection.query('SELECT pid from added_product where Pname = ?',[cope.Pname] , function(error, Pid_result){
-        console.log(Pid_result);
-        connection.query('UPDATE products SET UnitPrice = ? , Discount= ? , Quantity= ? WHERE Userid = ? AND pid = ? ',[cope.UnitPrice, cope.Discount , cope.Quantity , cope.U_id , Pid_result[0].pid] , function(err,result)
+        connection.query('UPDATE products SET UnitPrice = ? , Discount= ? , Quantity= ? , Date_Time = ? WHERE Userid = ? AND pid = ? ',[cope.UnitPrice, cope.Discount , cope.Quantity , cope.Date_Time , cope.U_id  , Pid_result[0].pid] , function(err,result)
         {
+            console.log(result);
             if(err)
                  res.status(500).send("error in updating");
             else
@@ -125,6 +127,9 @@ app.post('/custadd', function(req,res){
 
 app.post('/addProducts', function(req,res){
     var cope = req.body;
+    //cope.Date_Time = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    //cope.Date_Time = moment().format('MMMM Do YYYY, h:mm:ss a');
+    cope.Date_Time = dateFormat(new Date(), "yyyy-mm-dd h:MM:ss");
     var pname = cope.Pname;
     var s = req.headers.authorization.toString().split(" ");
     console.log(s[0]);

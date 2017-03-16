@@ -53,7 +53,8 @@ app.controller('shopkprController',function($http,$state , authToken){
 		Pname:'',
 		Discount:'',
 		Quantity:'',
-		UnitPrice:''
+		UnitPrice:'',
+		Date_Time: Date.now()
 	};
 	this.updateValue = function(x){
 		this.productUpdate.U_id = authToken.getId();
