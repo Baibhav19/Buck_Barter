@@ -14,7 +14,6 @@ app.controller('shopkprController',function($http,$state , authToken){
 		Userid: '',
 		ITCname: '',
 		Pname : '',
-		NetWeight: '',
 		UnitPrice : '',
 		Discount : '',
 		Quantity: '',
@@ -56,6 +55,7 @@ app.controller('shopkprController',function($http,$state , authToken){
 		Discount:'',
 		Quantity:'',
 		UnitPrice:'',
+		Description:'',
 		Date_Time: Date.now()
 	};
 	this.updateValue = function(x){
@@ -64,6 +64,7 @@ app.controller('shopkprController',function($http,$state , authToken){
 		this.productUpdate.Discount = x.Discount;
 		this.productUpdate.UnitPrice = x.UnitPrice;
 		this.productUpdate.Quantity = x.Quantity;
+		this.productUpdate.Description = x.Description;
 	}
 	this.update = function(){
 		$http.post("/updateProduct",this.productUpdate).then(function successCallback(response){

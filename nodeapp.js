@@ -82,7 +82,7 @@ app.use(req,res,next){
         var cope = req.body;
         cope.Date_Time = dateFormat(new Date(), "yyyy-mm-dd h:MM:ss");
         connection.query('SELECT pid from added_product where Pname = ?',[cope.Pname] , function(error, Pid_result){
-            connection.query('UPDATE products SET UnitPrice = ? , Discount= ? , Quantity= ? , Date_Time = ? WHERE Userid = ? AND pid = ? ',[cope.UnitPrice, cope.Discount , cope.Quantity , cope.Date_Time , cope.U_id  , Pid_result[0].pid] , function(err,result)
+            connection.query('UPDATE products SET UnitPrice = ? , Discount= ? , Quantity= ? , Description= ?, Date_Time = ? WHERE Userid = ? AND pid = ? ',[cope.UnitPrice, cope.Discount , cope.Quantity , cope.Description , cope.Date_Time , cope.U_id  , Pid_result[0].pid] , function(err,result)
             {
                 console.log(result);
                 if(err)
@@ -127,18 +127,16 @@ app.use(req,res,next){
 
     app.post('/addProducts', function(req,res){
         var cope = req.body;
-    //cope.Date_Time = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    //cope.Date_Time = moment().format('MMMM Do YYYY, h:mm:ss a');
     cope.Date_Time = dateFormat(new Date(), "yyyy-mm-dd h:MM:ss");
     var pname = cope.Pname;
     var s = req.headers.authorization.toString().split(" ");
     console.log(s[0]);
     cope.Userid = parseInt(s[0]);
-    connection.query('SELECT count(*) as names from added_product where Pname = ? AND NetWeight = ? AND Description = ?',[pname , cope.NetWeight , cope.Description], function(error, result) {
+    connection.query('SELECT count(*) as names from added_product where Pname = ?',[pname], function(error, result) {
         console.log(result[0].names);
         if(result[0].names == 1)
         {
-            connection.query('SELECT pid from added_product where Pname = ? AND NetWeight = ? AND Description = ?' , [pname , cope.NetWeight , cope.Description] , function(error , result){
+            connection.query('SELECT pid from added_product where Pname = ?' , [pname] , function(error , result){
                 console.log(result[0].pid);
                 cope.pid = result[0].pid;
                 var product =
@@ -148,6 +146,7 @@ app.use(req,res,next){
                     UnitPrice : cope.UnitPrice,
                     Discount : cope.Discount,
                     Quantity : cope.Quantity,
+                    Description : cope.Description,
                     Date_Time : cope.Date_Time
                 };
                 connection.query('insert into products set ?', [product], function(err, result) {
@@ -169,12 +168,10 @@ app.use(req,res,next){
                 {
                     pid:'',
                     Pname : cope.Pname,
-                    NetWeight: cope.NetWeight,
-                    Description: cope.Description,
                     ITCid : result[0].ITCid
                 }
                 connection.query('insert into added_product set ?', added, function(err, result) {
-                 connection.query('SELECT pid from added_product where Pname = ? AND NetWeight = ? AND Description = ?' , [pname , cope.NetWeight , cope.Description] , function(error , result){
+                 connection.query('SELECT pid from added_product where Pname = ?' , [pname , cope.NetWeight , cope.Description] , function(error , result){
                     var product =
                     {
                         pid :result[0].pid,
@@ -182,6 +179,7 @@ app.use(req,res,next){
                         UnitPrice : cope.UnitPrice,
                         Discount : cope.Discount,
                         Quantity : cope.Quantity,
+                        Description: cope.Description,
                         Date_Time : cope.Date_Time
                     }
                     connection.query('insert into products set ?', product, function(err, result) {
@@ -215,7 +213,7 @@ app.use(req,res,next){
         });
     }
     var s = req.headers.authorization.toString().split(" ");
-    connection.query('SELECT added_product.Pname ,products.Userid , products.UnitPrice, products.Discount , products.Quantity , added_product.Description FROM added_product LEFT JOIN products ON (products.Pid = added_product.Pid)' , function(error , result){
+    connection.query('SELECT added_product.Pname ,products.Userid , products.UnitPrice, products.Discount , products.Quantity , products.Description FROM added_product LEFT JOIN products ON (products.Pid = added_product.Pid)' , function(error , result){
         if(error)
         {
             res.status(500).send(error);

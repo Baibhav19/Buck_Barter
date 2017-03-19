@@ -13,13 +13,6 @@
 				<br>
 
 				<div class="form-group">
-					<div class="col-xs-4"><label class="control-label" style="font-size: 125%">Net Weight</label></div>
-					<div class="col-xs-8"><input type="text" class="form-control" name="netweight" id="netweight" ng-model="shCtrl.product.NetWeight" placeholder="Optional"></div>
-				</div>
-
-				<br>
-
-				<div class="form-group">
 					<div class="col-xs-4"><label class="control-label" style="font-size: 125%">Category</label></div>
 					<div class="col-xs-8">
 						<select class="form-control" ng-model ="shCtrl.product.ITCname" "category" id="category">
@@ -58,10 +51,11 @@
 
 				<div class="form-group">
 					<div class="col-xs-4"><label class="control-label" style="font-size: 125%">Description</label></div>
-					<div class="col-xs-8"><input type="text" class="form-control" name="description" id="description" ng-model="shCtrl.product.Description" placeholder="Description"></div>
+					<div class="col-xs-6 col-sm-7"><textarea class="form-control" ng-model = "shCtrl.product.Description" rows="2" id="comment"></textarea>
 				</div>
-
-
+				</div>
+				<br>
+				<br>
 			</div>
 
 			<div class="col-sm-offset-1 col-sm-5 text-center">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2017 at 01:25 PM
+-- Generation Time: Mar 19, 2017 at 04:07 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -29,8 +29,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `added_product` (
   `pid` int(11) NOT NULL,
   `Pname` varchar(200) NOT NULL,
-  `NetWeight` varchar(300) NOT NULL,
-  `Description` varchar(300) NOT NULL,
   `ITCid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -38,14 +36,9 @@ CREATE TABLE `added_product` (
 -- Dumping data for table `added_product`
 --
 
-INSERT INTO `added_product` (`pid`, `Pname`, `NetWeight`, `Description`, `ITCid`) VALUES
-(21, 'Dettol Soap', '100 gm', 'Original Dettol Soap 100 gm', 1),
-(22, 'Dettol Soap', '100 gm', 'Menthol Dettol Soap 50gm', 1),
-(23, 'Lakme Moisturizer', '250 gm', 'Lakme Moisturizer Peach Variant 250 gm', 2),
-(24, 'Complan', '500 gm', 'Complan Kesar Pista 500gm', 1),
-(27, 'T-Shirt', '', 'Mens T-Shirt Size Medium', 3),
-(29, 'Lakme Moisturizer', '125 gm', 'Lakme Moisturizer 125gm with fruit extracts', 2),
-(30, 'Complan', '500 gm', 'Complan Vanila 500gm', 1);
+INSERT INTO `added_product` (`pid`, `Pname`, `ITCid`) VALUES
+(31, 'Dettol Soap', 5),
+(32, 'Complan', 1);
 
 -- --------------------------------------------------------
 
@@ -81,6 +74,7 @@ CREATE TABLE `products` (
   `UnitPrice` double NOT NULL,
   `Discount` double NOT NULL,
   `Quantity` double NOT NULL,
+  `Description` varchar(300) NOT NULL,
   `Date_Time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -88,13 +82,11 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`pid`, `Userid`, `UnitPrice`, `Discount`, `Quantity`, `Date_Time`) VALUES
-(22, 40, 12, 3, 10, '2017-03-19 02:25:08'),
-(23, 40, 135, 5, 10, '2017-03-19 02:27:09'),
-(24, 40, 160, 0, 10, '2017-03-19 02:37:49'),
-(29, 43, 100, 5, 5, '2017-03-19 05:53:28'),
-(21, 43, 12, 0, 10, '2017-03-19 05:54:15'),
-(30, 43, 430, 5, 10, '2017-03-19 05:54:57');
+INSERT INTO `products` (`pid`, `Userid`, `UnitPrice`, `Discount`, `Quantity`, `Description`, `Date_Time`) VALUES
+(31, 43, 12, 2, 5, 'Original Dettol Soap 100 gms.', '2017-03-19 08:24:23'),
+(32, 43, 120, 10, 5, 'Complan Kesan Pista 500 gms.', '2017-03-19 08:34:09'),
+(32, 43, 200, 20, 5, 'Complan Vanila 500 gm', '2017-03-19 08:35:06'),
+(32, 40, 150, 10, 10, 'Complan Original 200 gm', '2017-03-19 08:36:23');
 
 -- --------------------------------------------------------
 
@@ -155,7 +147,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `added_product`
 --
 ALTER TABLE `added_product`
-  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `users`
 --
