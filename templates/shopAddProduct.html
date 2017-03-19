@@ -1,69 +1,83 @@
 <div class="container box">
-  <br>
-  <h1 class="text-center">Add a Product</h1><hr><br>
-  <form class="form-horizontal" name="addProductForm" ng-submit="shCtrl.productAddfunc()" novalidate>
-    <div class="row">
-      <div class="col-sm-6">
+	<br>
+	<h1 class="text-center">Add a Product</h1><hr><br>
+	<form class="form-horizontal" name="addProductForm" ng-submit="shCtrl.productAddfunc()" novalidate>
+		<div class="row">
+			<div class="col-sm-6">
 
-        <div class="form-group">
-          <div class="col-xs-4"><label class="control-label" style="font-size: 125%">Name</label></div>
-          <div class="col-xs-8"><input type="text" class="form-control" name="pname" id="pname" ng-model="shCtrl.product.Pname" placeholder="Name"></div>
-        </div>
+				<div class="form-group">
+					<div class="col-xs-4"><label class="control-label" style="font-size: 125%">Name</label></div>
+					<div class="col-xs-8"><input type="text" class="form-control" name="pname" id="pname" ng-model="shCtrl.product.Pname" placeholder="Name"></div>
+				</div>
 
-        <br>
+				<br>
 
-        <div class="form-group">
-          <div class="col-xs-4"><label class="control-label" style="font-size: 125%">Category</label></div>
-          <div class="col-xs-8">
-            <select class="form-control" ng-model ="shCtrl.product.ITCname" "category" id="category">
-              <option>Kitchen</option>
-              <option>Cosmetics</option>
-              <option>Garments</option>
-              <option>Footwear</option>
-              <option>Shower Room</option>
-            </select>
-          </div>
-        </div>
+				<div class="form-group">
+					<div class="col-xs-4"><label class="control-label" style="font-size: 125%">Net Weight</label></div>
+					<div class="col-xs-8"><input type="text" class="form-control" name="netweight" id="netweight" ng-model="shCtrl.product.NetWeight" placeholder="NetWeight"></div>
+				</div>
 
-        <br>
+				<br>
 
-        <div class="form-group">
-          <div class="col-xs-4"><label class="control-label" style="font-size: 125%">Quantity</label></div>
-          <div class="col-xs-8"><input type="number" class="form-control" name="pquantity" ng-model="shCtrl.product.Quantity" id="pquantity" placeholder="Quantity"></div>
-        </div>
+				<div class="form-group">
+					<div class="col-xs-4"><label class="control-label" style="font-size: 125%">Category</label></div>
+					<div class="col-xs-8">
+						<select class="form-control" ng-model ="shCtrl.product.ITCname" "category" id="category">
+							<option>Kitchen</option>
+							<option>Cosmetics</option>
+							<option>Garments</option>
+							<option>Footwear</option>
+							<option>Shower Room</option>
+						</select>
+					</div>
+				</div>
 
-        <br>
+				<br>
 
-        <div class="form-group">
-          <div class="col-xs-4"><label class="control-label" style="font-size: 125%">Price</label></div>
-          <div class="col-xs-8"><input type="number" class="form-control" name="pprice" ng-model="shCtrl.product.UnitPrice" id="pprice" placeholder="Price" step=0.01></div>
-        </div>
+				<div class="form-group">
+					<div class="col-xs-4"><label class="control-label" style="font-size: 125%">Quantity</label></div>
+					<div class="col-xs-8"><input type="number" class="form-control" name="pquantity" ng-model="shCtrl.product.Quantity" id="pquantity" placeholder="Quantity"></div>
+				</div>
 
-        <br>
+				<br>
 
-        <div class="form-group">
-          <div class="col-xs-4"><label class="control-label" style="font-size: 125%">Discount</label></div>
-          <div class="col-xs-6 col-sm-7"><input type="number" class="form-control" name="pdiscount" ng-model="shCtrl.product.Discount" id="pdiscount" placeholder="Discount" step=0.01></div>
-          <div class="col-xs-2 col-sm-1 pull-left" id="perc" style="font-size: 125%; font-weight: bold">%</div>
-        </div>
+				<div class="form-group">
+					<div class="col-xs-4"><label class="control-label" style="font-size: 125%">Price</label></div>
+					<div class="col-xs-8"><input type="number" class="form-control" name="pprice" ng-model="shCtrl.product.UnitPrice" id="pprice" placeholder="Price" step=0.01></div>
+				</div>
+
+				<br>
+
+				<div class="form-group">
+					<div class="col-xs-4"><label class="control-label" style="font-size: 125%">Discount</label></div>
+					<div class="col-xs-6 col-sm-7"><input type="number" class="form-control" name="pdiscount" ng-model="shCtrl.product.Discount" id="pdiscount" placeholder="Discount" step=0.01></div>
+					<div class="col-xs-2 col-sm-1 pull-left" id="perc" style="font-size: 125%; font-weight: bold">%</div>
+				</div>
+
+				<br>
+
+				<div class="form-group">
+					<div class="col-xs-4"><label class="control-label" style="font-size: 125%">Description</label></div>
+					<div class="col-xs-8"><input type="text" class="form-control" name="description" id="description" ng-model="shCtrl.product.Description" placeholder="Description"></div>
+				</div>
 
 
-      </div>
+			</div>
 
-      <div class="col-sm-offset-1 col-sm-5 text-center">
-        <div class="row imgDisplay">
-          <img class="text-center" src="http://placehold.it/200x200" alt="Error">
-        </div>
-        <br><br>
-        <div class="row"><div class="col-xs-offset-2 col-xs-8"><input class="form-control" accept=".jpg,.png" id="uploadImage" ng-model="shCtrl.product.ImgSrc" type="file"></div></div>
-      </div>
+			<div class="col-sm-offset-1 col-sm-5 text-center">
+				<div class="row imgDisplay">
+					<img class="text-center" src="http://placehold.it/200x200" alt="Error">
+				</div>
+				<br><br>
+				<div class="row"><div class="col-xs-offset-2 col-xs-8"><input class="form-control" accept=".jpg,.png" id="uploadImage" ng-model="shCtrl.product.ImgSrc" type="file"></div></div>
+			</div>
 
-    </div>
+		</div>
 
-    <div class="row text-center">
-      <br><br>
-      <input type="submit" name="product-submit" id="product-submit" class="btn btn-primary" value ="Add Product">
-    </div>
-  </form>
+		<div class="row text-center">
+			<br><br>
+			<input type="submit" name="product-submit" id="product-submit" class="btn btn-primary" value ="Add Product">
+		</div>
+	</form>
 </div>
 <br><br>

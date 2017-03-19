@@ -1,83 +1,76 @@
 <div class="row">
-    <div class="col-lg-12">
-        <div class="alert alert-danger" data-ng-if="(regShopkprForm.Fname.$dirty && regShopkprForm.Fname.$error.required) || (regShopkprForm.Email.$dirty && regShopkprForm.Email.$error.required) || (regShopkprForm.Lname.$dirty && regShopkprForm.Lname.$error.required) || (regShopkprForm.Email.$dirty && regShopkprForm.Email.$invalid) || (regShopkprForm.cpassword.$dirty && regShopkprForm.cpassword.$invalid) || (regShopkprForm.PhoneNo.$dirty && regShopkprForm.PhoneNo.$error.maxlength) || (regShopkprForm.PhoneNo.$dirty && regShopkprForm.PhoneNo.$error.required)">
-        <label for="firstname" ng-if="regShopkprForm.Fname.$dirty && regShopkprForm.Fname.$error.required" >First name is required. </label>
-        <!-- <label for="firstname" ng-if="regShopkprForm.Fname.$dirty && regShopkprForm.Fname.$invalid">enter a valid name. </label> -->
-        <label for="lastname" ng-if="regShopkprForm.Lname.$dirty && regShopkprForm.Lname.$error.required">Last name is required. </label>
-        <label for="em" ng-if="regShopkprForm.Email.$dirty && regShopkprForm.Email.$error.required">Email field is required.</label>
-        <label for="em" ng-if="regShopkprForm.Email.$dirty && regShopkprForm.Email.$invalid">Please enter a valid Email address.</label>
-        <label ng-if="regShopkprForm.cpassword.$dirty && regShopkprForm.cpassword.$invalid">Passwords don't match.</label>
-        <label for="edit-phno" ng-if="regShopkprForm.PhoneNo.$dirty && regShopkprForm.PhoneNo.$error.maxlength">Mobile No. should be 10 digits</label>
-        <label for="edit-phno" ng-if="regShopkprForm.PhoneNo.$dirty && regShopkprForm.PhoneNo.$error.required">Mobile No. is required</label>      
-        </div> 
-        <div class="container-fluid">
-            <form id="register-shopkeeper" class="form-horizontal" name = "regShopkprForm" ng-submit = "regShopkprForm.$valid && frmCtrl.shopkprRegister()" = novalidate>
-                <h2 style="font-family:verdana; color:blue"><strong><center>REGISTER AS SHOPKEEPER</center></strong></h2>
-                <hr>
-                <div class="form-group">
-                    <div class="col-md-3"><label class="control-label" style="font-size: 125%">First Name</label></div>
-                    <div class="col-md-offset-1 col-md-6"><input type="text" class="form-control" ng-model = "frmCtrl.shopkpr.Fname" name="Fname" id="firstname" placeholder="First Name" required></div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <div class="col-md-3"><label class="control-label" style="font-size: 125%">Last Name</label></div>
-                    <div class="col-md-offset-1 col-md-6"><input type="text" class="form-control" ng-model = "frmCtrl.shopkpr.Lname" name="Lname" id="lastname" placeholder="Last Name" required></div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <div class="col-md-3"><label class="control-label" style="font-size: 125%">Email ID</label></div>
-                    <div class="col-md-offset-1 col-md-6"><input type="Email" class="form-control" ng-model = "frmCtrl.shopkpr.Email" name="Email" id="Email" placeholder="Email ID" required></div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <div class="col-md-3"><label class="control-label" style="font-size: 125%">Password</label></div>
-                    <div class="col-md-offset-1 col-md-6"><input type="password" class="form-control" ng-model = "frmCtrl.shopkpr.Password" name="Password" id="password" placeholder="Password" required></div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <div class="col-md-4"><label class="control-label" style="font-size: 125%">Confirm Password</label></div>
-                    <div class="col-md-offset-0 col-md-6"><input type="password" class="form-control" ng-model = "cpassword" name="cpassword" id="cpassword" placeholder="Confirm Password" validate-password ='frmCtrl.shopkpr.Password' required ></div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <div class="col-md-3"><label class="control-label" style="font-size: 125%">Phone Number</label></div>
-                    <div class="col-md-offset-1 col-md-6"><input type="tel" class="form-control" ng-model="frmCtrl.shopkpr.PhoneNo" name="PhoneNo" id="edit-phno" ng-maxlength="10" placeholder="Phone number" required></div>
-                </div>
-                <br>
-                <!-- <div class="form-group">
-                    <div class="col-md-3"><label class="control-label" style="font-size: 125%">ShopType</label></div>
-                    <div class="col-md-offset-1 col-md-6">
-                      <select id="shoptype" class="form-control" ng-model = "frmCtrl.shopkpr.shopType">
-                      <option selected="selected" class="default">Choose One</option>
-                      <option>Kitchen</option>
-                      <option>Stationary</option>
-                      <option>General Store</option>
-                      <option>Garments</option></select>
-                    </div>
-                </div>
-                <br> -->
-                <div class="form-group">
-                    <div class="col-md-3"><label class="control-label" style="font-size: 125%">Address</label></div>
-                    <div class="col-md-offset-1 col-md-6"><input type="text" class="form-control" ng-model = "frmCtrl.shopkpr.Address" name= "Address" id="address" placeholder="Address"></div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <div class="col-md-3"><label class="control-label" style="font-size: 125%">City</label></div>
-                    <div class="col-md-offset-1 col-md-6"><input type="text" class="form-control" name="City" id="city" placeholder="City" required></div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <div class="col-md-3"><label class="control-label" style="font-size: 125%">State</label></div>
-                    <div class="col-md-offset-1 col-md-6"><input type="text" class="form-control" name="State" id="state" placeholder="State" required></div>
-                </div>
-                <br>
-                <br>
-                <div class="row">
-                      <div class="col-sm-12 text-center">
-                        <input type="submit" name="shopkeeper-submit" id="shopkeeper-submit" class="btn btn-primary" value="Register">
-                      </div>
-                </div>
-        </form>
-    </div>
-</div>
-</div>
+	<div class="col-lg-12">
+		<div class="alert alert-danger" data-ng-if="(regShopkprForm.Fname.$dirty && regShopkprForm.Fname.$error.required) || (regShopkprForm.Email.$dirty && regShopkprForm.Email.$error.required) || (regShopkprForm.Lname.$dirty && regShopkprForm.Lname.$error.required) || (regShopkprForm.Email.$dirty && regShopkprForm.Email.$invalid) || (regShopkprForm.cpassword.$dirty && regShopkprForm.cpassword.$invalid) || (regShopkprForm.PhoneNo.$dirty && regShopkprForm.PhoneNo.$error.maxlength) || (regShopkprForm.PhoneNo.$dirty && regShopkprForm.PhoneNo.$error.required)">
+			<label for="firstname" ng-if="regShopkprForm.Fname.$dirty && regShopkprForm.Fname.$error.required" >First name is required. </label>
+			<!-- <label for="firstname" ng-if="regShopkprForm.Fname.$dirty && regShopkprForm.Fname.$invalid">enter a valid name. </label> -->
+			<label for="lastname" ng-if="regShopkprForm.Lname.$dirty && regShopkprForm.Lname.$error.required">Last name is required. </label>
+			<label for="em" ng-if="regShopkprForm.Email.$dirty && regShopkprForm.Email.$error.required">Email field is required.</label>
+			<label for="em" ng-if="regShopkprForm.Email.$dirty && regShopkprForm.Email.$invalid">Please enter a valid Email address.</label>
+			<label ng-if="regShopkprForm.cpassword.$dirty && regShopkprForm.cpassword.$invalid">Passwords don't match.</label>
+			<label for="edit-phno" ng-if="regShopkprForm.PhoneNo.$dirty && regShopkprForm.PhoneNo.$error.maxlength">Mobile No. should be 10 digits</label>
+			<label for="edit-phno" ng-if="regShopkprForm.PhoneNo.$dirty && regShopkprForm.PhoneNo.$error.required">Mobile No. is required</label>      
+		</div> 
+		<div class="container-fluid">
+			<form id="register-shopkeeper" class="form-horizontal" name = "regShopkprForm" ng-submit = "regShopkprForm.$valid && frmCtrl.shopkprRegister()" = novalidate>
+				<h2 style="font-family:verdana; color:blue"><strong><center>REGISTER AS SHOPKEEPER</center></strong></h2>
+				<hr>
+				<div class="form-group">
+					<div class="col-md-3"><label class="control-label" style="font-size: 125%">First Name</label></div>
+					<div class="col-md-offset-1 col-md-6"><input type="text" class="form-control" ng-model = "frmCtrl.shopkpr.Fname" name="Fname" id="firstname" placeholder="First Name" required></div>
+				</div>
+				<br>
+				<div class="form-group">
+					<div class="col-md-3"><label class="control-label" style="font-size: 125%">Last Name</label></div>
+					<div class="col-md-offset-1 col-md-6"><input type="text" class="form-control" ng-model = "frmCtrl.shopkpr.Lname" name="Lname" id="lastname" placeholder="Last Name" required></div>
+				</div>
+				<br>
+				<div class="form-group">
+					<div class="col-md-3"><label class="control-label" style="font-size: 125%">Email ID</label></div>
+					<div class="col-md-offset-1 col-md-6"><input type="Email" class="form-control" ng-model = "frmCtrl.shopkpr.Email" name="Email" id="Email" placeholder="Email ID" required></div>
+				</div>
+				<br>
+				<div class="form-group">
+					<div class="col-md-3"><label class="control-label" style="font-size: 125%">Password</label></div>
+					<div class="col-md-offset-1 col-md-6"><input type="password" class="form-control" ng-model = "frmCtrl.shopkpr.Password" name="Password" id="password" placeholder="Password" required></div>
+				</div>
+				<br>
+				<div class="form-group">
+					<div class="col-md-4"><label class="control-label" style="font-size: 125%">Confirm Password</label></div>
+					<div class="col-md-offset-0 col-md-6"><input type="password" class="form-control" ng-model = "cpassword" name="cpassword" id="cpassword" placeholder="Confirm Password" validate-password ='frmCtrl.shopkpr.Password' required ></div>
+				</div>
+				<br>
+				<div class="form-group">
+					<div class="col-md-3"><label class="control-label" style="font-size: 125%">Phone Number</label></div>
+					<div class="col-md-offset-1 col-md-6"><input type="tel" class="form-control" ng-model="frmCtrl.shopkpr.PhoneNo" name="PhoneNo" id="edit-phno" ng-maxlength="10" placeholder="Phone number" required></div>
+				</div>
+				<br>
+				<div class="form-group">
+					<div class="col-md-3"><label class="control-label" style="font-size: 125%">Address</label></div>
+					<div class="col-md-offset-1 col-md-6"><input type="text" class="form-control" ng-model = "frmCtrl.shopkpr.Address" name= "Address" id="address" placeholder="Address"></div>
+				</div>
+				<br>
+				<div class="form-group">
+					<div class="col-md-3"><label class="control-label" style="font-size: 125%">City</label></div>
+					<div class="col-md-offset-1 col-md-6"><input type="text" class="form-control" name="City" id="city" placeholder="City" required></div>
+				</div>
+				<br>
+				<div class="form-group">
+					<div class="col-md-3"><label class="control-label" style="font-size: 125%">Home Delivery</label></div>
+					<div class="col-md-offset-1 col-md-6">
+						<select id="homedelivery" class="form-control" ng-model = "frmCtrl.shopkpr.Home_Delivery">
+							<option>Availabe</option>
+							<option>Not Available</option></select>
+						</div>
+					</div>
+					<br>
+					<br>
+					<br>
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<input type="submit" name="shopkeeper-submit" id="shopkeeper-submit" class="btn btn-primary" value="Register">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>

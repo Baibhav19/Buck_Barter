@@ -14,9 +14,11 @@ app.controller('shopkprController',function($http,$state , authToken){
 		Userid: '',
 		ITCname: '',
 		Pname : '',
+		NetWeight: '',
 		UnitPrice : '',
 		Discount : '',
 		Quantity: '',
+		Description: '',
 		Date_Time: Date.now()
 	};
 	gets.showProducts = function(){

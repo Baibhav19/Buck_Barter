@@ -77,6 +77,7 @@
 				<th>Unit Price</th>
 				<th>Discount %</th>
 				<th>Quantity</th>
+				<th>Description</th>
 				<th ng-if="shCtrl.isSelected(3)">Update</th>
 				<th ng-if="shCtrl.isSelected(4)">Delete</th>
 			</tr>
@@ -90,6 +91,7 @@
 				<td>{{ x.UnitPrice }}</td>
 				<td>{{ x.Discount }}%</td>
 				<td>{{ x.Quantity }}</td>
+				<td>{{x.Description}}</td>
 				<td class="text-center" ng-if="shCtrl.isSelected(3)">
 					<button class="btn btn-primary" data-toggle="modal" href="#myModal" ng-click="shCtrl.updateValue(x)">Update</button>
 				</td>

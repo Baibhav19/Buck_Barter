@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2017 at 08:58 AM
+-- Generation Time: Mar 19, 2017 at 11:31 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -29,6 +29,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `added_product` (
   `pid` int(11) NOT NULL,
   `Pname` varchar(200) NOT NULL,
+  `NetWeight` varchar(300) NOT NULL,
+  `Description` varchar(300) NOT NULL,
   `ITCid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -36,11 +38,11 @@ CREATE TABLE `added_product` (
 -- Dumping data for table `added_product`
 --
 
-INSERT INTO `added_product` (`pid`, `Pname`, `ITCid`) VALUES
-(10, 'Dettol Soap', 5),
-(11, 'Peach Milk', 2),
-(12, 'Deo', 2),
-(14, 'Fortune Soyabean Oil', 1);
+INSERT INTO `added_product` (`pid`, `Pname`, `NetWeight`, `Description`, `ITCid`) VALUES
+(21, 'Dettol Soap', '100 gm', 'Original Dettol Soap 100 gm', 1),
+(22, 'Dettol Soap', '100 gm', 'Menthol Dettol Soap 50gm', 1),
+(23, 'Lakme Moisturizer', '250 gm', 'Lakme Moisturizer Peach Variant 250 gm', 2),
+(24, 'Complan', '500 gm', 'Complan Kesar Pista 500gm', 1);
 
 -- --------------------------------------------------------
 
@@ -84,7 +86,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`pid`, `Userid`, `UnitPrice`, `Discount`, `Quantity`, `Date_Time`) VALUES
-(10, 2, 50, 25, 1000, '0000-00-00 00:00:00');
+(22, 40, 12, 3, 10, '2017-03-19 02:25:08'),
+(23, 40, 135, 5, 10, '2017-03-19 02:27:09'),
+(24, 40, 160, 0, 10, '2017-03-19 02:37:49');
 
 -- --------------------------------------------------------
 
@@ -101,6 +105,7 @@ CREATE TABLE `users` (
   `Password` varchar(200) NOT NULL,
   `Address` varchar(150) NOT NULL,
   `Selectid` int(11) NOT NULL,
+  `Home_Delivery` varchar(300) NOT NULL,
   `Latitude` double DEFAULT NULL,
   `Longitude` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -109,9 +114,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`Userid`, `Fname`, `Lname`, `Email`, `PhoneNo`, `Password`, `Address`, `Selectid`, `Latitude`, `Longitude`) VALUES
-(13, 'Baibhav', 'aggarwal', 'baibhav@outlook', 1234567, '$2a$10$hUWQeaHO48M1hiKqx9KDe.rLqtnQgUxs3FqEB2N7niZ', 'xdfcgh', 2, 30.518668, 76.658851),
-(38, 'Shivam', 'Garg', '05shivamgarg@gmail.com', 785428451, '$2a$10$WliZUC.brs2Z7oyZ04OMAOW1jnc2mWXRsyKdZZ2tKnglrLEoDNdjq', 'Chitkara University', 1, 29.0587757, 76.085601);
+INSERT INTO `users` (`Userid`, `Fname`, `Lname`, `Email`, `PhoneNo`, `Password`, `Address`, `Selectid`, `Home_Delivery`, `Latitude`, `Longitude`) VALUES
+(38, 'Shivam', 'Garg', '05shivamgarg@gmail.com', 785428451, '$2a$10$WliZUC.brs2Z7oyZ04OMAOW1jnc2mWXRsyKdZZ2tKnglrLEoDNdjq', 'Chitkara University', 1, '', 29.0587757, 76.085601),
+(40, 'Vishesh', 'Mittal', 'visheshmittal97@gmail.com', 9736999719, '$2a$10$A2MZYIndyuMeBNJ7nF3DJOtLxnDsTwcqVDSj.PvE3gGokEtoesHLK', 'Avas Vikas BSR', 2, 'Available', 27.1766701, 78.00807449999999),
+(42, 'Parv', 'Mittal', 'parv@gmail.com', 8520, '$2a$10$k7N3FFba6.ukIMoccdRRGOjH9YPZpTXTkjx/oWZ/oQJ5kjh/jawUK', 'jnmk,l.', 1, '', 30.5143937, 76.661971),
+(43, 'Baibhav', 'Aggarwal', 'baibhav@outlook.com', 9876543210, '$2a$10$nKEroKsNlOuCbb8Q6nhrMO655bJvDHhQ9MuyJQPcrZSx3PxJAJs0C', 'Room no 308 Chitkara University', 2, 'Availabe', 30.514370399999997, 76.6620078);
 
 --
 -- Indexes for dumped tables
@@ -142,12 +149,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `added_product`
 --
 ALTER TABLE `added_product`
-  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `Userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `Userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -21,6 +21,7 @@ app.controller('formController' , function($http , $state, authToken ,$window , 
        PhoneNo: '',
        Selectid: '1',
        Address : '' ,
+       Home_Delivery: '',
        Latitude: '',
        Longitude:''
    };
@@ -32,6 +33,7 @@ app.controller('formController' , function($http , $state, authToken ,$window , 
        PhoneNo : '',
        Password : '',
        Address : '' ,
+       Home_Delivery: '',
        Selectid : '2',
        Latitude: '',
        Longitude:''
