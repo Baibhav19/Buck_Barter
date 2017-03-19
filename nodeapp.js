@@ -86,8 +86,8 @@ app.use(req,res,next){
             {
                 console.log(result);
                 if(err)
-                   res.status(500).send("error in updating");
-               else
+                 res.status(500).send("error in updating");
+             else
                 res.status(200).send('Updated successfully');
         });
         });
@@ -174,28 +174,28 @@ app.use(req,res,next){
                     ITCid : result[0].ITCid
                 }
                 connection.query('insert into added_product set ?', added, function(err, result) {
-                    var id_product = connection.query('SELECT Pid from added_product where Pname = ?',[pname] , function(error, result){
-                        var product =
-                        {
-                            pid :result[0].Pid,
-                            Userid : cope.Userid,
-                            UnitPrice : cope.UnitPrice,
-                            Discount : cope.Discount,
-                            Quantity : cope.Quantity,
-                            Date_Time : cope.Date_Time
+                 connection.query('SELECT pid from added_product where Pname = ? AND NetWeight = ? AND Description = ?' , [pname , cope.NetWeight , cope.Description] , function(error , result){
+                    var product =
+                    {
+                        pid :result[0].pid,
+                        Userid : cope.Userid,
+                        UnitPrice : cope.UnitPrice,
+                        Discount : cope.Discount,
+                        Quantity : cope.Quantity,
+                        Date_Time : cope.Date_Time
+                    }
+                    connection.query('insert into products set ?', product, function(err, result) {
+                        if (err){
+                            console.log("Error detected");
+                            res.send("errrrrr");
                         }
-                        connection.query('insert into products set ?', product, function(err, result) {
-                            if (err){
-                                console.log("Error detected");
-                                res.send("errrrrr");
-                            }
-                            else  {
-                                console.log("done");
-                                res.send("done 1st");
-                            }
-                        });
+                        else  {
+                            console.log("done");
+                            res.send("done 1st");
+                        }
                     });
                 });
+             });
             });
         }
     });
@@ -267,10 +267,10 @@ app.use(req,res,next){
             {
                 connection.query('SELECT Password from users where Email = ?' , [username] , function(error , result){
                     if(bcrypt.compareSync(password , result[0].Password )) {
-                     createToken(username , res);
-                 }
-                 else
-                 {
+                       createToken(username , res);
+                   }
+                   else
+                   {
                     res.status(500).send("error");
                 }
             });

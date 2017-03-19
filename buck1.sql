@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2017 at 11:31 AM
+-- Generation Time: Mar 19, 2017 at 01:25 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -42,7 +42,10 @@ INSERT INTO `added_product` (`pid`, `Pname`, `NetWeight`, `Description`, `ITCid`
 (21, 'Dettol Soap', '100 gm', 'Original Dettol Soap 100 gm', 1),
 (22, 'Dettol Soap', '100 gm', 'Menthol Dettol Soap 50gm', 1),
 (23, 'Lakme Moisturizer', '250 gm', 'Lakme Moisturizer Peach Variant 250 gm', 2),
-(24, 'Complan', '500 gm', 'Complan Kesar Pista 500gm', 1);
+(24, 'Complan', '500 gm', 'Complan Kesar Pista 500gm', 1),
+(27, 'T-Shirt', '', 'Mens T-Shirt Size Medium', 3),
+(29, 'Lakme Moisturizer', '125 gm', 'Lakme Moisturizer 125gm with fruit extracts', 2),
+(30, 'Complan', '500 gm', 'Complan Vanila 500gm', 1);
 
 -- --------------------------------------------------------
 
@@ -88,7 +91,10 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`pid`, `Userid`, `UnitPrice`, `Discount`, `Quantity`, `Date_Time`) VALUES
 (22, 40, 12, 3, 10, '2017-03-19 02:25:08'),
 (23, 40, 135, 5, 10, '2017-03-19 02:27:09'),
-(24, 40, 160, 0, 10, '2017-03-19 02:37:49');
+(24, 40, 160, 0, 10, '2017-03-19 02:37:49'),
+(29, 43, 100, 5, 5, '2017-03-19 05:53:28'),
+(21, 43, 12, 0, 10, '2017-03-19 05:54:15'),
+(30, 43, 430, 5, 10, '2017-03-19 05:54:57');
 
 -- --------------------------------------------------------
 
@@ -149,12 +155,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `added_product`
 --
 ALTER TABLE `added_product`
-  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `Userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `Userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
