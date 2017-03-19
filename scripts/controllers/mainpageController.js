@@ -11,8 +11,41 @@ app.controller('mainpageController' , function(authToken , $http , $geolocation)
     this.fetchLocation = function(){
         $http.get("/showCoords").then(function sucessCallback(response){
                 gets.coords = response.data;
-                //console.log(gets.coords[0].Latitude);
-                var createRandomMarker = function(i, idKey) {
+            },
+            function errorCallback(response){
+                alert(response.message);
+            });
+        $geolocation.getCurrentPosition({
+            timeout: 60000
+        }).then(function(position) {
+            gets.myPosition = position;
+            gets.lat = gets.myPosition.coords.latitude;
+            gets.lon = gets.myPosition.coords.longitude;
+            var R = 6371e3; // metres
+            toRadians = function(degrees) {
+                return degrees * Math.PI / 180;
+            };
+            var φ1 = toRadians(gets.lat);
+            var φ2 = toRadians(gets.coords[0].Latitude);
+            var Δφ = toRadians(gets.coords[0].Latitude - gets.lat);
+            var Δλ = toRadians(gets.coords[0].Longitude - gets.lon);
+
+            var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                    Math.cos(φ1) * Math.cos(φ2) *
+                    Math.sin(Δλ/2) * Math.sin(Δλ/2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+            var d = R * c;
+            console.log(d);
+            gets.fl = 1;
+            gets.map = {
+                center: {
+                    latitude: gets.lat,
+                    longitude: gets.lon
+                },
+                zoom: 14
+            };
+            var createRandomMarker = function(i, idKey) {
                     if (idKey == null) {
                         idKey = "id";
                     }
@@ -31,29 +64,10 @@ app.controller('mainpageController' , function(authToken , $http , $geolocation)
                     model.show = !model.show;
                 };
                 var markers = [];
-                for (var i = 0; i < 2; i++) {
+                for (var i = 0; i < gets.coords.length; i++) {
                     markers.push(createRandomMarker(i));
                 }
                 gets.randomMarkers = markers;
-            },
-            function errorCallback(response){
-                alert(response.message);
-            });
-        $geolocation.getCurrentPosition({
-            timeout: 60000
-        }).then(function(position) {
-            gets.myPosition = position;
-            //console.log(gets.myPosition.coords.latitude);
-            gets.lat = gets.myPosition.coords.latitude;
-            gets.lon = gets.myPosition.coords.longitude;
-            gets.fl = 1;
-            gets.map = {
-                center: {
-                    latitude: gets.lat,
-                    longitude: gets.lon
-                },
-                zoom: 14
-            };
             gets.circles =[
             {
                 id: 1,
