@@ -1,5 +1,8 @@
 app.controller('mainpageController' , function(authToken , $http , $geolocation){
     var gets = this;
+    gets.id ={
+        id:43
+    };
     gets.lat = 30.7333 ;
     gets.lon = 76.7794 ;
     gets.coords=[];
@@ -7,10 +10,23 @@ app.controller('mainpageController' , function(authToken , $http , $geolocation)
     this.isLoaded = function(){
         return gets.fl == 1 ;
     };
-    
+
     this.fetchLocation = function(){
+        $http.get("/getUsers").then(function sucessCallback(response){
+                console.log(response.data);
+            },
+            function errorCallback(response){
+                alert(response.message);
+            });
+        $http.post("/StoreProd" , gets.id).then(function sucessCallback(response){
+                console.log(response.data);
+            },
+            function errorCallback(response){
+                alert(response.message);
+            });
         $http.get("/showCoords").then(function sucessCallback(response){
                 gets.coords = response.data;
+                console.log(gets.coords);
             },
             function errorCallback(response){
                 alert(response.message);

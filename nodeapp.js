@@ -198,14 +198,50 @@ app.use(req,res,next){
         }
     });
 });
+    app.post('/StoreProd', function(req,res){
+        var detailed_prod = new Array();
+        //console.log(req.body.id);
+        connection.query('SELECT added_product.Pname , products.Userid , products.UnitPrice ,products.Discount , products.Description FROM added_product LEFT JOIN products ON (products.Pid = added_product.Pid)' , function(error , result){
+            console.log(result);
+            if(error)
+            {
+                res.status(500).send('No Products');
+            }
+            else
+            {
+                for(var i = 0 ; i < result.length ;i++){
+                    if(result[i].Userid == req.body.id){
+                        result[i] =
+                        {
+                            Pname : result[i].Pname,
+                            UnitPrice: result[i].UnitPrice,
+                            Discount: result[i].Discount,
+                            Description: result[i].Description
+                        }
+                        detailed_prod.push(result[i]);
+                    }
+                }
+            res.send(detailed_prod);
+            }
+    });
+    });
+    app.get('/getUsers' , function(req,res){
+        var All_Users = new Array();
+        connection.query('SELECT Userid ,Store_Name , Latitude , Longitude FROM users where Selectid = 2' , function(error , result){
+        if(error)
+        {
+            res.status(500).send("no Availability");
+        }
+        else
+        {
+            for(var i = 0 ; i < result.length ;i++){
+                    All_Users.push(result[i]);
+            }
+            res.send(All_Users);
+        }
+    });
+});
     app.get('/showProduct' , function(req,res){
-    // if(!req.headers.authorization){
-    //     return res.status(401).send({
-    //         message:'not authentiated , sign in first'
-    //     });
-    // connection.query('SELECT * from products where Userid = ?',[Userid] , function(error, result){
-    //     console.log(result);
-
     var product = new Array();
     if(!req.headers.authorization){
         return res.status(401).send({
