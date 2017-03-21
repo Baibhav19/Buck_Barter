@@ -32,6 +32,10 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
         url: '/deleteProduct',
         template: '<shop-dir></shop-dir>'
     })
+    .state("shopByStores", {
+        url: "/shopByStores" ,
+        templateUrl: 'templates/shopByStores.html'
+    })
     .state("register", {
        url: '/register',
        templateUrl: 'templates/register.html'

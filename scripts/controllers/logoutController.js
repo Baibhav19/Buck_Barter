@@ -1,4 +1,5 @@
-app.controller('logoutController' ,function(authToken ,$state){
+app.controller('logoutController' ,function(authToken , fetcher ,$state){
 	authToken.removeToken();
+	fetcher.removeLocation();
 	$state.go('home');
 });

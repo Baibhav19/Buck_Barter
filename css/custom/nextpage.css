@@ -61,9 +61,9 @@ h3{
 }
 
 #map_canvas {
-  height: 200px;
-  width: 700px;
-  margin: 0px;
+  height: 400px;
+  /*width: 70%;*/
+  margin: 5px;
 }
 
 #map_canvas {
@@ -76,4 +76,19 @@ h3{
   bottom: 0;
   right: 0;
   left: 0;
+}
+
+.card, .card-hidden {
+  background: #F7F9FA;
+  border-radius: 3px;
+
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
+  padding: 1.25em;
+  position: relative; 
+}
+
+ul.products li {
+    width: 33%;
+    display: inline-block;
+    vertical-align: top;
 }

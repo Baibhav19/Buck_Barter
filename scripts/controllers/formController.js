@@ -1,4 +1,4 @@
-app.controller('formController' , function($http , $state, authToken ,$window , $geolocation){
+app.controller('formController' , function($http , fetcher, $state, authToken ,$window , $geolocation){
 	this.tab = 1;
 	this.setTab = function(tabno){
 		this.tab = tabno ;
@@ -6,11 +6,6 @@ app.controller('formController' , function($http , $state, authToken ,$window , 
 	this.isSelected = function(checkTab){
 		return this.tab === checkTab ;
 	};
-	$geolocation.watchPosition({
-		timeout: 60000,
-		maximumAge: 250,
-		enableHighAccuracy: true
-	});
     this.bol = false;
     this.cust = {
        Userid :'',
@@ -41,35 +36,33 @@ app.controller('formController' , function($http , $state, authToken ,$window , 
    };
    this.custRegister = function(){
        console.log("registered customer" , this.cust);
-       if($geolocation.position.error){
-          alert("browser doesn't support location.");
+      if(fetcher.isFetched()){
+        console.log(fetcher.getLat());
+        this.cust.Latitude = fetcher.getLat();
+        this.cust.Longitude = fetcher.getLon();
       }
-      else{
-          this.cust.Latitude = $geolocation.position.coords.latitude;
-          this.cust.Longitude = $geolocation.position.coords.longitude;
-      }
-      $http.post("/custadd",this.cust).then(function successCallback(response) {
-        alert("successfully registered");
-        $state.go('login');
-	        	console.log(response.data);
-	        },
-	        function errorCallback(response){
-	        	alert("error while registering!!! Register again");
-	        	$state.go('register');
-	        	console.log(response.status);
-	        });
+        $http.post("/custadd",this.cust).then(function successCallback(response) {
+          alert("successfully registered");
+          $state.go('login');
+  	        	console.log(response.data);
+  	        },
+  	        function errorCallback(response){
+  	        	alert("error while registering!!! Register again");
+  	        	$state.go('register');
+  	        	console.log(response.status);
+  	        });
       this.cust = {};
   };
   this.shopkprRegister = function(){
     console.log("registered shopkeeper" , this.shopkpr);
-    if($geolocation.position.error){
-      alert("browser doesn't support location. Register again :(");
-          $state.go('register');
-      }
-      else{
-        this.shopkpr.Latitude = $geolocation.position.coords.latitude;
-        this.shopkpr.Longitude = $geolocation.position.coords.longitude;
-        $http.post("/shopadd",this.shopkpr).then(function successCallback(response) {
+        console.log(fetcher.isFetched());
+        if(fetcher.isFetched()){
+          console.log(fetcher.getLat() + "in if");
+          this.shopkpr.Latitude = fetcher.getLat();
+          this.shopkpr.Longitude = fetcher.getLon();
+        }
+        console.log(fetcher.getLon() + "outside if")
+          $http.post("/shopadd",this.shopkpr).then(function successCallback(response) {
             alert("successfully registered");
 	        	$state.go('login');
 	        	console.log(response.data);
@@ -79,7 +72,6 @@ app.controller('formController' , function($http , $state, authToken ,$window , 
 	        	$state.go('register');
 	        	console.log(response.status);
 	        });
-    }
     this.shopkpr = {};
 };
 

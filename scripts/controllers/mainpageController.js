@@ -1,58 +1,53 @@
-app.controller('mainpageController' , function(authToken , $http , $geolocation){
+app.controller('mainpageController' , function(authToken , fetcher , $http , $geolocation){
     var gets = this;
     gets.id ={
         id:43
     };
     gets.lat = 30.7333 ;
     gets.lon = 76.7794 ;
+    gets.shopRecord = [];
     gets.coords=[];
     gets.fl = 0;
     this.isLoaded = function(){
         return gets.fl == 1 ;
     };
-
-    this.fetchLocation = function(){
-        $http.get("/getUsers").then(function sucessCallback(response){
-                console.log(response.data);
-            },
-            function errorCallback(response){
-                alert(response.message);
-            });
-        $http.post("/StoreProd" , gets.id).then(function sucessCallback(response){
-                console.log(response.data);
-            },
-            function errorCallback(response){
-                alert(response.message);
-            });
-        $http.get("/showCoords").then(function sucessCallback(response){
-                gets.coords = response.data;
-                console.log(gets.coords);
-            },
-            function errorCallback(response){
-                alert(response.message);
-            });
-        $geolocation.getCurrentPosition({
-            timeout: 60000
-        }).then(function(position) {
-            gets.myPosition = position;
-            gets.lat = gets.myPosition.coords.latitude;
-            gets.lon = gets.myPosition.coords.longitude;
-            var R = 6371e3; // metres
+    
+    $http.get("/getUsers").then(function sucessCallback(response){
+            console.log(response.data);
+            gets.shopRecord = response.data;
+        },
+        function errorCallback(response){
+            alert(response.message);
+        });
+    calcDistance = function(lat , lon){
+        var R = 6371e3; // metres
             toRadians = function(degrees) {
                 return degrees * Math.PI / 180;
             };
             var φ1 = toRadians(gets.lat);
-            var φ2 = toRadians(gets.coords[0].Latitude);
-            var Δφ = toRadians(gets.coords[0].Latitude - gets.lat);
-            var Δλ = toRadians(gets.coords[0].Longitude - gets.lon);
-
+            var φ2 = toRadians(lat);
+            var Δφ = toRadians(lat - gets.lat);
+            var Δλ = toRadians(lon - gets.lon);
             var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-                    Math.cos(φ1) * Math.cos(φ2) *
-                    Math.sin(Δλ/2) * Math.sin(Δλ/2);
+            Math.cos(φ1) * Math.cos(φ2) *
+            Math.sin(Δλ/2) * Math.sin(Δλ/2);
             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
             var d = R * c;
-            console.log(d);
+            return d.toFixed(2);
+    };
+    this.fetchLocation = function(){
+        $geolocation.getCurrentPosition({
+            timeout: 60000
+        }).then(function(position) {
+            gets.myPosition = position;
+            fetcher.setLat(gets.myPosition.coords.latitude);
+            fetcher.setLon(gets.myPosition.coords.longitude);
+            gets.lat = fetcher.getLat();
+            gets.lon = fetcher.getLon();
+            for(var i =0 ; i < gets.shopRecord.length ; i++){
+                gets.shopRecord[i].Selectid = calcDistance(gets.shopRecord[i].Latitude , gets.shopRecord[i].Longitude);
+            }
+            fetcher.setUsers(gets.shopRecord);
             gets.fl = 1;
             gets.map = {
                 center: {
@@ -62,45 +57,45 @@ app.controller('mainpageController' , function(authToken , $http , $geolocation)
                 zoom: 14
             };
             var createRandomMarker = function(i, idKey) {
-                    if (idKey == null) {
-                        idKey = "id";
-                    }
-                    var ret={
-                          latitude : gets.coords[i].Latitude,
-                          longitude : gets.coords[i].Longitude,
-                          title: 'store' + i ,
-                          icon:'images/stores-icon.png',
-                          show :false
-                    };
-                    ret[idKey]=i;
-                    return ret;
-                };
-                gets.onClick = function(marker, eventName, model) {
-                    console.log("Clicked!");
-                    model.show = !model.show;
-                };
-                var markers = [];
-                for (var i = 0; i < gets.coords.length; i++) {
-                    markers.push(createRandomMarker(i));
+                if (idKey == null) {
+                    idKey = "id";
                 }
-                gets.randomMarkers = markers;
-            gets.circles =[
-            {
-                id: 1,
-                center: {
-                    latitude: gets.lat,
-                    longitude: gets.lon
-                },
-                radius: 1000,
-                stroke: {
-                    color: '#08B21F',
-                    weight: 2,
-                    opacity: 1
-                },
-                fill: {
-                    color: '#08B21F',
-                    opacity: 0.5
-                },
+                var ret={
+                  latitude : gets.shopRecord[i].Latitude,
+                  longitude : gets.shopRecord[i].Longitude,
+                  title: 'store' + i ,
+                  icon:'images/stores-icon.png',
+                  show :false
+              };
+              ret[idKey]=i;
+              return ret;
+          };
+          gets.onClick = function(marker, eventName, model) {
+            console.log("Clicked!");
+            model.show = !model.show;
+        };
+        var markers = [];
+        for (var i = 0; i < gets.shopRecord.length; i++) {
+            markers.push(createRandomMarker(i));
+        }
+        gets.randomMarkers = markers;
+        gets.circles =[
+        {
+            id: 1,
+            center: {
+                latitude: gets.lat,
+                longitude: gets.lon
+            },
+            radius: 1000,
+            stroke: {
+                color: '#08B21F',
+                weight: 2,
+                opacity: 1
+            },
+            fill: {
+                color: '#08B21F',
+                opacity: 0.5
+            },
                 geodesic: true, // optional: defaults to false
                 //draggable: true, // optional: defaults to false
                 clickable: true, // optional: defaults to true
@@ -111,6 +106,9 @@ app.controller('mainpageController' , function(authToken , $http , $geolocation)
         })
         .catch(function(error){
             console.log(error);
+            fetcher.setLon(0);
+            fetcher.setLat(0);
+            
         });
     }
     gets.options = {

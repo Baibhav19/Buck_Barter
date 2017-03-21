@@ -227,7 +227,7 @@ app.use(req,res,next){
     });
     app.get('/getUsers' , function(req,res){
         var All_Users = new Array();
-        connection.query('SELECT Userid ,Store_Name , Latitude , Longitude FROM users where Selectid = 2' , function(error , result){
+        connection.query('SELECT Userid ,Store_Name, Home_Delivery ,Selectid, Latitude , Longitude FROM users where Selectid = 2' , function(error , result){
         if(error)
         {
             res.status(500).send("no Availability");

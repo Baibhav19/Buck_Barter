@@ -1,0 +1,30 @@
+<page-header></page-header>
+<br>
+<div ng-controller = "storeController as stCtrl">
+<div class="row">
+	<h1>  Stores near You</h1>
+	<ul class="products" >
+		<li ng-repeat = "stores in stCtrl.shopRecord">
+			<h3>
+                {{stores.Store_Name}}
+                <br>
+   				<div class="img-wrap">
+                    <img src = "images/smile.jpg" class="set_img"/>
+                </div>
+
+            </h3>
+            <h4>
+            	Details:
+            </h4>
+		    <p><b>Home Delievery :</b> {{stores.Home_Delivery}}</p>
+		    <p><b>Distance :</b> {{stores.Selectid}} mtr</p>
+		    <button ng-click="stCtrl.store(stores.Userid)" class="btn btn-primary btn-lg">View Products</button>
+		</li>
+	</ul>
+</div>
+<br><hr>
+<div class="row">
+	<h1>Other stores</h1>
+</div>
+</div>
+<br><br>
