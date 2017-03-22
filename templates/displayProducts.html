@@ -1,0 +1,28 @@
+<page-header></page-header>
+<br>
+<div>
+<div class="row">
+	<h1>  Featured Products</h1>
+	<ul class="products" >
+		<li ng-repeat = "products in stCtrl.products">
+			<h3>
+   				<div class="img-wrap">
+                    <img src = "images/smile.jpg" class="set_img"/>
+                </div>
+
+            </h3>
+            <h4>
+            	Details:
+            </h4>
+		    <p><b>Product Name :</b> {{products.Pname}}</p>
+		    <p><b>Price :</b> {{products.UnitPrice}} mtr</p>
+		    <p><b>Description :</b> {{products.Description}} mtr</p>
+		    <button  class="btn btn-primary btn-lg">Add to cart</button>
+		    <button  class="btn btn-primary btn-lg">Buy</button>
+
+		</li>
+	</ul>
+</div>
+<br>
+</div>
+<br><br>

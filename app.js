@@ -36,6 +36,10 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
         url: "/shopByStores" ,
         templateUrl: 'templates/shopByStores.html'
     })
+    .state("store_name", {
+        url: "store_name/:store",
+        template: "<product-dir></product-dir>"
+    })
     .state("register", {
        url: '/register',
        templateUrl: 'templates/register.html'

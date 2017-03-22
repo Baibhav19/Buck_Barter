@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2017 at 05:52 PM
+-- Generation Time: Mar 22, 2017 at 12:54 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -38,7 +38,8 @@ CREATE TABLE `added_product` (
 
 INSERT INTO `added_product` (`pid`, `Pname`, `ITCid`) VALUES
 (31, 'Dettol Soap', 5),
-(32, 'Complan', 1);
+(32, 'Complan', 1),
+(33, 'Rice', 1);
 
 -- --------------------------------------------------------
 
@@ -83,10 +84,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`pid`, `Userid`, `UnitPrice`, `Discount`, `Quantity`, `Description`, `Date_Time`) VALUES
-(31, 43, 12, 2, 5, 'Original Dettol Soap 100 gms.', '2017-03-19 08:24:23'),
+(31, 43, 12, 2, 5, 'Original Dettol Soap 100 gms.', '2017-03-21 11:09:27'),
 (32, 43, 120, 10, 5, 'Complan Kesan Pista 500 gms.', '2017-03-19 08:34:09'),
 (32, 43, 200, 20, 5, 'Complan Vanila 500 gm', '2017-03-19 08:35:06'),
-(32, 40, 150, 10, 10, 'Complan Original 200 gm', '2017-03-19 08:36:23');
+(32, 40, 150, 10, 10, 'Complan Original 200 gm', '2017-03-19 08:36:23'),
+(33, 50, 50, 20, 20, '1kg - basmati Rice', '2017-03-22 10:13:49');
 
 -- --------------------------------------------------------
 
@@ -114,10 +116,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`Userid`, `Fname`, `Lname`, `Store_Name`, `Email`, `PhoneNo`, `Password`, `Address`, `Selectid`, `Home_Delivery`, `Latitude`, `Longitude`) VALUES
-(40, 'Vishesh', 'Mittal', '', 'visheshmittal97@gmail.com', 9736999719, '$2a$10$A2MZYIndyuMeBNJ7nF3DJOtLxnDsTwcqVDSj.PvE3gGokEtoesHLK', 'Avas Vikas BSR', 2, 'Available', 27.1766701, 78.00807449999999),
 (42, 'Parv', 'Mittal', '', 'parv@gmail.com', 8520, '$2a$10$k7N3FFba6.ukIMoccdRRGOjH9YPZpTXTkjx/oWZ/oQJ5kjh/jawUK', 'jnmk,l.', 1, '', 30.5143937, 76.661971),
-(43, 'Baibhav', 'Aggarwal', '', 'baibhav@outlook.com', 9876543210, '$2a$10$nKEroKsNlOuCbb8Q6nhrMO655bJvDHhQ9MuyJQPcrZSx3PxJAJs0C', 'Room no 308 Chitkara University', 2, 'Availabe', 30.514370399999997, 76.6620078),
-(45, 'Shivam', 'Garg', 'Anapurna', '05shivamgarg@gmail.com', 9056505227, '$2a$10$rUIruiSNSykX6J7SYmGvLehxQ0uOFDiovALuumf8ZzBPRTxQHPjaW', 'Chitkara University, Jhasla', 2, 'Availabe', 30.514341899999998, 76.66196579999999);
+(43, 'Baibhav', 'Aggarwal', 'Easy_Day', 'baibhav@outlook.com', 9876543210, '$2a$10$nKEroKsNlOuCbb8Q6nhrMO655bJvDHhQ9MuyJQPcrZSx3PxJAJs0C', 'Room no 308 Chitkara University', 2, 'Availabe', 30.514370399999997, 76.6620078),
+(45, 'Shivam', 'Garg', 'Anapurna', '05shivamgarg@gmail.com', 9056505227, '$2a$10$rUIruiSNSykX6J7SYmGvLehxQ0uOFDiovALuumf8ZzBPRTxQHPjaW', 'Chitkara University, Jhasla', 2, 'Availabe', 30.514341899999998, 76.66196579999999),
+(49, 'Gaurav', 'Yadav', 'Bobby General store', 'gaurav@outlook.com', 543285412, '$2a$10$OR6TqfXzDDgW0f4Mu7LH9.xTXKgIjrUfTDdYdUtESfeZOptvXYv0i', 'chitkara', 2, 'Availabe', 30.5212479, 76.6669556),
+(50, 'Baby', 'Aggarwal', 'Baby Karyana de samana', 'countersba@gmail.com', 0, '$2a$10$Azs8iB5SkN8Bma0ClCjq5OsajheohTb6cenQ7BLDbF.ecA2HSMupi', 'Vasco De Gam Hostel', 2, 'Availabe', 30.516066600000002, 76.6597429);
 
 --
 -- Indexes for dumped tables
@@ -148,12 +151,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `added_product`
 --
 ALTER TABLE `added_product`
-  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `Userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `Userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

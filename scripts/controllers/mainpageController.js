@@ -63,7 +63,7 @@ app.controller('mainpageController' , function(authToken , fetcher , $http , $ge
                 var ret={
                   latitude : gets.shopRecord[i].Latitude,
                   longitude : gets.shopRecord[i].Longitude,
-                  title: 'store' + i ,
+                  title: gets.shopRecord[i].Store_Name ,
                   icon:'images/stores-icon.png',
                   show :false
               };
