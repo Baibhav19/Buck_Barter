@@ -4,6 +4,7 @@ app.factory('fetcher' , function($window){
 	var lon;
 	var us_id;
 	var users;
+	var products;
 	return {
 		setUsers: function(user){
 			users = user;
@@ -15,6 +16,17 @@ app.factory('fetcher' , function($window){
 				users = JSON.parse(arr);
 			}
 			return users;
+		},
+		setProducts: function(prod){
+			products = prod;
+			storage.setItem("productsArray", JSON.stringify(products));
+		},
+		getProducts: function(){
+			if(!products){
+				var arr = storage.getItem('productsArray');
+				products = JSON.parse(arr);
+			}
+			return products;
 		},
 		setLat: function(latitude){
 			lat = latitude;

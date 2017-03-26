@@ -1,7 +1,8 @@
 var app = angular.module('localDeals', [
     'ui.router',
     'ngGeolocation' ,
-    'uiGmapgoogle-maps'
+    'uiGmapgoogle-maps' ,
+    'ui.carousel'
 ]);
 
 app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
@@ -67,5 +68,6 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
             // Reject the authentication promise to prevent the state from loading
             return $q.reject()
         }
-    }
+    };
+    
 });

@@ -13,7 +13,7 @@ router.route('/')
         var detailed_prod = new Array();
         //console.log(req.body.id);
         connection.query('SELECT added_product.Pname , products.Userid , products.UnitPrice ,products.Discount , products.Description FROM added_product LEFT JOIN products ON (products.Pid = added_product.Pid)' , function(error , result){
-            console.log(result);
+            //console.log(result);
             if(error)
             {
                 res.status(500).send('No Products');

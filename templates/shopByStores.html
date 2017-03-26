@@ -1,30 +1,51 @@
 <page-header></page-header>
 <br>
 <div ng-controller = "storeController as stCtrl">
-<div class="row">
-	<h1>  Stores near You</h1>
-	<ul class="products" >
-		<li ng-repeat = "stores in stCtrl.shopRecord">
-			<h3>
-                {{stores.Store_Name}}
-                <br>
-   				<div class="img-wrap">
-                    <img src = "images/smile.jpg" class="set_img"/>
-                </div>
-
-            </h3>
-            <h4>
-            	Details:
-            </h4>
-		    <p><b>Home Delievery :</b> {{stores.Home_Delivery}}</p>
-		    <p><b>Distance :</b> {{stores.Selectid}} mtr</p>
-		    <button ng-click="stCtrl.store(stores.Userid , stores.Store_Name)" class="btn btn-primary btn-lg">View Products</button>
-		</li>
-	</ul>
-</div>
-<br><hr>
-<div class="row">
-	<h1>Other stores</h1>
-</div>
+    <div class = "row">
+        <h2>Stores near you</h2>
+        <br>
+        <div class="box-container" ng-show = "!stCtrl.check_nearStores()">
+            <ui-carousel slides="stCtrl.nearStores" slides-to-show="4" slides-to-scroll="1" autoplay="true" arrows="true" dots="true">
+                <carousel-item>
+                    <h3>
+                      {{item.Store_Name}}
+                      <br>
+                        <div class="img-wrap">
+                            <img src = "images/smile.jpg" class="set_img"/>
+                        </div>
+                    </h3>
+                    <h4>Details:</h4>
+                    <p><b>Home Delievery :</b> {{item.Home_Delivery}}</p>
+                    <p><b>Distance :</b> {{item.Selectid}} mtr</p>
+                    <button ng-click="stCtrl.store(item.Userid , item.Store_Name)" class="btn btn-primary btn-lg">View Products</button>
+                </carousel-item>
+            </ui-carousel>
+        </div>
+        <div ng-show ="stCtrl.check_nearStores()"><h2>No stores near you</h2></div>
+    </div>
+    <br><hr>
+    <div class="row">
+        <h2>All stores</h2>
+        <br>
+        <div class="box-container" ng-show = "!stCtrl.check_stores()">
+            <ui-carousel slides="stCtrl.slides" slides-to-show="4" slides-to-scroll="1" autoplay="true" arrows="true" dots="true">
+                <carousel-item>
+                    <h3>
+                      {{item.Store_Name}}
+                      <br>
+                        <div class="img-wrap">
+                            <img src = "images/smile.jpg" class="set_img"/>
+                        </div>
+                    </h3>
+                    <h4>Details:</h4>
+                    <p><b>Home Delievery :</b> {{item.Home_Delivery}}</p>
+                    <p><b>Distance :</b> {{item.Selectid}} mtr</p>
+                    <button ng-click="stCtrl.store(item.Userid , item.Store_Name)" class="btn btn-primary btn-lg">View Products</button>
+                </carousel-item>
+            </ui-carousel>
+        </div>
+        <div ng-show ="stCtrl.check_stores()"><h2>No stores</h2></div>
+        
+    </div>
 </div>
 <br><br>

@@ -1,10 +1,11 @@
 <page-header></page-header>
 <br>
-<div>
-<div class="row">
+<div ng-controller = "productController as pCtrl">
+<div class="row" ng-show = "!pCtrl.check()">
 	<h1>  Featured Products</h1>
-	<ul class="products" >
-		<li ng-repeat = "products in stCtrl.products">
+	<ul class="products">
+		Product:
+		<li ng-repeat = "prod in pCtrl.products">
 			<h3>
    				<div class="img-wrap">
                     <img src = "images/smile.jpg" class="set_img"/>
@@ -14,14 +15,17 @@
             <h4>
             	Details:
             </h4>
-		    <p><b>Product Name :</b> {{products.Pname}}</p>
-		    <p><b>Price :</b> {{products.UnitPrice}} mtr</p>
-		    <p><b>Description :</b> {{products.Description}} mtr</p>
+		    <p><b>Product Name :</b> {{prod.Pname}}</p>
+		    <p><b>Price :</b> ₹ {{prod.UnitPrice}} </p>
+		    <p><b>Description :</b> {{prod.Description}}</p>
 		    <button  class="btn btn-primary btn-lg">Add to cart</button>
 		    <button  class="btn btn-primary btn-lg">Buy</button>
 
 		</li>
 	</ul>
+</div>
+<div class = "row" ng-show = "pCtrl.check()">
+	<h1>No Products Added</h1>
 </div>
 <br>
 </div>
