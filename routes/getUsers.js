@@ -7,7 +7,7 @@ router.route('/')
         var All_Users = new Array();
         db.getConnection(function(err , connection){
         if(!err){
-            connection.query('SELECT Userid ,Store_Name, Home_Delivery ,Selectid, Latitude , Longitude FROM users where Selectid = 2' , function(error , result){
+            connection.query('SELECT Userid , Store_Name , Email , PhoneNo , Home_Delivery , Selectid , Latitude , Longitude FROM users where Selectid = 2' , function(error , result){
                 if(error)
                 {
                     res.status(500).send("no Availability");

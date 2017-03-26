@@ -34,12 +34,12 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
         template: '<shop-dir></shop-dir>'
     })
     .state("shopByStores", {
-        url: "/shopByStores" ,
+        url: '/shopByStores' ,
         templateUrl: 'templates/shopByStores.html'
     })
     .state("store_name", {
-        url: "store_name/:store",
-        template: "<product-dir></product-dir>"
+        url: 'store_name/:store',
+        template: '<product-dir></product-dir>'
     })
     .state("register", {
        url: '/register',
