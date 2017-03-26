@@ -1,14 +1,139 @@
 <page-header></page-header>
 <br>
+
 <div ng-controller = "productController as pCtrl">
-<div class="row" ng-show = "!pCtrl.check()">
+<div class="modal fade" id="productModal">
+    <div class="container-fluid productmodalsize">
+
+    <div class="modal-dialog modal-lg" style="margin-top: -0.5%;">
+
+      <div class="modal-body">
+          
+          <div class="container-fluid">
+             
+              <div class="row">
+              <div class="col-sm-12">
+              <button type="button" class="close" data-dismiss="modal">x</button>
+              </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <!-- product image section -->
+                  <img src="images/smile.jpg" alt="Error" class="img-responsive"> 
+                </div>
+                <div class="col-sm-6">
+                  
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <h1>This is product</h1>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="label label-primary">
+                        Kitchen
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <p>
+                        This contains the product description.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <span class="glyphicon glyphicon-star"></span>
+                      <span class="glyphicon glyphicon-star-empty"></span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <a href="#">x reviews</a>
+                    </div>
+                    <div class="col-sm-6">
+                      <a href="#" class="pull-right">Write a review</a>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <h3><del>original price</del></h3>
+                      <h2><b>Rs. Price</b>&nbsp;&nbsp;<small>Free Delivery</small></h2>
+                      <div class="row">
+                        <div class="col-sm-offset-2 col-sm-3">
+                          <div class="label label-default text-center">x% OFF</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-2">
+                      <button class="btn btn-default btn-lg">
+                        <span class="glyphicon glyphicon-plus"></span>
+                      </button>
+                    </div>
+                    <div class="col-sm-2">
+                      <input class="btn form-control text-center" value="1">
+                    </div>
+                    <div class="col-sm-2">
+                      <button class="btn btn-default btn-lg">
+                        <span class="glyphicon glyphicon-minus"></span>
+                      </button>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <button class="btn btn-lg btn-warning">Buy Now</button>
+                    </div>
+                    <div class="col-sm-6">
+                      <button class="btn btn-lg btn-success pull-right">Add to Cart</button>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <h4 class="text-center text-success"><b>In Stock</b></h4>
+                      <h4 class="text-center text-danger"><b>Not in Stock</b></h4>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <h4><b>Seller:</b></h4>
+                      <p>Name of shop</p>
+                      <p>Address</p>
+                      <p>Contact number</p>
+                      <p>email id</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+      </div>
+
+    </div>
+
+    </div>
+</div>
+
+<div class="row">
+<div ng-show = "!pCtrl.check()">
 	<h1>  Featured Products</h1>
+
+
 	<ul class="products">
-		Product:
+		
 		<li ng-repeat = "prod in pCtrl.products">
+		<div class="col-sm-3">
 			<h3>
-   				<div class="img-wrap">
-                    <img src = "images/smile.jpg" class="set_img"/>
+   				<div>
+                    <button data-toggle="modal" href="#productModal"><img src = "images/smile.jpg" class="img-responsive" /></button>
                 </div>
 
             </h3>
@@ -21,12 +146,16 @@
 		    <button  class="btn btn-primary btn-lg">Add to cart</button>
 		    <button  class="btn btn-primary btn-lg">Buy</button>
 
+		</div>
 		</li>
+		
 	</ul>
+
 </div>
 <div class = "row" ng-show = "pCtrl.check()">
 	<h1>No Products Added</h1>
 </div>
 <br>
+</div>
 </div>
 <br><br>

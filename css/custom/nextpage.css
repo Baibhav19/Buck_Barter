@@ -78,22 +78,20 @@ h3{
   left: 0;
 }
 
-.card, .card-hidden {
-  background: #F7F9FA;
-  border-radius: 3px;
-
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
-  padding: 1.25em;
-  position: relative; 
-}
-
 ul.products li {
-    width: 25%;
-    display: inline-block;
-    vertical-align: top;
+    display: inline;
 }
 
 .box-container {
   width: 75%;
   margin: 0 auto;
 }
+
+.productmodalsize{
+  width: 70%;
+  background-color: white;
+  font-size: 15px;
+  border-radius: 12px;
+}
+
+
