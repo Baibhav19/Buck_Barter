@@ -14,7 +14,6 @@ app.controller('mainpageController' , function(authToken , fetcher , $http , $ge
     this.category = function(cat){
         gets.iCat.iCategory = cat ;
         $http.post("/productsByCategory" , gets.iCat).then(function sucessCallback(response){
-            console.log(response.data);
             fetcher.setProducts(response.data);
             $state.go('category',{cat : gets.iCat.iCategory} , { reload : true }); 
         },
@@ -23,7 +22,7 @@ app.controller('mainpageController' , function(authToken , fetcher , $http , $ge
         });
     }
     $http.get("/getUsers").then(function sucessCallback(response){
-            console.log(response.data);
+            console.log("got users");
             gets.shopRecord = response.data;
         },
         function errorCallback(response){
