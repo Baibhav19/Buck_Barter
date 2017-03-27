@@ -9,6 +9,7 @@ var getUsers = require('./routes/getUsers');
 var storeProd = require('./routes/storeProd');
 var custadd = require('./routes/custadd');
 var shopadd = require('./routes/shopadd');
+var prodByCat = require('./routes/productsByCategory');
 var http = require('http');
 var bodyParser = require('body-parser');
 var passport = require('passport');
@@ -27,6 +28,7 @@ passport.serializeUser(function(user , done){
     app.use('/updateProduct' , updateProduct);
     app.use('/getUsers' , getUsers);
     app.use('/showProduct' , showProduct);
+    app.use('/productsByCategory' , prodByCat);
     app.use('/custadd' , custadd);
     app.use('/shopadd' , shopadd);
     app.use('/storeProd' , storeProd);

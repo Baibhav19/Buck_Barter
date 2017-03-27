@@ -18,5 +18,5 @@ app.controller('loginController',function($http, $state ,authToken){
         		console.log(response.status);
         	});
     	this.user = {};
-	};
+	}
 });

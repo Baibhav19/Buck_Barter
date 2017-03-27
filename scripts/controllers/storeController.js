@@ -6,7 +6,7 @@ app.controller('storeController' , function(fetcher , $http , $state , Carousel)
 	this.slides = fetcher.getUsers();
     this.check_stores = function(){
         return this.slides.length == 0 ;
-    };
+    }
     this.nearStores = [];
     for(var i = 0 ; i < this.slides.length ; i++){
         if(this.slides[i].Selectid < 1000){
@@ -15,7 +15,7 @@ app.controller('storeController' , function(fetcher , $http , $state , Carousel)
     }
     this.check_nearStores = function(){
         return this.nearStores.length == 0 ;
-    };
+    }
 	this.store = function(us_id , name){
         console.log(us_id);
         gets.id.id=us_id;
@@ -26,5 +26,5 @@ app.controller('storeController' , function(fetcher , $http , $state , Carousel)
         function errorCallback(response){
             alert(response.message);
         });
-    };
+    }
 });

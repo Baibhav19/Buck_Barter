@@ -2,10 +2,10 @@ app.controller('formController' , function($http , fetcher, $state, authToken ,$
 	this.tab = 1;
 	this.setTab = function(tabno){
 		this.tab = tabno ;
-	};
+	}
 	this.isSelected = function(checkTab){
 		return this.tab === checkTab ;
-	};
+	}
     this.bol = false;
     this.cust = {
        Userid :'',
@@ -37,7 +37,6 @@ app.controller('formController' , function($http , fetcher, $state, authToken ,$
    this.custRegister = function(){
        console.log("registered customer" , this.cust);
       if(fetcher.isFetched()){
-        console.log(fetcher.getLat());
         this.cust.Latitude = fetcher.getLat();
         this.cust.Longitude = fetcher.getLon();
       }
@@ -52,16 +51,14 @@ app.controller('formController' , function($http , fetcher, $state, authToken ,$
   	        	console.log(response.status);
   	        });
       this.cust = {};
-  };
+  }
   this.shopkprRegister = function(){
     console.log("registered shopkeeper" , this.shopkpr);
         console.log(fetcher.isFetched());
         if(fetcher.isFetched()){
-          console.log(fetcher.getLat() + "in if");
           this.shopkpr.Latitude = fetcher.getLat();
           this.shopkpr.Longitude = fetcher.getLon();
         }
-        console.log(fetcher.getLon() + "outside if")
           $http.post("/shopadd",this.shopkpr).then(function successCallback(response) {
             alert("successfully registered");
 	        	$state.go('login');
@@ -73,6 +70,6 @@ app.controller('formController' , function($http , fetcher, $state, authToken ,$
 	        	console.log(response.status);
 	        });
     this.shopkpr = {};
-};
+}
 
 });

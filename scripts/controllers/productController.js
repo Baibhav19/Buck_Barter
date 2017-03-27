@@ -12,7 +12,9 @@ app.controller('productController' , function(fetcher , $http , $state){
 		Discount : '',
 		prodQty : '',
 		Qty : 1 ,
-		Category : ''
+		Category : '' ,
+		CalcPrice : 0,
+		dPrice : 0
 	}
 	this.users = [];
 	this.user = {};
@@ -21,10 +23,13 @@ app.controller('productController' , function(fetcher , $http , $state){
 		this.productModel.Pname = prod.Pname;
 		this.productModel.Description = prod.Description;
 		this.productModel.UnitPrice = prod.UnitPrice;
+		this.productModel.CalcPrice = prod.UnitPrice;
 		this.productModel.Discount = prod.Discount;
 		this.productModel.prodQty = prod.Quantity;
 		this.productModel.Category = this.categories[parseInt(prod.Category) - 1 ];
-		this.productModel.disPrice = prod.UnitPrice + (prod.UnitPrice * prod.Discount / 100);
+		this.productModel.dPrice = prod.UnitPrice + (prod.UnitPrice * prod.Discount / 100);
+		this.productModel.disPrice = this.productModel.dPrice;
+		this.productModel.Qty = 1;
 		this.findUser();
 	}
 	this.findUser = function(){
@@ -37,11 +42,15 @@ app.controller('productController' , function(fetcher , $http , $state){
 	}	
 	this.addQty = function(){
 		if(this.checkQty())
-		this.productModel.Qty = this.productModel.Qty + 1;
+			this.productModel.Qty = this.productModel.Qty + 1;
+		this.productModel.UnitPrice = (this.productModel.CalcPrice * this.productModel.Qty).toFixed(2);
+		this.productModel.disPrice = (this.productModel.dPrice * this.productModel.Qty).toFixed(2);
 	}
 	this.subQty = function(){
 		if(this.productModel.Qty > 1)
-		this.productModel.Qty = this.productModel.Qty - 1;
+			this.productModel.Qty = this.productModel.Qty - 1;
+		this.productModel.UnitPrice = (this.productModel.CalcPrice * this.productModel.Qty).toFixed(2);
+		this.productModel.disPrice = (this.productModel.dPrice * this.productModel.Qty).toFixed(2);
 	}
 	this.checkQty = function(){
 		return (this.productModel.prodQty - this.productModel.Qty) >= 0 ;

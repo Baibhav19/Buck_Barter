@@ -42,13 +42,13 @@ app.controller('shopkprController',function($http,$state , authToken){
 			alert("product added successfully");
 			console.log(response.data);
 			$state.go("home");
-		} ,
+		},
 		function errorCallback(response){
 			console.log(response.data);
 			alert("something went wrong");
 		});
 		this.product = {};
-	};
+	}
 	this.productUpdate = {
 		U_id:'',
 		Pname:'',
@@ -94,5 +94,5 @@ app.controller('shopkprController',function($http,$state , authToken){
 			alert("something went wrong");
 		});
 		this.productDelete = {};
-	};
+	}
 });

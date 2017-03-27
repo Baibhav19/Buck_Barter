@@ -1,8 +1,5 @@
-app.controller('mainpageController' , function(authToken , fetcher , $http , $geolocation){
+app.controller('mainpageController' , function(authToken , fetcher , $http , $geolocation , $state){
     var gets = this;
-    gets.id ={
-        id:43
-    };
     gets.lat = 30.7333 ;
     gets.lon = 76.7794 ;
     gets.shopRecord = [];
@@ -10,8 +7,21 @@ app.controller('mainpageController' , function(authToken , fetcher , $http , $ge
     gets.fl = 0;
     this.isLoaded = function(){
         return gets.fl == 1 ;
+    }
+    gets.iCat ={
+        iCategory : 1
     };
-    
+    this.category = function(cat){
+        gets.iCat.iCategory = cat ;
+        $http.post("/productsByCategory" , gets.iCat).then(function sucessCallback(response){
+            console.log(response.data);
+            fetcher.setProducts(response.data);
+            $state.go('category',{cat : gets.iCat.iCategory} , { reload : true }); 
+        },
+        function errorCallback(response){
+            console.log(response.status);
+        });
+    }
     $http.get("/getUsers").then(function sucessCallback(response){
             console.log(response.data);
             gets.shopRecord = response.data;
@@ -34,7 +44,7 @@ app.controller('mainpageController' , function(authToken , fetcher , $http , $ge
             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
             var d = R * c;
             return d.toFixed(2);
-    };
+    }
     this.fetchLocation = function(){
         $geolocation.getCurrentPosition({
             timeout: 60000
