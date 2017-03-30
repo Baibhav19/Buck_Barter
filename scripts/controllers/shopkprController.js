@@ -9,17 +9,7 @@ app.controller('shopkprController',function($http,$state , authToken){
 	this.isSelected = function(tabno){
 		return this.tab === tabno;
 	};
-	this.product = {
-		pid : '',
-		Userid: '',
-		ITCname: '',
-		Pname : '',
-		UnitPrice : '',
-		Discount : '',
-		Quantity: '',
-		Description: '',
-		Date_Time: Date.now()
-	};
+	this.product = {};
 	gets.showProducts = function(){
 		$http.get("/showProduct").then(function sucessCallback(response){
 			gets.names = response.data;
@@ -37,8 +27,19 @@ app.controller('shopkprController',function($http,$state , authToken){
 		});
 	}
 	this.productAddfunc = function(){
-		console.log("product_Added" , this.product);
-		$http.post("/addProducts",this.product).then(function sucessCallback(response) {
+		var formData = new FormData;
+        for(key in this.product){
+            formData.append(key , this.product[key]);
+        }
+        var file = $('#file')[0].files[0];
+        console.log(file , "file...");
+        formData.append('Image' , file);
+		$http.post("/addProducts" , formData , {
+            transformRequest: angular.identity,
+            headers: {
+              'Content-Type': undefined
+            }
+        }).then(function sucessCallback(response) {
 			alert("product added successfully");
 			console.log(response.data);
 			$state.go("home");
