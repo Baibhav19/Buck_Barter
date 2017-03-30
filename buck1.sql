@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2017 at 12:54 PM
+-- Generation Time: Mar 30, 2017 at 07:59 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -39,7 +39,32 @@ CREATE TABLE `added_product` (
 INSERT INTO `added_product` (`pid`, `Pname`, `ITCid`) VALUES
 (31, 'Dettol Soap', 5),
 (32, 'Complan', 1),
-(33, 'Rice', 1);
+(33, 'Maggie', 1),
+(34, 'Nike Shoe', 4),
+(35, 'Lux Soap', 5),
+(36, 'Mufti Jean', 3),
+(37, 'Socks', 3),
+(38, 'Bajaj Almond', 5),
+(39, 'Sugar', 1),
+(40, 'Socs', 2),
+(41, 'Sock', 3),
+(42, 'Condom', 5),
+(43, 'Ponds', 2),
+(44, 'ghj', 2),
+(45, 'fftghj', 1),
+(46, 'ghhjbj', 3),
+(47, 'Magi', 1),
+(48, 'sd', 1),
+(49, 'Maggi', 1),
+(50, 'fghj', 4),
+(51, 'jhbnm', 2),
+(52, 'gffhj', 3),
+(53, 'fghjk', 3),
+(54, 'milk', 2),
+(55, 'decoration', 1),
+(56, 'ghjg', 2),
+(57, 'gjhkjk', 3),
+(58, 'kf', 1);
 
 -- --------------------------------------------------------
 
@@ -76,19 +101,23 @@ CREATE TABLE `products` (
   `Discount` double NOT NULL,
   `Quantity` double NOT NULL,
   `Description` varchar(300) NOT NULL,
-  `Date_Time` datetime NOT NULL
+  `Date_Time` datetime NOT NULL,
+  `filename` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`pid`, `Userid`, `UnitPrice`, `Discount`, `Quantity`, `Description`, `Date_Time`) VALUES
-(31, 43, 12, 2, 5, 'Original Dettol Soap 100 gms.', '2017-03-21 11:09:27'),
-(32, 43, 120, 10, 5, 'Complan Kesan Pista 500 gms.', '2017-03-19 08:34:09'),
-(32, 43, 200, 20, 5, 'Complan Vanila 500 gm', '2017-03-19 08:35:06'),
-(32, 40, 150, 10, 10, 'Complan Original 200 gm', '2017-03-19 08:36:23'),
-(33, 50, 50, 20, 20, '1kg - basmati Rice', '2017-03-22 10:13:49');
+INSERT INTO `products` (`pid`, `Userid`, `UnitPrice`, `Discount`, `Quantity`, `Description`, `Date_Time`, `filename`) VALUES
+(31, 43, 12, 2, 5, 'Original Dettol Soap 100 gms.', '2017-03-19 08:24:23', ''),
+(32, 43, 120, 10, 5, 'Complan Kesan Pista 500 gms.', '2017-03-19 08:34:09', ''),
+(32, 43, 200, 20, 5, 'Complan Vanila 500 gm', '2017-03-19 08:35:06', ''),
+(32, 40, 150, 10, 10, 'Complan Original 200 gm', '2017-03-19 08:36:23', ''),
+(54, 46, 231, 21, 516, 'trdyyghlkjl', '2017-03-30 08:18:59', ''),
+(31, 46, 50, 10, 25, '500gm', '2017-03-30 10:13:40', ''),
+(31, 46, 23, 10, 55, '10gm', '2017-03-30 10:22:29', '46-Desert.jpg'),
+(58, 43, 6732, 26, 632, 'sdhcvbsdkj', '2017-03-30 10:48:26', '43-887.jpg');
 
 -- --------------------------------------------------------
 
@@ -116,11 +145,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`Userid`, `Fname`, `Lname`, `Store_Name`, `Email`, `PhoneNo`, `Password`, `Address`, `Selectid`, `Home_Delivery`, `Latitude`, `Longitude`) VALUES
+(40, 'Vishesh', 'Mittal', 'Easy Day', 'visheshmittal97@gmail.com', 9736999719, '$2a$10$A2MZYIndyuMeBNJ7nF3DJOtLxnDsTwcqVDSj.PvE3gGokEtoesHLK', 'Avas Vikas BSR', 2, 'Available', 27.1766701, 78.00807449999999),
 (42, 'Parv', 'Mittal', '', 'parv@gmail.com', 8520, '$2a$10$k7N3FFba6.ukIMoccdRRGOjH9YPZpTXTkjx/oWZ/oQJ5kjh/jawUK', 'jnmk,l.', 1, '', 30.5143937, 76.661971),
-(43, 'Baibhav', 'Aggarwal', 'Easy_Day', 'baibhav@outlook.com', 9876543210, '$2a$10$nKEroKsNlOuCbb8Q6nhrMO655bJvDHhQ9MuyJQPcrZSx3PxJAJs0C', 'Room no 308 Chitkara University', 2, 'Availabe', 30.514370399999997, 76.6620078),
+(43, 'Baibhav', 'Aggarwal', 'Reliance', 'baibhav@outlook.com', 9876543210, '$2a$10$nKEroKsNlOuCbb8Q6nhrMO655bJvDHhQ9MuyJQPcrZSx3PxJAJs0C', 'Room no 308 Chitkara University', 2, 'Availabe', 30.514370399999997, 76.6620078),
 (45, 'Shivam', 'Garg', 'Anapurna', '05shivamgarg@gmail.com', 9056505227, '$2a$10$rUIruiSNSykX6J7SYmGvLehxQ0uOFDiovALuumf8ZzBPRTxQHPjaW', 'Chitkara University, Jhasla', 2, 'Availabe', 30.514341899999998, 76.66196579999999),
-(49, 'Gaurav', 'Yadav', 'Bobby General store', 'gaurav@outlook.com', 543285412, '$2a$10$OR6TqfXzDDgW0f4Mu7LH9.xTXKgIjrUfTDdYdUtESfeZOptvXYv0i', 'chitkara', 2, 'Availabe', 30.5212479, 76.6669556),
-(50, 'Baby', 'Aggarwal', 'Baby Karyana de samana', 'countersba@gmail.com', 0, '$2a$10$Azs8iB5SkN8Bma0ClCjq5OsajheohTb6cenQ7BLDbF.ecA2HSMupi', 'Vasco De Gam Hostel', 2, 'Availabe', 30.516066600000002, 76.6597429);
+(46, 'fcvbn', 'cfvbn', 'uhgvc', 'garg123@gmail.com', 5625432956, '$2a$10$EuUzs.peAQ04o15HeHo8.eTLGhN.mOlGj7l01wOj1dTnxku31ukIa', 'Chitkara University, Jhasla', 2, 'Availabe', 30.514338000000002, 76.6619652);
 
 --
 -- Indexes for dumped tables
@@ -151,12 +180,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `added_product`
 --
 ALTER TABLE `added_product`
-  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `Userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `Userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
