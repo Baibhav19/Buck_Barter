@@ -2,7 +2,7 @@ app.controller('productController' , function(fetcher , $http , $state){
 	this.products = fetcher.getProducts();
 	this.categories = ['Kitchen' , 'Cosmetics' , 'Garments' , 'Footwear' , 'ShowerRoom'];
 	this.products.ITCid = this.categories[this.products.ITCid];
-	console.log(this.products);
+	//console.log(this.products);
 	this.productModel = {
 		Userid : '' ,
 		Pname : '' , 

@@ -1,0 +1,49 @@
+p{
+	line-height: 150%;
+}
+
+h1 {
+    position: relative;
+}
+
+h1.mainheading:before {
+    content: "";
+    display: block;
+    border-top: solid 1px black;
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+}
+
+ h1.mainheading span {
+    background: #fff;
+    padding: 0 20px;
+    position: relative;
+}
+
+ul li{
+	line-height: 150%;
+}
+
+ul li .size{
+	font-size: 150%;
+}
+
+ul li .indent{
+	margin-left: 2%;
+}
+
+.heading{
+    color: #E32525;
+}
+
+.question{
+    color: #80AFEC;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.module{
+    line-height: 175%;
+}

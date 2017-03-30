@@ -79,6 +79,22 @@ app.get('/getUsers' , function(req,res){
             }
             });
     });
+app.get('/bySearch' , function(req,res){
+        var All_Products = new Array();
+            connection.query('SELECT Pname , pid FROM added_product' , function(error , result){
+                if(error)
+                {
+                    res.status(500).send("no Availability");
+                }
+                else
+                {
+                    for(var i = 0 ; i < result.length ;i++){
+                        All_Products.push(result[i]);
+                }
+                res.send(All_Products);
+            }
+            });
+    });
 
 app.post('/productsByCategory' , function(req,res){
         var detailed_prod = new Array();
@@ -127,6 +143,16 @@ app.post('/StoreProd' , function(req,res){
                 }
             res.send(detailed_prod);
             }
+    });
+});
+
+app.post('/bySearchProduct' ,function(req , res){
+    console.log(req.body.searchStr);
+    connection.query('SELECT * FROM products where pid = ?' ,[req.body.searchStr] ,function(error , result){
+        if(error)
+            res.status(501).send("error while searching");
+        else
+            res.status(200).send(result);
     });
 });
 

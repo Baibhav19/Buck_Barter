@@ -45,6 +45,10 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
         url: '/category/:cat',
         template: '<product-dir></product-dir>'
     })
+    .state("bySearch" , {
+        url: '/bySearch/:search',
+        template: '<product-dir></product-dir>'
+    })
     .state("register", {
        url: '/register',
        templateUrl: 'templates/register.html'
@@ -52,6 +56,18 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
     .state("login", {
        url:'/login',
        templateUrl:'templates/login.html' 
+    })
+    .state("contactUs" , {
+        url:'/contactUs' ,
+        templateUrl:'templates/contactus.html'
+    })
+    .state("faq" , {
+        url:'/Faq' ,
+        templateUrl:'templates/faq.html'
+    })
+    .state("tandc" , {
+        url:'/termsAndCondition' ,
+        templateUrl:'templates/termsncond.html'
     })
     .state("logout", {
         url:'/home',

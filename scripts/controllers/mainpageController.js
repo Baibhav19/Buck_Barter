@@ -5,6 +5,7 @@ app.controller('mainpageController' , function(authToken , fetcher , $http , $ge
     gets.shopRecord = [];
     gets.coords=[];
     gets.fl = 0;
+    this.allStates = [];
     this.isLoaded = function(){
         return gets.fl == 1 ;
     }
@@ -22,27 +23,71 @@ app.controller('mainpageController' , function(authToken , fetcher , $http , $ge
         });
     }
     $http.get("/getUsers").then(function sucessCallback(response){
-            console.log("got users");
-            gets.shopRecord = response.data;
+        console.log("got users");
+        gets.shopRecord = response.data;
+    },
+    function errorCallback(response){
+        alert(response.message);
+    });
+    $http.get("/bySearch").then(function sucessCallback(response){
+        console.log("got names");
+        gets.productRecord = response.data;
+    },
+    function errorCallback(response){
+        alert(response.message);
+    });
+    this.filterCountry = [];
+    this.hidethis = true;
+    gets.search ={
+        searchStr : ''
+    };
+    this.complete = function(string){
+        var output = [];
+        if(string.length == 0){
+            this.hidethis = true;
+        }
+        else{
+            angular.forEach(gets.productRecord , function(country){
+                if(country.Pname.toLowerCase().indexOf(string.toLowerCase()) >= 0){
+                    output.push(country);
+                }
+            });
+            this.hidethis = false;
+            this.filterCountry = output;
+        }
+    }
+    this.fillTextbox = function(string , pid){
+        this.country = string;
+        this.hidethis = true;
+        gets.search.searchStr = pid;
+        $http.post("/bySearchProduct" , gets.search).then(function sucessCallback(response){
+            gets.products = response.data;
+            for(var i = 0 ; i < gets.products.length ; i++){
+                gets.products[i].Pname = string;
+            }
+            fetcher.setProducts(gets.products);
+            $state.go('bySearch',{search : string} , { reload : true });
         },
         function errorCallback(response){
             alert(response.message);
         });
+    }
+
     calcDistance = function(lat , lon){
         var R = 6371e3; // metres
-            toRadians = function(degrees) {
-                return degrees * Math.PI / 180;
-            };
-            var φ1 = toRadians(gets.lat);
-            var φ2 = toRadians(lat);
-            var Δφ = toRadians(lat - gets.lat);
-            var Δλ = toRadians(lon - gets.lon);
-            var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-            Math.cos(φ1) * Math.cos(φ2) *
-            Math.sin(Δλ/2) * Math.sin(Δλ/2);
-            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-            var d = R * c;
-            return d.toFixed(2);
+        toRadians = function(degrees) {
+            return degrees * Math.PI / 180;
+        };
+        var φ1 = toRadians(gets.lat);
+        var φ2 = toRadians(lat);
+        var Δφ = toRadians(lat - gets.lat);
+        var Δλ = toRadians(lon - gets.lon);
+        var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+        Math.cos(φ1) * Math.cos(φ2) *
+        Math.sin(Δλ/2) * Math.sin(Δλ/2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = R * c;
+        return d.toFixed(2);
     }
     this.fetchLocation = function(){
         $geolocation.getCurrentPosition({
@@ -113,14 +158,14 @@ app.controller('mainpageController' , function(authToken , fetcher , $http , $ge
                 control: {}
             }];
         })
-        .catch(function(error){
-            console.log(error);
-            fetcher.setLon(0);
-            fetcher.setLat(0);
-            
-        });
-    }
-    gets.options = {
-        scrollwheel: false
-    };
+.catch(function(error){
+    console.log(error);
+    fetcher.setLon(0);
+    fetcher.setLat(0);
+
+});
+}
+gets.options = {
+    scrollwheel: false
+};
 });

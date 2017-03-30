@@ -20,11 +20,18 @@
       <div class="col-sm-6 col-md-6">
         <form class="navbar-form" role="search">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-            <div class="input-group-btn box3">
-              <button class="btn btn-default box4" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            <!-- <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term"> -->
+            <input type = "text" name="country" class="form-control" placeholder="Search" id="country" ng-model = "mpCtrl.country" ng-keyUp="mpCtrl.complete(mpCtrl.country)" />
+             <div class="input-group-btn box3">
+                <button class="btn btn-default box4" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+              </div>
             </div>
-          </div>
+            <div id="myDropdown" class="dropdown-content" ng-model="mpCtrl.hidethis" ng-hide="mpCtrl.hidethis">
+
+              <a class="list-group-item" ng-repeat="productData in mpCtrl.filterCountry" ng-click="mpCtrl.fillTextbox(productData.Pname , productData.pid) ">{{productData.Pname}}</a>
+            </div>
+            
+          
         </form>
       </div>
 
@@ -124,14 +131,14 @@
             <!-- map here-->
 
             <ui-gmap-google-map center="mpCtrl.map.center" zoom="mpCtrl.map.zoom" draggable="true" options="mpCtrl.options">
-              <ui-gmap-circle ng-repeat="c in mpCtrl.circles track by c.id" center="c.center" stroke="c.stroke" fill="c.fill" radius="c.radius"
-                visible="c.visible" geodesic="c.geodesic" clickable="c.clickable" control="c.control"></ui-gmap-circle> 
-              <ui-gmap-markers models="mpCtrl.randomMarkers" coords="'self'" icon="'icon'" click="mpCtrl.onClick">
-                <ui-gmap-windows show="show">
-                  <div ng-non-bindable>{{title}}</div>
-                </ui-gmap-windows>
-              </ui-gmap-markers>
-            </ui-gmap-google-map>
+            <ui-gmap-circle ng-repeat="c in mpCtrl.circles track by c.id" center="c.center" stroke="c.stroke" fill="c.fill" radius="c.radius"
+            visible="c.visible" geodesic="c.geodesic" clickable="c.clickable" control="c.control"></ui-gmap-circle> 
+            <ui-gmap-markers models="mpCtrl.randomMarkers" coords="'self'" icon="'icon'" click="mpCtrl.onClick">
+            <ui-gmap-windows show="show">
+            <div ng-non-bindable>{{title}}</div>
+          </ui-gmap-windows>
+        </ui-gmap-markers>
+      </ui-gmap-google-map>
 
     </div>
   </div>
@@ -142,19 +149,19 @@
       <a ui-sref = "shopByStores"><img src = "images/smile.jpg" class="set_img"></a>
     </div>
   </div>
-    <br><hr>
-    <div class = "row" style="margin: 3% 1%;">
+  <br><hr>
+  <div class = "row" style="margin: 3% 1%;">
     <div class="col-md-4 col-xs-12">
-        <img src="images/bb1.png" alt="pic" style="border: 3px solid black; border-radius: 45px;">
-      </div>
-      
-      <div class="col-md-4 col-xs-12">
-        <img src="images/bb2.png" alt="pic" style="border: 3px solid black; border-radius: 45px;">
-      </div>
+      <img src="images/bb1.png" alt="pic" style="border: 3px solid black; border-radius: 45px;">
+    </div>
 
-      <div class="col-md-4 col-xs-12">
-        <img src="images/bb3.png" alt="pic" style="border: 3px solid black; border-radius: 45px;">
-      </div>
+    <div class="col-md-4 col-xs-12">
+      <img src="images/bb2.png" alt="pic" style="border: 3px solid black; border-radius: 45px;">
+    </div>
+
+    <div class="col-md-4 col-xs-12">
+      <img src="images/bb3.png" alt="pic" style="border: 3px solid black; border-radius: 45px;">
     </div>
   </div>
-  
+</div>
+
