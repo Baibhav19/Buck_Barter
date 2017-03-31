@@ -3,6 +3,7 @@ app.factory('authToken' , function($window){
 	var cachedToken ;
 	var name;
 	var us_id;
+	var Selectid;
 	return {
 		setToken: function(token){
 			cachedToken = token;
@@ -42,6 +43,16 @@ app.factory('authToken' , function($window){
 				us_id = storage.getItem('id');  
 			}
 			return us_id;
+		},
+		setSelectId:function(id){
+			Selectid = id;
+			storage.setItem('Select_id' , id);
+		},
+		getSelectId:function(){
+			if(!Selectid){
+				Selectid = storage.getItem('Select_id');  
+			}
+			return Selectid;
 		}
 	}
 });

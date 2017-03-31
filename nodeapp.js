@@ -102,7 +102,7 @@ app.get('/bySearch' , function(req,res){
 app.post('/productsByCategory' , function(req,res){
         var detailed_prod = new Array();
 
-        connection.query('SELECT added_product.Pname , added_product.ITCid , products.Userid , products.UnitPrice ,products.Discount , products.Description , products.Quantity FROM added_product JOIN products ON (products.Pid = added_product.Pid AND added_product.ITCid = ? )' , [req.body.iCategory] , function(error , result){
+        connection.query('SELECT added_product.Pname , added_product.ITCid , products.Userid , products.UnitPrice ,products.Discount , products.Description , products.Quantity , filename FROM added_product JOIN products ON (products.Pid = added_product.Pid AND added_product.ITCid = ? )' , [req.body.iCategory] , function(error , result){
             if(error)
             {
                 res.status(500).send('No Products');
@@ -121,7 +121,7 @@ app.post('/productsByCategory' , function(req,res){
 app.post('/StoreProd' , function(req,res){
         var detailed_prod = new Array();
         console.log(req.body.id);
-        connection.query('SELECT added_product.Pname , added_product.ITCid , products.Userid , products.UnitPrice ,products.Discount , products.Description , products.Quantity FROM added_product LEFT JOIN products ON (products.Pid = added_product.Pid)' , function(error , result){
+        connection.query('SELECT added_product.Pname , added_product.ITCid , products.Userid , products.UnitPrice ,products.Discount , products.Description , products.Quantity  , products.filename FROM added_product LEFT JOIN products ON (products.Pid = added_product.Pid)' , function(error , result){
             //console.log(result);
             if(error)
             {
@@ -139,7 +139,8 @@ app.post('/StoreProd' , function(req,res){
                             Discount: result[i].Discount,
                             Description: result[i].Description,
                             Quantity : result[i].Quantity ,
-                            Category : result[i].ITCid
+                            Category : result[i].ITCid ,
+                            filename : result[i].filename
                         }
                         detailed_prod.push(result[i]);
                     }
@@ -318,7 +319,7 @@ app.get('/showProduct' , function(req,res){
         });
     }
     var s = req.headers.authorization.toString().split(" ");
-    connection.query('SELECT added_product.Pname ,products.Userid , products.UnitPrice, products.Discount , products.Quantity , products.Description FROM added_product LEFT JOIN products ON (products.Pid = added_product.Pid)' , function(error , result){
+    connection.query('SELECT added_product.Pname ,products.Userid , products.UnitPrice, products.Discount , products.Quantity , products.Description  , products.filename FROM added_product LEFT JOIN products ON (products.Pid = added_product.Pid)' , function(error , result){
         if(error)
         {
             res.status(500).send(error);
@@ -332,16 +333,17 @@ app.get('/showProduct' , function(req,res){
         }
     });
 });
-function createToken(cope , res){
+function createToken(email, res){
     var payload =  {
-        sub : cope
+        sub : email
     }
     var token = jwt.encode(payload , "hello");
     console.log('in create token');
-    var query = connection.query('SELECT Userid from users where Email = ?' , [cope] , function(error , result){
+    var query = connection.query('SELECT Userid , Selectid from users where Email = ?' , [email] , function(error , result){
         res.send({
-            username: cope ,
-            useridd: result[0].Userid,
+            username: email ,
+            useridd: result[0].Userid ,
+            Selectid: result[0].Selectid ,
             token : token
         });
     });

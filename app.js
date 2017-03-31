@@ -77,7 +77,7 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
 
     $httpProvider.interceptors.push('authInterceptor');
     function authenticate($q, authToken, $state, $timeout) {
-        if (authToken.isAuthenticated()) {
+        if (authToken.isAuthenticated() && authToken.getSelectId() == 2) {
             return $q.when()
         } 
         else {

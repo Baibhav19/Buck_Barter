@@ -8,6 +8,7 @@ app.controller('loginController',function($http, $state ,authToken){
 	 	console.log("hello");
 	 	$http.post("/login",this.user).then(function successCallback(response) {
 	        	authToken.setToken(response.data.token);
+	        	authToken.setSelectId(response.data.Selectid);
 	        	authToken.setName(response.data.username);
 	        	authToken.setId(response.data.useridd);
 	        	$state.go('home');

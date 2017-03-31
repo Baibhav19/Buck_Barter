@@ -14,7 +14,8 @@ app.controller('productController' , function(fetcher , $http , $state){
 		Qty : 1 ,
 		Category : '' ,
 		CalcPrice : 0,
-		dPrice : 0
+		dPrice : 0 ,
+		img: ''
 	}
 	this.users = [];
 	this.user = {};
@@ -30,6 +31,7 @@ app.controller('productController' , function(fetcher , $http , $state){
 		this.productModel.dPrice = prod.UnitPrice + (prod.UnitPrice * prod.Discount / 100);
 		this.productModel.disPrice = this.productModel.dPrice;
 		this.productModel.Qty = 1;
+		this.productModel.img = prod.filename;
 		this.findUser();
 	}
 	this.findUser = function(){

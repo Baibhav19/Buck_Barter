@@ -20,7 +20,7 @@
             <div class="row">
               <div class="col-sm-6">
                 <!-- product image section -->
-                <img src="images/smile.jpg" alt="Error" class="img-responsive"> 
+                <img ng-src="uploads/{{pCtrl.productModel.img}}" alt="Error" class="img-responsive"> 
               </div>
               <div class="col-sm-6">
 
@@ -132,7 +132,7 @@
           <div class="col-sm-3">
            <h3>
              <div>
-              <button data-toggle="modal" href="#productModal" ng-click = "pCtrl.upProductModel(prod)"><img src = "images/smile.jpg" class="img-responsive" /></button>
+              <button data-toggle="modal" href="#productModal" ng-click = "pCtrl.upProductModel(prod)"><img src = "uploads/{{prod.filename}}" class="img-responsive" /></button>
             </div>
 
           </h3>
