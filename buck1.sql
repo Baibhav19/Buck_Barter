@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2017 at 08:34 PM
+-- Generation Time: Apr 02, 2017 at 08:36 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -103,8 +103,9 @@ INSERT INTO `products` (`pid`, `Userid`, `UnitPrice`, `Discount`, `Quantity`, `D
 (33, 46, 23, 2, 25, 'double pack', '2017-03-30 11:36:34', '46-baibhavimg.jpg'),
 (59, 47, 150, 5, 10, '50mg Loreal Non smudge', '2017-03-31 02:33:06', '47-5456.jpg'),
 (60, 43, 85, 5, 8, '2 L soft drink', '2017-03-31 02:37:31', '43-45.jpg'),
-(49, 43, 24, 4, 20, 'Double pack', '2017-03-31 10:36:35', '43-43-1490897160653371317962.jpg'),
-(31, 43, 25, 5, 10, '100 gm Toilet Soap', '2017-03-31 10:58:53', '43-Dettol.jpg');
+(31, 43, 25, 5, 10, '100 gm Toilet Soap', '2017-03-31 10:58:53', '43-Dettol.jpg'),
+(32, 43, 275, 10, 7, '1 kg Complan Kesar Pista', '2017-04-02 11:20:06', '43-43-images.jpg'),
+(32, 43, 250, 10, 10, '1 kg Complan Original', '2017-04-02 11:20:18', '43-43-compla.jpg');
 
 -- --------------------------------------------------------
 
@@ -135,7 +136,7 @@ INSERT INTO `users` (`Userid`, `Fname`, `Lname`, `Store_Name`, `Email`, `PhoneNo
 (43, 'Baibhav', 'Aggarwal', 'Reliance', 'baibhav@outlook.com', 9876543210, '$2a$10$nKEroKsNlOuCbb8Q6nhrMO655bJvDHhQ9MuyJQPcrZSx3PxJAJs0C', 'Room no 308 Chitkara University', 2, 'Availabe', 30.514370399999997, 76.6620078),
 (45, 'Shivam', 'Garg', 'Anapurna', '05shivamgarg@gmail.com', 9056505227, '$2a$10$rUIruiSNSykX6J7SYmGvLehxQ0uOFDiovALuumf8ZzBPRTxQHPjaW', 'Chitkara University, Jhasla', 2, 'Availabe', 30.514341899999998, 76.66196579999999),
 (46, 'fcvbn', 'cfvbn', 'uhgvc', 'garg123@gmail.com', 5625432956, '$2a$10$EuUzs.peAQ04o15HeHo8.eTLGhN.mOlGj7l01wOj1dTnxku31ukIa', 'Chitkara University, Jhasla', 2, 'Availabe', 30.514338000000002, 76.6619652),
-(47, 'Esha', 'Wadhwa', 'Esha Cosmetics', 'esha.ew@gmail.com', 9882257372, '$2a$10$j2/KyUwkAfJEhpknKFHipuBzX4tWlpRWkexix35WWdNqCwQtWQYHi', 'Chitkara University', 2, 'Availabe', 30.520733, 76.6585865),
+(47, 'Esha', 'Wadhwa', 'Esha Cosmetics', 'esha.ew@gmail.com', 9882257372, '$2a$10$j2/KyUwkAfJEhpknKFHipuBzX4tWlpRWkexix35WWdNqCwQtWQYHi', 'Chitkara University', 2, 'Availabe', 30.522620003, 76.6585865),
 (48, 'Karan', 'Arora', 'Arora general store', 'arora15@gmail.com', 8863410343, '$2a$10$WxfgDdAE99qDmVMGqfgH9.FzkhgBynCxBZqMayKFLzrKnKKqKVaoO', 'Turing BLock,Chitkara University', 2, 'Availabe', 30.520733, 76.6585865),
 (49, 'Gaurav', 'Yadav', '', 'gaurav217@gmail.com', 9883344555, '$2a$10$d33ens22Ix9rbMWsA.jqOe8wt69ktqIkRtYhw1Og89QxTyCgkrAWC', 'Vosco hostel chitkara University', 1, '', 30.514324899999995, 76.66196029999999);
 
