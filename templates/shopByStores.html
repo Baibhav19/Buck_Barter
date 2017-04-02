@@ -2,46 +2,53 @@
 <br>
 <div ng-controller = "storeController as stCtrl">
     <div class = "row">
-        <h2>Stores near you</h2>
+        <h1 style="color: #5A33C7; margin-left: 25px;"><b>Stores near you</b></h1>
         <br>
         <div class="box-container" ng-show = "!stCtrl.check_nearStores()">
             <ui-carousel slides="stCtrl.nearStores" slides-to-show="4" slides-to-scroll="1" autoplay="true" arrows="true" dots="true">
+            
                 <carousel-item>
-                    <h3>
+                <div style="padding: 3px;">
+                    <h3 style="height: 50px;">
                       {{item.Store_Name}}
-                      <br>
-                        <div class="img-wrap">
-                            <img src = "images/smile.jpg" class="set_img"/>
-                        </div>
                     </h3>
-                    <h4>Details:</h4>
+                      <br>
+                        <div style="padding: 1px;">
+                            <img src = "images/smile.jpg" class="img-responsive" style="border: 1px black solid;" />
+                        </div>
+                    
+                    <h4 style="color: #E34963;"><b>Details:</b></h4>
                     <p><b>Conatact No. :</b> {{item.PhoneNo}}</p>
                     <p><b>Home Delievery :</b> {{item.Home_Delivery}}</p>
                     <p><b>Distance :</b> {{item.Selectid}} mtr</p>
                     <button ng-click="stCtrl.store(item.Userid , item.Store_Name)" class="btn btn-primary btn-lg">View Products</button>
+                </div>
                 </carousel-item>
+            
             </ui-carousel>
         </div>
         <div ng-show ="stCtrl.check_nearStores()"><h2>No stores near you</h2></div>
     </div>
     <br><hr>
     <div class="row">
-        <h2>All stores</h2>
+        <h1 style="color: #5A33C7; margin-left: 25px;"><b>All stores</b></h1>
         <br>
         <div class="box-container" ng-show = "!stCtrl.check_stores()">
             <ui-carousel slides="stCtrl.slides" slides-to-show="4" slides-to-scroll="1" autoplay="true" arrows="true" dots="true">
                 <carousel-item>
-                    <h3>
+                <div style="padding: 3px;">
+                    <h3 style="height: 50px;">
                       {{item.Store_Name}}
-                      <br>
-                        <div class="img-wrap">
-                            <img src = "images/smile.jpg" class="set_img"/>
-                        </div>
                     </h3>
-                    <h4>Details:</h4>
+                      <br>
+                        <div style="padding: 1px;">
+                            <img src = "images/smile.jpg" class="img-responsive" style="border: 1px black solid;"/>
+                        </div>
+                    <h4 style="color: #E34963;"><b>Details:</b></h4>
                     <p><b>Home Delievery :</b> {{item.Home_Delivery}}</p>
                     <p><b>Distance :</b> {{item.Selectid}} mtr</p>
                     <button ng-click="stCtrl.store(item.Userid , item.Store_Name)" class="btn btn-primary btn-lg">View Products</button>
+                </div>
                 </carousel-item>
             </ui-carousel>
         </div>

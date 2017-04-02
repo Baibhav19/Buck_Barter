@@ -123,22 +123,16 @@
 
     <div class="row">
       <div ng-show = "!pCtrl.check()">
-       <h1>  Featured Products</h1>
-
-
+       <h1 style="color: #5A33C7; margin-left: 25px;"><b>  Featured Products</b></h1>
        <ul class="products">
 
         <li ng-repeat = "prod in pCtrl.products">
-          <div class="col-sm-3">
-           <h3>
+          <div class="col-md-3 col-sm-4">
              <div>
-              <button data-toggle="modal" href="#productModal" ng-click = "pCtrl.upProductModel(prod)"><img src = "uploads/{{prod.filename}}" height="200" width="200" /></button>
+              <button data-toggle="modal" href="#productModal" ng-click = "pCtrl.upProductModel(prod)"><img src = "uploads/{{prod.filename}}" height="200" width="200"/></button>
             </div>
 
-          </h3>
-          <h4>
-           Details:
-         </h4>
+         <h4 style="color: #E34963;"><b>Details:</b></h4>
          <p><b>Product Name :</b> {{prod.Pname}}</p>
          <p><b>Price :</b> ₹ {{prod.UnitPrice}} </p>
          <p><b>Description :</b> {{prod.Description}}</p>
@@ -153,7 +147,7 @@
 
  </div>
  <div class = "row" ng-show = "pCtrl.check()">
-   <h1>No Products Added</h1>
+   <h1 style="color: #5A33C7; margin-left: 25px;"><b>No Products Added</b></h1>
  </div>
  <br>
 </div>

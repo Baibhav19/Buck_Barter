@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
           <div class="row">
             <ul class="nav navbar-nav navbar-right">
-              <li class="text-center test" ng-show="hdCtrl.isAuthenticated">Welcome {{hdCtrl.names}}</li>
+              <li class="text-center test" ng-show="hdCtrl.isAuthenticated" style="margin-top: 5%;">Welcome {{hdCtrl.names}}</li>
               <li ng-hide="hdCtrl.isAuthenticated" ui-sref-active="active"><a ui-sref="register"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
               <li ng-show="hdCtrl.isAuthenticated" ui-sref-active="active"><a ui-sref="logout"><span class="glyphicon glyphicon-user"></span>LogOut</a></li>
               <li ng-hide="hdCtrl.isAuthenticated" ui-sref-active="active"><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -25,7 +25,7 @@
     <nav class = "nav navbar-inverse">
       <div class="col-sm-3">
         <ul class="nav navbar-nav">
-          <li class="active dropdown">
+          <li class="active dropdown" style="width: 100%;">
             <a class="dropdown-toggle" data-toggle="dropdown">Shop by category<b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a ng-click = "hdCtrl.category(1)">Kitchen</a></li>
@@ -38,10 +38,10 @@
         </ul>
       </div>
 
-      <div class="col-sm-6 col-md-6">
+      <div class="col-sm-5">
         <form class="navbar-form" role="search">
-          <div class="input-group" >
-            <input type = "text" name="country" class="form-control" placeholder="Search" id="country" ng-model = "hdCtrl.country" ng-keyUp="hdCtrl.complete(hdCtrl.country)"/>
+          <div class="input-group" style="width: 100%;">
+            <input type = "text" name="country" class="form-control" placeholder="Search" id="country" ng-model = "hdCtrl.country" ng-keyUp="hdCtrl.complete(hdCtrl.country)"  />
              <div class="input-group-btn box3">
                 <button class="btn btn-default box4" type="submit"><i class="glyphicon glyphicon-search"></i></button>
               </div>
@@ -55,9 +55,9 @@
         </form>
       </div>
 
-      <div class="col-sm-3">
+      <div class="col-sm-4">
         <ul class="nav navbar-nav">
-          <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span><div class="itemscount"><div class="badge badgecount"><p class="text-center">0</p></div></div> Cart</a></li>
           <li ui-sref-active="active" ng-show="hdCtrl.checkShop()"><a ui-sref="shopkeeper.showProduct"><span class="glyphicon glyphicon-log-in"></span> Shopkeeper</a></li>
         </ul>
       </div>

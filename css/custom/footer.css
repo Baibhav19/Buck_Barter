@@ -22,6 +22,15 @@
      -webkit-transition-duration: 0.5s;
  }
 
+/*ul .social-media{
+	list-style: none;
+	white-space:nowrap;
+}
+
+ul .social-media > li{
+	display: inline-block;
+}*/
+
  #social-fb:hover {
      color: #3B5998;
  }
@@ -31,3 +40,4 @@
  #social-gp:hover {
      color: #d34836;
  }
+

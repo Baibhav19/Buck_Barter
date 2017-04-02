@@ -42,14 +42,14 @@
         <hr>
         <br>
         <div class="row">
-          <div class="col-sm-3">
-            <h2>Shop by Store</h2>
-            <a ui-sref = "shopByStores"><img src = "images/smile.jpg" class="set_img"></a>
+          <div class="col-sm-4">
+            <div style="margin-left: 5%;"><h2 class="text-center"><b>Shop by Store</b></h2>
+            <a ui-sref = "shopByStores"><img src = "images/shopbystore.jpg" class="img-responsive"></a></div>
           </div>
           <div ng-if = "!mpCtrl.isLoaded()">
             <h1>Loading Map</h1>
           </div>
-          <div class="col-sm-8" id="map_canvas" ng-if = "mpCtrl.isLoaded()">
+          <div class="col-sm-offset-1 col-sm-7" id="map_canvas" ng-if = "mpCtrl.isLoaded()">
             <!-- map here-->
             <ui-gmap-google-map center="mpCtrl.map.center" zoom="mpCtrl.map.zoom" draggable="true" options="mpCtrl.options">
               <ui-gmap-circle ng-repeat="c in mpCtrl.circles track by c.id" center="c.center" stroke="c.stroke" fill="c.fill" radius="c.radius"
@@ -65,16 +65,16 @@
   <br>
   <hr>
   <div class = "row" style="margin: 3% 1%;">
-    <div class="col-md-4 col-xs-12">
-      <img src="images/bb1.png" alt="pic" style="border: 3px solid black; border-radius: 45px;">
+    <div class="col-sm-4 col-xs-12">
+      <img src="images/bb1.png" alt="pic" class="img-responsive" style="border: 3px solid black; border-radius: 45px;">
     </div>
 
-    <div class="col-md-4 col-xs-12">
-      <img src="images/bb2.png" alt="pic" style="border: 3px solid black; border-radius: 45px;">
+    <div class="col-sm-4 col-xs-12">
+      <img src="images/bb2.png" alt="pic" class="img-responsive" style="border: 3px solid black; border-radius: 45px;">
     </div>
 
-    <div class="col-md-4 col-xs-12">
-      <img src="images/bb3.png" alt="pic" style="border: 3px solid black; border-radius: 45px;">
+    <div class="col-sm-4 col-xs-12">
+      <img src="images/bb3.png" alt="pic" class="img-responsive" style="border: 3px solid black; border-radius: 45px;">
     </div>
   </div>
 </div>

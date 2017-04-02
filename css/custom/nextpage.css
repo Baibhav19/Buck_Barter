@@ -1,3 +1,4 @@
+
 .modalsize{
 	background-color: white;
 	font-size: 15px;
@@ -14,7 +15,6 @@ h3{
 
 .box1 .box2 input[type="text"] {
   height: 35px;
-  /*width: 500px;*/
   border: 0;
   font-size: 16px;
   border-bottom: 1px solid #e7e7e7;
@@ -34,7 +34,6 @@ h3{
 
 .box input[type="email"], .box input[type="password"] {
   height: 35px;
-  width: 300px;
   border: 0;
   font-size: 16px;
   -webkit-transition: all 0.1s linear;
@@ -116,3 +115,14 @@ ul.products li {
     display: block;
 }
 .show {display:block;}
+
+.itemscount{
+  height: 25px;
+  display: inline-block;
+}
+
+.badgecount{
+  background-color: red;
+  height: 25px;
+  color: white;
+}
