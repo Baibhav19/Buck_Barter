@@ -2,7 +2,7 @@ var app = angular.module('localDeals', [
     'ui.router',
     'ngGeolocation' ,
     'uiGmapgoogle-maps' ,
-    'ui.carousel'
+    'ui.carousel',
 ]);
 
 app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {

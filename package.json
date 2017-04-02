@@ -2,6 +2,7 @@
   "name": "mysqlAPP",
   "version": "1.0.0",
   "dependencies": {
+    "angular-animate": "^1.6.4",
     "angular-google-maps": "^2.4.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.16.0",

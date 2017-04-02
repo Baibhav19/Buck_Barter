@@ -120,7 +120,6 @@ app.post('/productsByCategory' , function(req,res){
         });
 app.post('/StoreProd' , function(req,res){
         var detailed_prod = new Array();
-        console.log(req.body.id);
         connection.query('SELECT added_product.Pname , added_product.ITCid , products.Userid , products.UnitPrice ,products.Discount , products.Description , products.Quantity  , products.filename FROM added_product LEFT JOIN products ON (products.Pid = added_product.Pid)' , function(error , result){
             //console.log(result);
             if(error)
@@ -151,7 +150,6 @@ app.post('/StoreProd' , function(req,res){
 });
 
 app.post('/bySearchProduct' ,function(req , res){
-    console.log(req.body.searchStr);
     connection.query('SELECT * FROM products where pid = ?' ,[req.body.searchStr] ,function(error , result){
         if(error)
             res.status(501).send("error while searching");
@@ -163,7 +161,6 @@ app.post('/bySearchProduct' ,function(req , res){
 app.post('/deleteProduct' , function(req , res){
     var cope = req.body;
     connection.query('SELECT pid from added_product where Pname = ?',[cope.Pname] , function(error, Pid_result){
-        console.log(Pid_result[0].pid);
         connection.query('DELETE FROM products where Userid = ? AND pid =? AND Description = ?',[cope.U_id , Pid_result[0].pid, cope.Description]  , function(error, result){
             if(error)
                 res.status(501).send("error in DELETE");
@@ -177,7 +174,7 @@ app.post('/updateProduct' , function(req , res){
     var cope = req.body;
     cope.Date_Time = dateFormat(new Date(), "yyyy-mm-dd h:MM:ss");
     connection.query('SELECT pid from added_product where Pname = ?',[cope.Pname] , function(error, Pid_result){
-        connection.query('UPDATE products SET UnitPrice = ? , Discount= ? , Quantity= ? , Date_Time = ?  , Description=? WHERE Userid = ? AND pid = ? ',[cope.UnitPrice, cope.Discount , cope.Quantity , cope.Date_Time , cope.Description , cope.U_id  , Pid_result[0].pid] , function(err,result)
+        connection.query('UPDATE products SET UnitPrice = ? , Discount= ? , Quantity= ? , Date_Time = ?  , Description=? WHERE Userid = ? AND pid = ? AND filename=?',[cope.UnitPrice, cope.Discount , cope.Quantity , cope.Date_Time , cope.Description , cope.U_id  , Pid_result[0].pid , cope.filename] , function(err,result)
         {
             console.log(result);
             if(err)
@@ -189,7 +186,6 @@ app.post('/updateProduct' , function(req , res){
 });
 app.post('/shopadd', function(req,res){
     var cope = req.body;
-    console.log(cope);
     var salt = bcrypt.genSaltSync(10);
     cope.Password = bcrypt.hashSync(cope.Password , salt);
     var query = connection.query('insert into users set ?',cope, function(err, result) {
@@ -207,15 +203,16 @@ app.post('/shopadd', function(req,res){
 
 app.post('/custadd', function(req,res){
     var cope = req.body;
-    console.log(cope);
     var salt = bcrypt.genSaltSync(10);
     cope.Password = bcrypt.hashSync(cope.Password , salt);
     var query = connection.query('insert into users set ?', cope, function(err, result) {
         if (err){
             console.log("Error detected");
+            res.status(500).send("error");
         }
         else  {
             console.log("done");
+            res.send("registered successfully");
         }
     });
 });
@@ -225,7 +222,7 @@ app.post('/addProducts', upload.any() , function(req,res){
     cope.Date_Time = dateFormat(new Date(), "yyyy-mm-dd h:MM:ss");
     var pname = cope.Pname;
     var s = req.headers.authorization.toString().split(" ");
-    console.log(s[0]);
+    //console.log(s[0]);
     cope.Userid = parseInt(s[0]);
     if(req.files){
         req.files.forEach(function(file){
@@ -305,13 +302,6 @@ app.post('/addProducts', upload.any() , function(req,res){
     }
 });
 app.get('/showProduct' , function(req,res){
-    // if(!req.headers.authorization){
-    //     return res.status(401).send({
-    //         message:'not authentiated , sign in first'
-    //     });
-    // connection.query('SELECT * from products where Userid = ?',[Userid] , function(error, result){
-    //     console.log(result);
-
     var product = new Array();
     if(!req.headers.authorization){
         return res.status(401).send({

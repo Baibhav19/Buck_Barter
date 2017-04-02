@@ -57,6 +57,7 @@ app.controller('shopkprController',function($http,$state , authToken){
 		Quantity:'',
 		UnitPrice:'',
 		Description:'',
+		filename:'',
 		Date_Time: Date.now()
 	};
 	this.updateValue = function(x){
@@ -66,6 +67,7 @@ app.controller('shopkprController',function($http,$state , authToken){
 		this.productUpdate.UnitPrice = x.UnitPrice;
 		this.productUpdate.Quantity = x.Quantity;
 		this.productUpdate.Description = x.Description;
+		this.productUpdate.filename = x.filename;
 	}
 	this.update = function(){
 		$http.post("/updateProduct",this.productUpdate).then(function successCallback(response){

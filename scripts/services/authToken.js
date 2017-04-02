@@ -23,6 +23,7 @@ app.factory('authToken' , function($window){
 			storage.removeItem('userToken');
 			storage.removeItem('id');
 			storage.removeItem('name');
+			storage.removeItem('Select_id');
 		},
 		setName:function(user){
 			name=user;
