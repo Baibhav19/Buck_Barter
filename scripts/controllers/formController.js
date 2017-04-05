@@ -21,7 +21,7 @@ app.controller('formController' , function($http , fetcher, $state, authToken ,$
        Longitude:''
    };
    this.shopkpr = {
-       Userid :'',
+       /*Userid :'',
        Fname : '',
        Lname : '',
        Store_Name: '',
@@ -32,7 +32,7 @@ app.controller('formController' , function($http , fetcher, $state, authToken ,$
        Home_Delivery: '',
        Selectid : '2',
        Latitude: '',
-       Longitude:''
+       Longitude:''*/
    };
    this.custRegister = function(){
        console.log("registered customer" , this.cust);
@@ -59,7 +59,24 @@ app.controller('formController' , function($http , fetcher, $state, authToken ,$
           this.shopkpr.Latitude = fetcher.getLat();
           this.shopkpr.Longitude = fetcher.getLon();
         }
-          $http.post("/shopadd",this.shopkpr).then(function successCallback(response) {
+        var formData = new FormData;
+        for(key in this.shopkpr){
+            formData.append(key , this.shopkpr[key]);
+        }
+        formData.append('Selectid' , '2');
+        var file = $('#file')[0].files[0];
+        console.log(file , "file...");
+        formData.append('Image' , file);
+        for (var pair of formData.entries()) {
+          console.log(pair[0]+ ', ' + pair[1]);
+        }
+          $http.post("/shopadd" , formData , {
+            withCredentials : false,
+            headers: {
+              'Content-Type': undefined
+            },
+            transformRequest: angular.identity
+          }).then(function successCallback(response) {
             alert("successfully registered");
 	        	$state.go('login');
 	        	console.log(response.data);

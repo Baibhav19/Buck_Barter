@@ -12,6 +12,9 @@ var upload = multer({ dest : '/uploads/'});
 //var passport = require('passport');
 //var LocalStrategy = require('passport-local').Strategy;
 app.use(express.static(__dirname + '/'))
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json());
 //app.use(passport.initialize());
 /*passport.serializeUser(function(user , done){
@@ -102,7 +105,7 @@ app.get('/bySearch' , function(req,res){
 app.post('/productsByCategory' , function(req,res){
         var detailed_prod = new Array();
 
-        connection.query('SELECT added_product.Pname , added_product.ITCid , products.Userid , products.UnitPrice ,products.Discount , products.Description , products.Quantity , filename FROM added_product JOIN products ON (products.Pid = added_product.Pid AND added_product.ITCid = ? )' , [req.body.iCategory] , function(error , result){
+        connection.query('SELECT added_product.Pname , added_product.ITCid , products.Userid , products.UnitPrice ,products.Discount , products.Description , products.Quantity , filename FROM added_product JOIN products ON (products.pid = added_product.pid AND added_product.ITCid = ? )' , [req.body.iCategory] , function(error , result){
             if(error)
             {
                 res.status(500).send('No Products');
@@ -120,7 +123,7 @@ app.post('/productsByCategory' , function(req,res){
         });
 app.post('/StoreProd' , function(req,res){
         var detailed_prod = new Array();
-        connection.query('SELECT added_product.Pname , added_product.ITCid , products.Userid , products.UnitPrice ,products.Discount , products.Description , products.Quantity  , products.filename FROM added_product LEFT JOIN products ON (products.Pid = added_product.Pid)' , function(error , result){
+        connection.query('SELECT added_product.Pname , added_product.ITCid , products.Userid , products.UnitPrice ,products.Discount , products.Description , products.Quantity  , products.filename FROM added_product LEFT JOIN products ON (products.pid = added_product.pid)' , function(error , result){
             //console.log(result);
             if(error)
             {
@@ -171,7 +174,6 @@ app.post('/deleteProduct' , function(req , res){
 });
 
 app.post('/updateProduct' , function(req , res){
-    var cope = req.body;
     cope.Date_Time = dateFormat(new Date(), "yyyy-mm-dd h:MM:ss");
     connection.query('SELECT pid from added_product where Pname = ?',[cope.Pname] , function(error, Pid_result){
         connection.query('UPDATE products SET UnitPrice = ? , Discount= ? , Quantity= ? , Date_Time = ?  , Description=? WHERE Userid = ? AND pid = ? AND filename=?',[cope.UnitPrice, cope.Discount , cope.Quantity , cope.Date_Time , cope.Description , cope.U_id  , Pid_result[0].pid , cope.filename] , function(err,result)
@@ -184,21 +186,46 @@ app.post('/updateProduct' , function(req , res){
         });
     });
 });
-app.post('/shopadd', function(req,res){
-    var cope = req.body;
-    var salt = bcrypt.genSaltSync(10);
-    cope.Password = bcrypt.hashSync(cope.Password , salt);
-    var query = connection.query('insert into users set ?',cope, function(err, result) {
-        if (err){
-            console.log(err);
-            res.status(500).send("error");
-        }
-        else  {
-            console.log("done");
-            res.send("registered successfully");
-
-        }
-    });
+app.post('/shopadd', upload.any() , function(req,res){
+    console.log(req.body);
+    if(req.files){
+        req.files.forEach(function(file){
+            console.log(file);
+            var filename = req.body.Email + "-" + file.originalname;
+            fs.rename(file.path , 'uploads/' + filename , function(err ){
+                if(err) throw err;
+                var cope = {
+                    Userid :'',
+                    Fname : req.body.Fname,
+                    Lname : req.body.Lname,
+                    Store_Name: req.body.Store_Name,
+                    Email : req.body.Email,
+                    PhoneNo : req.body.PhoneNo,
+                    Password : req.body.Password,
+                    Address : req.body.Address ,
+                    Home_Delivery: req.body.Home_Delivery,
+                    Selectid : req.body.Home_Delivery,
+                    Latitude: req.body.Latitude,
+                    Longitude: req.body.Longitude,
+                    filename : filename
+                }
+                console.log(cope);
+                var salt = bcrypt.genSaltSync(10);
+                cope.Password = bcrypt.hashSync(cope.Password , salt);
+                console.log("file uploded");
+                var query = connection.query('insert into users set ?',cope, function(err, result) {
+                    if (err){
+                        console.log(err);
+                        res.status(500).send("error");
+                    }
+                    else  {
+                        console.log("done");
+                        res.send("registered successfully");
+                    }
+                });
+            });
+        });
+    }
 });
 
 app.post('/custadd', function(req,res){
@@ -309,7 +336,7 @@ app.get('/showProduct' , function(req,res){
         });
     }
     var s = req.headers.authorization.toString().split(" ");
-    connection.query('SELECT added_product.Pname ,products.Userid , products.UnitPrice, products.Discount , products.Quantity , products.Description  , products.filename FROM added_product LEFT JOIN products ON (products.Pid = added_product.Pid)' , function(error , result){
+    connection.query('SELECT added_product.Pname ,products.Userid , products.UnitPrice, products.Discount , products.Quantity , products.Description  , products.filename FROM added_product LEFT JOIN products ON (products.pid = added_product.pid)' , function(error , result){
         if(error)
         {
             res.status(500).send(error);
