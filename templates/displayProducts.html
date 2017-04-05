@@ -86,10 +86,10 @@
                   <br>
                   <div class="row">
                     <div class="col-sm-6">
-                      <button class="btn btn-lg btn-warning">Buy Now</button>
+                      <button class="btn btn-lg btn-warning" ng-disabled="!pCtrl.isAuth() || !pCtrl.checkQty()" title="{{!pCtrl.isAuth() ? 'Log in first' : ''}}">Buy Now</button>
                     </div>
                     <div class="col-sm-6">
-                      <button class="btn btn-lg btn-success pull-right">Add to Cart</button>
+                      <button class="btn btn-lg btn-success pull-right" ng-disabled="!pCtrl.isAuth() || !pCtrl.checkQty()" title="{{!pCtrl.isAuth() ? 'Log in first' : ''}}" ng-click="pCtrl.addToCart(pCtrl.productModel)" data-dismiss="modal">Add to Cart</button>
                     </div>
                   </div>
                   <hr>
@@ -137,8 +137,8 @@
          <p><b>Price :</b> ₹ {{prod.UnitPrice}} </p>
          <p><b>Description :</b> {{prod.Description}}</p>
          <p><b>Discount :</b> {{prod.Discount}} %</p>
-         <button  class="btn btn-primary btn-lg">Add to cart</button>
-         <button  class="btn btn-primary btn-lg">Buy</button>
+         <button class="btn btn-primary btn-lg" ng-disabled="!pCtrl.isAuth() || prod.Quantity == 0" title="{{!pCtrl.isAuth() ? 'Log in first' : ''}}" ng-click="pCtrl.addToCart(prod)">Add to cart</button>
+         <button class="btn btn-primary btn-lg" ng-disabled="!pCtrl.isAuth()" title="{{!pCtrl.isAuth() ? 'Log in first' : ''}}">Buy</button>
 
        </div>
      </li>

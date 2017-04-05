@@ -12,9 +12,6 @@ var upload = multer({ dest : '/uploads/'});
 //var passport = require('passport');
 //var LocalStrategy = require('passport-local').Strategy;
 app.use(express.static(__dirname + '/'))
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
 app.use(bodyParser.json());
 //app.use(passport.initialize());
 /*passport.serializeUser(function(user , done){
@@ -102,10 +99,38 @@ app.get('/bySearch' , function(req,res){
             });
     });
 
+app.post('/addToCart' , function(req,res){
+    req.body.Date_Time = dateFormat(new Date(), "yyyy-mm-dd h:MM:ss");
+    console.log(req.body);
+    var cope = {
+        Userid : req.body.Userid,
+        pid : req.body.pid,
+        Quantity : req.body.Quantity,
+        Date_Time : req.body.Date_Time
+    }
+    connection.query('INSERT into cart set ?' ,[cope] , function(error , result){
+        if(error){
+            console.log("error in cart");
+            res.status(500).send('No Products');
+        }
+        else{
+            console.log("added to cart");
+            connection.query('UPDATE products SET Quantity = ? WHERE pid = ? AND Description = ?',[req.body.remQty,req.body.pid,req.body.Description] , function(err,results){
+                if(err){
+                    res.status(500).send('error in updating cart');
+                }
+                else{
+                    res.status(200).send('added to cart');
+                }
+            });
+        }
+    });
+});
+
 app.post('/productsByCategory' , function(req,res){
         var detailed_prod = new Array();
 
-        connection.query('SELECT added_product.Pname , added_product.ITCid , products.Userid , products.UnitPrice ,products.Discount , products.Description , products.Quantity , filename FROM added_product JOIN products ON (products.pid = added_product.pid AND added_product.ITCid = ? )' , [req.body.iCategory] , function(error , result){
+        connection.query('SELECT added_product.Pname , added_product.ITCid , products.pid , products.Userid , products.UnitPrice ,products.Discount , products.Description , products.Quantity , filename FROM added_product JOIN products ON (products.pid = added_product.pid AND added_product.ITCid = ? )' , [req.body.iCategory] , function(error , result){
             if(error)
             {
                 res.status(500).send('No Products');
@@ -120,10 +145,10 @@ app.post('/productsByCategory' , function(req,res){
 
             });
 
-        });
+});
 app.post('/StoreProd' , function(req,res){
         var detailed_prod = new Array();
-        connection.query('SELECT added_product.Pname , added_product.ITCid , products.Userid , products.UnitPrice ,products.Discount , products.Description , products.Quantity  , products.filename FROM added_product LEFT JOIN products ON (products.pid = added_product.pid)' , function(error , result){
+        connection.query('SELECT added_product.Pname , added_product.ITCid , products.Userid , products.pid , products.UnitPrice ,products.Discount , products.Description , products.Quantity  , products.filename FROM added_product LEFT JOIN products ON (products.pid = added_product.pid)' , function(error , result){
             //console.log(result);
             if(error)
             {
@@ -135,7 +160,8 @@ app.post('/StoreProd' , function(req,res){
                     if(result[i].Userid == req.body.id){
                         result[i] =
                         {
-                            Userid : result[i].Userid ,
+                            Userid : result[i].Userid,
+                            pid : result[i].pid,
                             Pname : result[i].Pname,
                             UnitPrice: result[i].UnitPrice,
                             Discount: result[i].Discount,
@@ -174,6 +200,7 @@ app.post('/deleteProduct' , function(req , res){
 });
 
 app.post('/updateProduct' , function(req , res){
+    var cope = req.body;
     cope.Date_Time = dateFormat(new Date(), "yyyy-mm-dd h:MM:ss");
     connection.query('SELECT pid from added_product where Pname = ?',[cope.Pname] , function(error, Pid_result){
         connection.query('UPDATE products SET UnitPrice = ? , Discount= ? , Quantity= ? , Date_Time = ?  , Description=? WHERE Userid = ? AND pid = ? AND filename=?',[cope.UnitPrice, cope.Discount , cope.Quantity , cope.Date_Time , cope.Description , cope.U_id  , Pid_result[0].pid , cope.filename] , function(err,result)
@@ -336,7 +363,7 @@ app.get('/showProduct' , function(req,res){
         });
     }
     var s = req.headers.authorization.toString().split(" ");
-    connection.query('SELECT added_product.Pname ,products.Userid , products.UnitPrice, products.Discount , products.Quantity , products.Description  , products.filename FROM added_product LEFT JOIN products ON (products.pid = added_product.pid)' , function(error , result){
+    connection.query('SELECT added_product.Pname , products.Userid , products.pid , products.UnitPrice, products.Discount , products.Quantity , products.Description  , products.filename FROM added_product LEFT JOIN products ON (products.pid = added_product.pid)' , function(error , result){
         if(error)
         {
             res.status(500).send(error);
