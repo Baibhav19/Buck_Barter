@@ -101,25 +101,37 @@ app.get('/bySearch' , function(req,res){
 
 app.post('/addToCart' , function(req,res){
     req.body.Date_Time = dateFormat(new Date(), "yyyy-mm-dd h:MM:ss");
-    console.log(req.body);
     var cope = {
         Userid : req.body.Userid,
         pid : req.body.pid,
         Quantity : req.body.Quantity,
+        Description : req.body.Description,
         Date_Time : req.body.Date_Time
     }
-    connection.query('INSERT into cart set ?' ,[cope] , function(error , result){
-        if(error){
-            console.log("error in cart");
-            res.status(500).send('No Products');
+    var flag = 0;
+    connection.query('SELECT Description , Quantity FROM cart where pid = ? AND Userid = ?',[cope.pid , cope.Userid] ,function(error , result){
+        for(var i = 0 ; i < result.length ; i++){
+            if(flag === 0 && result[i].Description === cope.Description){
+                flag = 1;
+                var quantity = result[i].Quantity;
+                connection.query('UPDATE cart set Quantity = ? where Userid = ? AND Description = ?' , [cope.Quantity + quantity , cope.Userid , cope.Description] , function(err, result){
+                    if(err){
+                        res.status(500).send('No Products');
+                    }
+                    else{
+                        res.status(200).send('added to cart');
+                    }
+                });
+            }
         }
-        else{
-            console.log("added to cart");
-            connection.query('UPDATE products SET Quantity = ? WHERE pid = ? AND Description = ?',[req.body.remQty,req.body.pid,req.body.Description] , function(err,results){
-                if(err){
-                    res.status(500).send('error in updating cart');
+        if(flag === 0){
+            connection.query('INSERT into cart set ?' ,[cope] , function(error , result){
+                if(error){
+                    console.log("error in cart");
+                    res.status(500).send('No Products');
                 }
                 else{
+                    console.log("added to cart");
                     res.status(200).send('added to cart');
                 }
             });

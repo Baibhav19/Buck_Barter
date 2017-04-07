@@ -9,23 +9,16 @@ app.controller('productController' , function(fetcher , $http , $state , authTok
 	var gets = this;
 	this.cart = {};
 	this.addToCart = function(product){
-		this.cart  = product;
+		this.cart.Description = product.Description;
 		this.cart.pid = product.pid;
-		if(this.cart.Qty == null){
-			 this.cart.remQty = this.cart.Quantity - 1;
-			 this.cart.Quantity = 1;
+		this.cart.Quantity = product.Qty;
+		if(this.cart.Quantity == null){
+			this.cart.Quantity = 1;
 		}
-		else
-			this.cart.remQty = this.productModel.prodQty - this.cart.Quantity;
 		this.cart.Userid = authToken.getId();
 		this.cart.Date_Time = Date.now();
 		$http.post('/addToCart' , this.cart).then(function successCallBack(response){
 			console.log(response.data);
-			for(var i = 0 ; i < gets.products.length ; i++){
-				if(gets.products[i].Description == gets.cart.Description){
-					gets.products[i].Quantity = gets.cart.remQty;
-				}
-			}
 		},
 		function errorCallBack(response){
 			alert(response.message);
