@@ -110,6 +110,7 @@ app.post('/addToCart' , function(req,res){
     }
     var flag = 0;
     connection.query('SELECT Description , Quantity FROM cart where pid = ? AND Userid = ?',[cope.pid , cope.Userid] ,function(error , result){
+        console.log(result.length);
         for(var i = 0 ; i < result.length ; i++){
             if(flag === 0 && result[i].Description === cope.Description){
                 flag = 1;

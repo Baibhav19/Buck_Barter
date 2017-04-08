@@ -2,6 +2,7 @@ app.controller('shopkprController',function($http,$state , authToken){
 	this.tab = 1;
 	var gets = this;
 	gets.no_products= false;
+	this.uploadme = "images/200x200.gif";
 	gets.names = [] ;
 	this.setTab= function(tabno){
 		this.tab = tabno;
@@ -13,14 +14,12 @@ app.controller('shopkprController',function($http,$state , authToken){
 	gets.showProducts = function(){
 		$http.get("/showProduct").then(function sucessCallback(response){
 			gets.names = response.data;
-			//console.log(gets.names);
 			if(gets.names.length == 0){
 				gets.no_products = true;
 			}
 			else{
 				gets.no_products = false;
 			}
-			//console.log(gets.no_products);
 		},
 		function errorCallback(response){
 			alert(response.message);
@@ -42,7 +41,8 @@ app.controller('shopkprController',function($http,$state , authToken){
         }).then(function sucessCallback(response) {
 			alert("product added successfully");
 			console.log(response.data);
-			$state.go("home");
+			gets.showProducts();
+			$state.go("shopkeeper.showProduct");
 		},
 		function errorCallback(response){
 			console.log(response.data);

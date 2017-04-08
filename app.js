@@ -91,3 +91,9 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
     };
     
 });
+
+app.run(function($rootScope){
+    $rootScope.$on('$stateChangeSuccess',function(){
+        $("html, body").animate({ scrollTop: 0 }, 400);
+    });
+});

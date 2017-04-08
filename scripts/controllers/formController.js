@@ -1,4 +1,4 @@
-app.controller('formController' , function($http , fetcher, $state, authToken ,$window , $geolocation){
+app.controller('formController' , function($http , fetcher, $state, authToken , $geolocation){
 	this.tab = 1;
 	this.setTab = function(tabno){
 		this.tab = tabno ;
@@ -20,20 +20,7 @@ app.controller('formController' , function($http , fetcher, $state, authToken ,$
        Latitude: '',
        Longitude:''
    };
-   this.shopkpr = {
-       /*Userid :'',
-       Fname : '',
-       Lname : '',
-       Store_Name: '',
-       Email : '',
-       PhoneNo : '',
-       Password : '',
-       Address : '' ,
-       Home_Delivery: '',
-       Selectid : '2',
-       Latitude: '',
-       Longitude:''*/
-   };
+   this.shopkpr = {};
    this.custRegister = function(){
        console.log("registered customer" , this.cust);
       if(fetcher.isFetched()){
