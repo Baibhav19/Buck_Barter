@@ -48,8 +48,8 @@ app.controller('productController' , function(fetcher , $http , $state , authTok
 			if (this.users[i].Userid === this.productModel.Userid) {
 				this.user = this.users[i];
 			}
-  		}	
-	}	
+  		}
+	}
 	this.addQty = function(){
 		if(this.checkQty())
 			this.productModel.Qty = this.productModel.Qty + 1;

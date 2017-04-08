@@ -139,7 +139,17 @@ app.post('/addToCart' , function(req,res){
         }
     });
 });
-
+app.post('/showCart' , function(req , res){
+    connection.query('SELECT cart.Quantity , cart.Description ,  added_product.Pname FROM cart JOIN added_product ON (added_product.pid = cart.pid AND cart.Userid = ? )' , [req.body.Userid] , function(error , result){
+        console.log(result);
+        if(error){
+            res.status(500).send("Error");
+        }
+        else{
+            res.status(200).send(result);
+        }
+    });
+});
 app.post('/productsByCategory' , function(req,res){
         var detailed_prod = new Array();
 

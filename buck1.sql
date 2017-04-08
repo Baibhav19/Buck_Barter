@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2017 at 08:09 PM
+-- Generation Time: Apr 08, 2017 at 07:30 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -54,28 +54,9 @@ INSERT INTO `added_product` (`pid`, `Pname`, `ITCid`) VALUES
 (57, 'gjhkjk', 3),
 (58, 'kf', 1),
 (59, 'Kajal', 2),
-(60, 'Pepsi', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cart`
---
-
-CREATE TABLE `cart` (
-  `pid` int(11) NOT NULL,
-  `Userid` int(11) NOT NULL,
-  `Quantity` int(11) NOT NULL,
-  `Date_Time` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`pid`, `Userid`, `Quantity`, `Date_Time`) VALUES
-(32, 43, 1, '2017-04-05 11:36:28'),
-(60, 43, 1, '2017-04-05 11:38:34');
+(60, 'Pepsi', 1),
+(61, 'Dove Shampoo', 5),
+(62, 'Face Wash', 5);
 
 -- --------------------------------------------------------
 
@@ -121,12 +102,14 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`pid`, `Userid`, `UnitPrice`, `Discount`, `Quantity`, `Description`, `Date_Time`, `filename`) VALUES
-(33, 46, 23, 2, 21, 'double pack', '2017-03-30 11:36:34', '46-baibhavimg.jpg'),
-(59, 47, 150, 5, 10, '50mg Loreal Non smudge', '2017-03-31 02:33:06', '47-5456.jpg'),
-(60, 43, 85, 7, 10, '2 L soft drink', '2017-04-05 08:12:36', '43-45.jpg'),
-(31, 43, 25, 5, 10, '100 gm Toilet Soap', '2017-03-31 10:58:53', '43-Dettol.jpg'),
-(32, 43, 250, 10, 1, '1 kg Complan Original', '2017-04-05 10:53:03', '43-43-images.jpg'),
-(32, 43, 275, 10, 5, '1 kg Complan Kesar Badam', '2017-04-02 12:22:23', '43-43-compla.jpg');
+(33, 46, 23, 2, 17, 'double pack', '2017-03-30 11:36:34', '46-baibhavimg.jpg'),
+(59, 47, 150, 5, 11, '50mg Loreal Non smudge', '2017-04-08 01:21:41', '47-5456.jpg'),
+(60, 43, 85, 7, 8, '2 L soft drink', '2017-04-05 08:12:36', '43-45.jpg'),
+(31, 43, 25, 5, 5, '100 gm Toilet Soap', '2017-03-31 10:58:53', '43-Dettol.jpg'),
+(32, 43, 250, 10, 6, '1 kg Complan Original', '2017-04-06 12:49:39', '43-43-images.jpg'),
+(32, 43, 275, 10, 2, '1 kg Complan Kesar Badam', '2017-04-02 12:22:23', '43-43-compla.jpg'),
+(61, 43, 150, 10, 7, 'Anti Dandruff with lemon extracts', '2017-04-08 06:05:28', '43-Dove-Dryness-Care-Shampoo.jpg'),
+(62, 43, 80, 10, 10, '100ml Ponds Men Energy Charge', '2017-04-08 06:22:18', '43-images.jpg');
 
 -- --------------------------------------------------------
 
@@ -160,7 +143,8 @@ INSERT INTO `users` (`Userid`, `Fname`, `Lname`, `Store_Name`, `Email`, `PhoneNo
 (46, 'fcvbn', 'cfvbn', 'uhgvc', 'garg123@gmail.com', 5625432956, '$2a$10$EuUzs.peAQ04o15HeHo8.eTLGhN.mOlGj7l01wOj1dTnxku31ukIa', 'Chitkara University, Jhasla', 2, 'Availabe', 30.514338000000002, 76.6619652, ''),
 (47, 'Esha', 'Wadhwa', 'Esha Cosmetics', 'esha.ew@gmail.com', 9882257372, '$2a$10$j2/KyUwkAfJEhpknKFHipuBzX4tWlpRWkexix35WWdNqCwQtWQYHi', 'Chitkara University', 2, 'Availabe', 30.522620003, 76.6585865, ''),
 (48, 'Karan', 'Arora', 'Arora general store', 'arora15@gmail.com', 8863410343, '$2a$10$WxfgDdAE99qDmVMGqfgH9.FzkhgBynCxBZqMayKFLzrKnKKqKVaoO', 'Turing BLock,Chitkara University', 2, 'Availabe', 30.520733, 76.6585865, ''),
-(49, 'Gaurav', 'Yadav', '', 'gaurav217@gmail.com', 9883344555, '$2a$10$d33ens22Ix9rbMWsA.jqOe8wt69ktqIkRtYhw1Og89QxTyCgkrAWC', 'Vosco hostel chitkara University', 1, '', 30.514324899999995, 76.66196029999999, '');
+(49, 'Gaurav', 'Yadav', '', 'gaurav217@gmail.com', 9883344555, '$2a$10$d33ens22Ix9rbMWsA.jqOe8wt69ktqIkRtYhw1Og89QxTyCgkrAWC', 'Vosco hostel chitkara University', 1, '', 30.514324899999995, 76.66196029999999, ''),
+(50, 'Saurabh', 'Thakur', '', 'saurabh207@gmail.com', 9882255272, '$2a$10$ebknY4gneXGfweyi7Pf8PuoWtnVIlFoDin054vVXjDCU/qUwE/Foa', 'sector 31-D Hno.132', 1, '', 30.514257699999995, 76.6620573, '');
 
 --
 -- Indexes for dumped tables
@@ -170,12 +154,6 @@ INSERT INTO `users` (`Userid`, `Fname`, `Lname`, `Store_Name`, `Email`, `PhoneNo
 -- Indexes for table `added_product`
 --
 ALTER TABLE `added_product`
-  ADD PRIMARY KEY (`pid`);
-
---
--- Indexes for table `cart`
---
-ALTER TABLE `cart`
   ADD PRIMARY KEY (`pid`);
 
 --
@@ -197,12 +175,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `added_product`
 --
 ALTER TABLE `added_product`
-  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `Userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `Userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
