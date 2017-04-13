@@ -1,5 +1,6 @@
 var app = angular.module('localDeals', [
     'ui.router',
+    'ngAnimate',
     'ngGeolocation' ,
     'uiGmapgoogle-maps' ,
     'ui.carousel',

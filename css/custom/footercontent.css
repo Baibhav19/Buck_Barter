@@ -47,3 +47,9 @@ ul li .indent{
 .module{
     line-height: 175%;
 }
+a:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -webkit-backface-visibility: hidden;
+  transform: scale(1.1);
+}

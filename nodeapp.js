@@ -21,7 +21,7 @@ var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'buck1'
+    database: 'buck2'
 });
 connection.connect(function(error){
     if(!!error){
@@ -68,7 +68,7 @@ app.use(req,res,next){
 passport.use(strategy);*/
 app.get('/getUsers' , function(req,res){
         var All_Users = new Array();
-            connection.query('SELECT Userid , Store_Name , Email , PhoneNo , Home_Delivery , Selectid , Latitude , Longitude FROM users where Selectid = 2' , function(error , result){
+            connection.query('SELECT Userid , Store_Name , Email , PhoneNo , Home_Delivery , Selectid , Latitude , Longitude , filename FROM users where Selectid = 2' , function(error , result){
                 if(error)
                 {
                     res.status(500).send("no Availability");
@@ -110,6 +110,8 @@ app.post('/addToCart' , function(req,res){
     }
     var flag = 0;
     connection.query('SELECT Description , Quantity FROM cart where pid = ? AND Userid = ?',[cope.pid , cope.Userid] ,function(error , result){
+        if(error){ console.log("no item sin cart");}
+        else{
         console.log(result.length);
         for(var i = 0 ; i < result.length ; i++){
             if(flag === 0 && result[i].Description === cope.Description){
@@ -125,6 +127,7 @@ app.post('/addToCart' , function(req,res){
                 });
             }
         }
+    }
         if(flag === 0){
             connection.query('INSERT into cart set ?' ,[cope] , function(error , result){
                 if(error){
@@ -237,7 +240,6 @@ app.post('/updateProduct' , function(req , res){
     });
 });
 app.post('/shopadd', upload.any() , function(req,res){
-    console.log(req.body);
     if(req.files){
         req.files.forEach(function(file){
             console.log(file);
@@ -254,7 +256,7 @@ app.post('/shopadd', upload.any() , function(req,res){
                     Password : req.body.Password,
                     Address : req.body.Address ,
                     Home_Delivery: req.body.Home_Delivery,
-                    Selectid : req.body.Home_Delivery,
+                    Selectid : req.body.Selectid,
                     Latitude: req.body.Latitude,
                     Longitude: req.body.Longitude,
                     filename : filename

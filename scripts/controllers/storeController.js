@@ -4,6 +4,7 @@ app.controller('storeController' , function(fetcher , $http , $state , Carousel)
         id:43
     };
 	this.slides = fetcher.getUsers();
+    // console.log(this.slides[0].filename);
     this.check_stores = function(){
         return this.slides.length == 0 ;
     }

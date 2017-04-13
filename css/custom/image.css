@@ -1,0 +1,13 @@
+img {
+  -webkit-transition:all 1s linear;
+  -moz-transition:all 1s linear;
+  transition:all 1s linear;
+  -webkit-backface-visibility: hidden;
+}
+
+img:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -webkit-backface-visibility: hidden;
+  transform: scale(1.1);
+}
