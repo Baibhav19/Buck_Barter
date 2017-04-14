@@ -68,7 +68,7 @@ app.use(req,res,next){
 passport.use(strategy);*/
 app.get('/getUsers' , function(req,res){
         var All_Users = new Array();
-            connection.query('SELECT Userid , Store_Name , Email , PhoneNo , Home_Delivery , Selectid , Latitude , Longitude , filename FROM users where Selectid = 2' , function(error , result){
+            connection.query('SELECT Userid , Store_Name , Email , PhoneNo , Home_Delivery , Address , Selectid , Latitude , Longitude , filename FROM users where Selectid = 2' , function(error , result){
                 if(error)
                 {
                     res.status(500).send("no Availability");

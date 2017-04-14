@@ -31,6 +31,7 @@ app.controller('productController' , function(fetcher , $http , $state , authTok
 		this.productModel.Userid = prod.Userid;
 		this.productModel.Pname = prod.Pname;
 		this.productModel.Description = prod.Description;
+		this.productModel.Address = prod.Address;
 		this.productModel.UnitPrice = prod.UnitPrice;
 		this.productModel.CalcPrice = prod.UnitPrice;
 		this.productModel.Discount = prod.Discount;
