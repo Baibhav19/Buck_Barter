@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2017 at 09:35 PM
+-- Generation Time: Apr 14, 2017 at 02:10 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -74,8 +74,13 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`pid`, `Userid`, `Quantity`, `Description`, `Date_Time`) VALUES
-(1, 4, 3, 'Double pack', '2017-04-13 11:14:14'),
-(12, 8, 2, 'Vim Bar with Lemon Extracts 100 gm', '2017-04-14 12:29:29');
+(10, 3, 1, 'Ponds Enery Booster FaceWash 120gms', '2017-04-14 05:26:43'),
+(11, 3, 1, 'Kinley Water Bottle 500ml', '2017-04-14 05:26:46'),
+(14, 3, 1, 'Butter Bite Buiscuits with extra nuts 150gms', '2017-04-14 05:26:50'),
+(12, 2, 1, 'Vim Bar with Lemon Extracts 100 gm', '2017-04-14 05:28:05'),
+(14, 2, 1, 'Butter Bite Buiscuits with extra nuts 150gms', '2017-04-14 05:28:08'),
+(10, 2, 1, 'Ponds Enery Booster FaceWash 120gms', '2017-04-14 05:33:00'),
+(16, 3, 1, 'HIMYM Fan Tshirt size L', '2017-04-14 05:34:12');
 
 -- --------------------------------------------------------
 
@@ -182,12 +187,6 @@ INSERT INTO `users` (`Userid`, `Fname`, `Lname`, `Store_Name`, `Email`, `PhoneNo
 -- Indexes for table `added_product`
 --
 ALTER TABLE `added_product`
-  ADD PRIMARY KEY (`pid`);
-
---
--- Indexes for table `cart`
---
-ALTER TABLE `cart`
   ADD PRIMARY KEY (`pid`);
 
 --
