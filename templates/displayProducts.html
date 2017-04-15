@@ -138,7 +138,7 @@
          <p><b>Discount :</b> {{prod.Discount}} %</p>
          <button class="btn btn-primary btn-lg" ng-disabled="!pCtrl.isAuth() || prod.Quantity == 0" title="{{!pCtrl.isAuth() ? 'Log in first' : ''}}" ng-click="pCtrl.addToCart(prod)">Add to cart</button>
          <button class="btn btn-primary btn-lg" ng-disabled="!pCtrl.isAuth()" title="{{!pCtrl.isAuth() ? 'Log in first' : ''}}">Buy</button>
-
+         <br><br>
        </div>
      </li>
 

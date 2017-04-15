@@ -10,14 +10,39 @@
         <label for="em" ng-if="login_form.Email.$dirty && login_form.Email.$invalid">Please enter a valid Email address.</label>
         </div>      
         <div class="box" >
-          <form name="login_form" ng-submit = "logCtrl.auth()" novalidate>          
-              <div style="text-align: center;">
-                  <p><input type="Email" name="Email" id="Email" ng-model = "logCtrl.user.Email" placeholder="Email" required></p>
-                  <p><input type="Password" name="Password" id="Password" ng-model = "logCtrl.user.Password" placeholder="Password" required></p>
-                  <p><button type="submit" ng-disabled = "login_form.$invalid" class="btn btn-primary btn-lg">Log in</button></p>
-              </div>     
+          <form name="login_form" ng-submit = "logCtrl.auth()" class="form-horizontal" novalidate>          
+              
+                  <div class="row">
+                  <div class="col-sm-offset-4 col-sm-4">
+                  <div class="form-group">
+                    <!-- <label>Email</label> -->
+                  <input type="Email" class="form-control" name="Email" id="Email" ng-model = "logCtrl.user.Email" placeholder="Email" required>
+                  </div>
+                  </div>
+                  
+                    <br>
+                    
+                  
+                  <div class="col-sm-offset-4 col-sm-4">
+                  <div class="form-group">
+                  <!-- <label>Password</label> -->
+                  <input type="Password" class="form-control" name="Password" id="Password" ng-model = "logCtrl.user.Password" placeholder="Password" required>
+                  </div>
+                  </div>
+                  
+                  <br>
+                  <div class="col-sm-12 text-center">
+                  <div class="form-group">
+                  <button type="submit" ng-disabled = "login_form.$invalid" class="btn btn-primary btn-lg text-center">Log in</button>
+                </div>
+                </div>
+                </div>
+              
+                
+                  
               <br>
-                <a href="#">Forgot Password?</a>
+            
+<!--                 <a href="#">Forgot Password?</a> -->
           </form>
         </div>
       </div>
