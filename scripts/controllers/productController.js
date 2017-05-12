@@ -19,6 +19,7 @@ app.controller('productController' , function(fetcher , $http , $state , authTok
 		this.cart.Date_Time = Date.now();
 		$http.post('/addToCart' , this.cart).then(function successCallBack(response){
 			console.log(response.data);
+			alert("added " + gets.cart.Quantity + " " + product.Pname + " to cart");
 		},
 		function errorCallBack(response){
 			alert(response.message);

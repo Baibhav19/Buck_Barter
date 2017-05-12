@@ -5,6 +5,7 @@ app.factory('fetcher' , function($window){
 	var us_id;
 	var users;
 	var products;
+	var cart;
 	return {
 		setUsers: function(user){
 			users = user;
@@ -27,6 +28,17 @@ app.factory('fetcher' , function($window){
 				products = JSON.parse(arr);
 			}
 			return products;
+		},
+		setCart: function(cartArray){
+			cart = cartArray;
+			storage.setItem("cartArrays", JSON.stringify(cartArray));
+		},
+		getCart:function(){
+			if(!cart){
+				var arr = storage.getItem('cartArrays');
+				cart = JSON.parse(arr);
+			}
+			return cart;
 		},
 		setLat: function(latitude){
 			lat = latitude;
@@ -52,6 +64,9 @@ app.factory('fetcher' , function($window){
 		removeLocation: function(){
 			storage.removeItem('userLon');
 			storage.removeItem('userLat');
+		},
+		removeCart: function(){
+			storage.removeItem('cartArray');
 		},
 		isFetched: function(){
 			return !!this.getLat();

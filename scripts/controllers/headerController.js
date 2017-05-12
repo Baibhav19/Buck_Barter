@@ -2,6 +2,18 @@ app.controller('headerController' , function(authToken , fetcher, $http , $state
 	var gets = this;
 	this.names=authToken.getName();
 	this.isAuthenticated = authToken.isAuthenticated();
+    this.cartFetcher = function(){
+        gets.cartId = {
+            cartUserId : authToken.getId()
+        }    
+        $http.post("/showCart" , gets.cartId).then(function sucessCallback(response){
+            fetcher.setCart(response.data);
+            $state.go("cart");
+        }),
+        function errorCallback(response){
+            console.log(response.status);
+        }
+    }
     this.checkShop = function(){
         return authToken.getSelectId() == 2;
     }

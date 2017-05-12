@@ -112,7 +112,6 @@ app.post('/addToCart' , function(req,res){
     connection.query('SELECT Description , Quantity FROM cart where pid = ? AND Userid = ?',[cope.pid , cope.Userid] ,function(error , result){
         if(error){ console.log("no item sin cart");}
         else{
-        console.log(result.length);
         for(var i = 0 ; i < result.length ; i++){
             if(flag === 0 && result[i].Description === cope.Description){
                 flag = 1;
@@ -135,7 +134,6 @@ app.post('/addToCart' , function(req,res){
                     res.status(500).send('No Products');
                 }
                 else{
-                    console.log("added to cart");
                     res.status(200).send('added to cart');
                 }
             });
@@ -143,8 +141,7 @@ app.post('/addToCart' , function(req,res){
     });
 });
 app.post('/showCart' , function(req , res){
-    connection.query('SELECT cart.Quantity , cart.Description ,  added_product.Pname FROM cart JOIN added_product ON (added_product.pid = cart.pid AND cart.Userid = ? )' , [req.body.Userid] , function(error , result){
-        console.log(result);
+    connection.query('SELECT cart.pid,cart.Quantity,cart.Description,products.filename,products.UnitPrice,added_product.Pname FROM cart JOIN added_product ON (added_product.pid = cart.pid AND cart.Userid = ?) JOIN products on (cart.pid = products.pid AND cart.Description=products.Description)' , [req.body.cartUserId], function(error , result){
         if(error){
             res.status(500).send("Error");
         }
@@ -153,9 +150,18 @@ app.post('/showCart' , function(req , res){
         }
     });
 });
+app.post('/deleteCartItem' , function(req , res){
+    connection.query('DELETE FROM cart where pid=? AND Userid=?', [req.body.pid , req.body.Uid], function(error , result){
+        if(error){
+            res.status(500).send("error");
+        }
+        else{
+            res.status(200).send(result);
+        }
+    });
+});
 app.post('/productsByCategory' , function(req,res){
         var detailed_prod = new Array();
-
         connection.query('SELECT added_product.Pname , added_product.ITCid , products.pid , products.Userid , products.UnitPrice ,products.Discount , products.Description , products.Quantity , filename FROM added_product JOIN products ON (products.pid = added_product.pid AND added_product.ITCid = ? )' , [req.body.iCategory] , function(error , result){
             if(error)
             {

@@ -18,6 +18,12 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
         templateUrl: 'templates/shopkeeper.html',
         resolve: { authenticate: authenticate }
     })
+    .state("cart" ,{
+        url: '/cart' ,
+        //abstract : true ,
+        templateUrl: 'templates/cartProducts.html',
+        //resolve: { authenticate: authenticate } 
+    })
     .state("shopkeeper.showProduct", {
         url: '/showProduct',
         template: '<shop-dir></shop-dir>'

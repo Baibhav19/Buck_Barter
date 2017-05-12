@@ -1,4 +1,4 @@
-app.controller('loginController',function($http, $state ,authToken){
+app.controller('loginController',function($http, $state , $timeout, authToken){
 	 this.user = {
 		Email : '',
 		Password : ''
@@ -13,7 +13,7 @@ app.controller('loginController',function($http, $state ,authToken){
 	        	authToken.setId(response.data.useridd);
 	        	$state.go('home');
         	} ,
-        	function errorCallback(response){
+        	function errorCallback(response){ 
         		alert("Invalid email or password!! Login again");
         		$state.go('login');
         		console.log(response.status);
