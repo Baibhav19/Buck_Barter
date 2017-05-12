@@ -16,13 +16,12 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
         url: '/shopkeeper',
         abstract : true ,
         templateUrl: 'templates/shopkeeper.html',
-        resolve: { authenticate: authenticate }
+        resolve: { authenticate: authenticateShopkeeper }
     })
     .state("cart" ,{
-        url: '/cart' ,
-        //abstract : true ,
+        url: '/cart',
         templateUrl: 'templates/cartProducts.html',
-        //resolve: { authenticate: authenticate } 
+        resolve: { authenticate: authenticateCustomer } 
     })
     .state("shopkeeper.showProduct", {
         url: '/showProduct',
@@ -83,7 +82,7 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
     $urlRouterProvider.otherwise('/home');
 
     $httpProvider.interceptors.push('authInterceptor');
-    function authenticate($q, authToken, $state, $timeout) {
+    function authenticateShopkeeper($q, authToken, $state, $timeout) {
         if (authToken.isAuthenticated() && authToken.getSelectId() == 2) {
             return $q.when()
         } 
@@ -96,7 +95,17 @@ app.config(function($stateProvider, $urlRouterProvider ,$httpProvider) {
             return $q.reject()
         }
     };
-    
+    function authenticateCustomer($q, authToken, $state, $timeout) {
+        if (authToken.isAuthenticated()) {
+            return $q.when()
+        } 
+        else {
+            $timeout(function() {
+                $state.go('login')
+            })
+            return $q.reject()
+        }
+    };
 });
 
 app.run(function($rootScope){
